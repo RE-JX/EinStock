@@ -1,0 +1,28 @@
+{
+  "name": "einstoc",
+  "version": "1.0.0",
+  "description": "Smart stock chooser",
+  "main": "index.js",
+  "scripts": {
+    "start": "$(npm bin)/nodemon",
+    "test": "$(npm bin)/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrr19-re-jx/EinStoc.git"
+  },
+  "author": "Lucas Hawes, Kevin Kim, Natasha Che, Aaron Stevens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lhawes/EinStoc/issues"
+  },
+  "homepage": "https://github.com/lhawes/EinStoc#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
+    "underscore": "^1.8.3"
+  }
+}
