@@ -1,0 +1,11 @@
+.env
+*.env
+_*.*
+bower_components/
+
+## Mac OSX ##
+.DS_Store
+
+## NPM ##
+node_modules/
+data/
