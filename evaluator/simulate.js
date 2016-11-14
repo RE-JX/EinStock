@@ -11,19 +11,19 @@
 // Output:
 // An object that looks something like this:
 // {
-//   frequency: 'd'
+//   frequency: 'd',
 //   startDate: '11/14/2016',
 //   endDate: '11/18/2016',
-//   assetName: 'IBM',
-//   predictions: [1, 0, 1, 1, 1],
+//   tickerSymbol: 'IBM',
+//   predictions: [1, 0, 1, 1, 1], <== predicted price movements
 //   actualMove: [0, 0, 1, 1, 0],  <== actual realized price movements
 //   inclusionError: 40, <== percentage of instances where price goes up, but prediction was down
 //   exclusionError: 30, <== percentage of instances where price goes down, but prediction was up
-//   assetValues: [100, 110, 95, 105, 102], <== evolution of total portfolio values over test period
+//   assetValues: [100, 110, 95, 105, 102], <== evolution of total portfolio values over test period, starting from $100 cash
 //   returns: [0, 10, -13, 20, -1], <== percentage change in total portfolio values
 //   avgReturn: 3, <== average return across intervals
 //   cummuReturn: 2, <== cummulative return over test  period
 //   returnStd: 5, <== standard deviation of returns
-//   sharpeRatio: 0.4, <== Sharpe ratio, a.k.a risk-adjusted return
+//   sharpeRatio: 0.4, <== annualized Sharpe ratio, a.k.a risk-adjusted return
 //   benchmarkReturn: 1 <== the cummulative return for S&P500 over test priod
 // }
