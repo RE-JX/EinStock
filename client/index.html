@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<!-- Where we declare where our main app file (index.js equivalent for React) -->
+<html ng-app='einstock'>
+
+<head>
+  <meta charset="utf-8" />
+  <title>EinStock</title>
+  <!-- Local CSS for customization and Angular Material -->
+  <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+  <!-- Node modules we'll be using -->
+  <script src="/public/angular/angular.js"></script>
+  <script src="/public/angular-route/angular-route.js"></script>
+  <script src="/public/angular-aria/angular-aria.js"></script>
+  <script src="/public/angular-animate/angular-animate.js"></script>
+  <script src="/public/angular-material/angular-material.js"></script>
+  <link rel="stylesheet" href="/public/angular-material/angular-material.css">
+</head>
+
+<body>
+
+<!-- Header for the our SPA (Single Page Application) -->
+  <div layout="row" class="container">
+    <h1>EinStock</h1>
+  </div>
+
+<!-- Where we'll have the different views rendering through the ng-router -->
+  <div ng-view></div>
+
+<!-- Local routes for files -->
+  <script src="/services/services.js"></script>
+  <script src="/dashboard/dashboard.js"></script>
+  <script src="/algorithm/algorithm.js"></script>
+  <script src="/app.js"></script>
+
+</body>
+
+</html>
