@@ -1,11 +1,19 @@
+
 .env
 *.env
 _*.*
 bower_components/
+
+## Files ##
+*.log
 
 ## Mac OSX ##
 .DS_Store
 
 ## NPM ##
 node_modules/
+
 data/
+
+bower_components/
+
