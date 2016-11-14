@@ -4,7 +4,8 @@
   "description": "stock trading simulator with machine learning algorithms",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "$(npm bin)/nodemon"
   },
   "repository": {
     "type": "git",
@@ -40,9 +41,14 @@
     "open": "0.0.5",
     "path": "^0.12.7",
     "pg": "^6.1.0",
-    "request": "^2.76.0"
+    "request": "^2.76.0",
+    "nodemon": "^1.11.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1"
+  },
+  "homepage": "https://github.com/lhawes/EinStoc#readme",
+  "dependencies": {
+
   }
 }
