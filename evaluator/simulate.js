@@ -25,5 +25,5 @@
 //   cummuReturn: 2, <== cummulative return over test  period
 //   returnStd: 5, <== standard deviation of returns
 //   sharpeRatio: 0.4, <== annualized Sharpe ratio, a.k.a risk-adjusted return
-//   benchmarkReturn: 1 <== the cummulative return for S&P500 over test priod
+//   benchmarkReturn: 1 <== the cummulative return for S&P500 over test period
 // }
