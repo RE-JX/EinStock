@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/hrr19-re-jx/EinStoc/issues"
   },
-  "homepage": "https://github.com/hrr19-re-jx/EinStoc#readme",
+  "homepage": "https://github.com/lhawes/EinStoc#readme",
   "dependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
@@ -38,18 +38,18 @@
     "lodash": "^4.16.6",
     "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
+    "nodemon": "^1.11.0",
     "open": "0.0.5",
     "path": "^0.12.7",
     "pg": "^6.1.0",
     "request": "^2.76.0",
-    "nodemon": "^1.11.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "yahoo-finance": "^0.2.14"
   },
   "devDependencies": {
     "babel": "^6.5.2",
     "chai": "^3.5.0",
     "grunt": "^1.0.1",
     "mocha": "^3.1.2"
-  },
-  "homepage": "https://github.com/lhawes/EinStoc#readme"
+  }
 }
