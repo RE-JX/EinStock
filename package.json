@@ -46,7 +46,8 @@
     "request": "^2.76.0",
     "sequelize": "^3.25.0",
     "simple-statistics": "^2.2.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "yahoo-finance": "^0.2.14"
   },
   "devDependencies": {
     "babel": "^6.5.2",
