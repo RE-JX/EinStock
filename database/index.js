@@ -35,6 +35,7 @@ var Simulation = db.define('Simulation', {
   startDate: { type: Sequelize.DATE, allowNull: false },
   endDate: { type: Sequelize.DATE, allowNull: false },
   tickerSymbol: { type: Sequelize.STRING, allowNull: false },
+  successRate: { type: Sequelize.FLOAT, allowNull: false },
   inclusionError: { type: Sequelize.FLOAT, allowNull: false },
   exclusionError: { type: Sequelize.FLOAT, allowNull: false },
   avgReturn: { type: Sequelize.FLOAT, allowNull: false },
@@ -45,8 +46,10 @@ var Simulation = db.define('Simulation', {
   benchmarkReturnMarket: { type: Sequelize.FLOAT, allowNull: false },
   predictedMoves: { type: Sequelize.ARRAY(Sequelize.BOOLEAN), allowNull: false },
   actualMoves: { type: Sequelize.ARRAY(Sequelize.BOOLEAN), allowNull: false },
-  assetValues: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
-  returns: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false }
+  totalAssetValues: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
+  returns: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
+  cashPosition: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
+  stockSharesOwned: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false }
 });
 
 // Simulation.belongTo(User);
