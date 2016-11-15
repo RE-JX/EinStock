@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const port = 8080;
+const database = require('../database');
 
 //-----------------middleware---------------
 //------------------------------------------
@@ -24,7 +25,11 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(port, () => {
+database.db.sync().then(() => {
+  console.log('database connected');
+  app.listen(process.env.PORT || port);
   console.log('listening on port: ', port);
-});
+})
+
+
 
