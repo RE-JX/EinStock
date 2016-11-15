@@ -42,7 +42,7 @@ _Although currently disabled, Historical also takes in a period argument that ha
 ###### Example output:
 
 ```javascript
- [ { date: Tue Jan 10 2012 00:00:00 GMT-0800 (PST),
+ [ { date: 'Tue Jan 10 2012 00:00:00 GMT-0800 (PST)',
     open: 425.909988,
     high: 426.000004,
     low: 421.500008,
@@ -71,7 +71,7 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 ```javascript
 { symbol: 'AAPL',
   name: 'Apple Inc.',
-  lastTradeDate: Mon Nov 14 2016 00:00:00 GMT-0800 (PST),
+  lastTradeDate: 'Mon Nov 14 2016 00:00:00 GMT-0800 (PST)',
   lastTradePriceOnly: 105.71,
   dividendYield: 2.1,
   peRatio: 12.72 }
