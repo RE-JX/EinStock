@@ -34,28 +34,27 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | b | Bid | d | Dividend Per Share | c | Change And Percent Change |
 | b2 | Ask (Realtime) | r1 | Dividend Pay Date | c6 | Change (Realtime) |
 | b3 | Bid (Realtime) | q | Ex-Dividend Date | k2 | Change Percent (Realtime) |
-| p | Previous Close  | p2 | Change in Percent |
-| | | | | d2 | Trade Date |
+| p | Previous Close  | p2 | Change in Percent | d2 | Trade Date |
 | | | | | t1 | Last Trade Time |
 
 
-###### Averages
-| symbol | Meaning |
-|:---:|:---|
-| c8 | After Hours Change (Realtime) |
-| c3 | Commission |
-| g | Day’s Low |
-| h | Day’s High |
-| k1 | Last Trade (Realtime) With Time |
-| l | Last Trade (With Time) |
-| l1 | Last Trade (Price Only) |
-| t8 | 1 yr Target Price |
-| m5 | Change From 200-day Moving Average |
-| m6 | Percent Change From 200-day Moving Average |
-| m7 | Change From 50-day Moving Average |
-| m8 | Percent Change From 50-day Moving Average |
-| m3 | 50-day Moving Average |
-| m4 | 200-day Moving Average |
+###### Averages, Ratio, 52 Week Pricing
+| symbol | Meaning | symbol | Meaning | symbol | Meaning |
+|:---:|:---|:---:|:---|:---:|:---|
+| c8 | After Hours Change (Realtime) | e | Earnings Per Share | k | 52-week High |
+| c3 | Commission | e7 | EPS Estimate Current Year | j | 52-week Low |
+| g | Day’s Low | e8 | EPS Estimate Next Year | j5 | Change From 52-week Low |
+| h | Day’s High | e9 | EPS Estimate Next Quarter | k4 | Change From 52-week High |
+| k1 | Last Trade (Realtime) With Time | b4 | Book Value | j6 | Percent Change From 52-week Low |
+| l | Last Trade (With Time) | j4 | EBITDA | k5 | Percebt Change From 52-week High |
+| l1 | Last Trade (Price Only) | p5 | Price per Sales | w | 52-week Range |
+| t8 | 1 yr Target Price | p6 | Price per Book |
+| m5 | Change From 200-day Moving Average | r | PE Ratio |
+| m6 | Percent Change From 200-day Moving Average | r2 | PE Ratio (Realtime) |
+| m7 | Change From 50-day Moving Average | r5 | PEG Ratio |
+| m8 | Percent Change From 50-day Moving Average | r6 | Price Per EPS Estimate Current Year |
+| m3 | 50-day Moving Average | r7 | Price Per EPS Estimate Next Year |
+| m4 | 200-day Moving Average | s7 | Short Ratio |
 
 ###### Misc
 | symbol | Meaning |
@@ -71,16 +70,6 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | g5 | Holdings Gain Percent (Realtime) |
 | g6 | Holdings Gain (Realtime) |
 
-###### 52 Week Pricing
-| symbol | Meaning |
-|:---:|:---|
-| k | 52-week High |
-| j | 52-week Low |
-| j5 | Change From 52-week Low |
-| k4 | Change From 52-week High |
-| j6 | Percent Change From 52-week Low |
-| k5 | Percebt Change From 52-week High |
-| w | 52-week Range |
 
 ###### System Info
 | symbol | Meaning |
@@ -104,23 +93,7 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | k3 | Last Trade Size |
 | a2 | Average Daily Volume |
 
-###### Ratio
-| symbol | Meaning |
-|:---:|:---|
-| e | Earnings Per Share |
-| e7 | EPS Estimate Current Year |
-| e8 | EPS Estimate Next Year |
-| e9 | EPS Estimate Next Quarter |
-| b4 | Book Value |
-| j4 | EBITDA |
-| p5 | Price per Sales |
-| p6 | Price per Book |
-| r | PE Ratio |
-| r2 | PE Ratio (Realtime) |
-| r5 | PEG Ratio |
-| r6 | Price Per EPS Estimate Current Year |
-| r7 | Price Per EPS Estimate Next Year |
-| s7 | Short Ratio |
+
 
 ###### Misc
 | symbol | Meaning |
