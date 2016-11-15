@@ -11,6 +11,10 @@ accepts@~1.3.3:
     mime-types "~2.1.11"
     negotiator "0.6.1"
 
+addressparser@~0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-0.1.3.tgz#9e9ab43d257e1ae784e1df5f580c9f5240f58874"
+
 angular-animate@^1.5.8:
   version "1.5.8"
   resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.5.8.tgz#535f7369225aba7fb15bf7134c71b15bc635c586"
@@ -84,6 +88,10 @@ array-find-index@^1.0.1:
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
+
+array-indexofobject@~0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/array-indexofobject/-/array-indexofobject-0.0.1.tgz#aaa128e62c9b3c358094568c219ff64fe489d42a"
 
 array-unique@^0.2.1:
   version "0.2.1"
@@ -1051,6 +1059,15 @@ extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
 
+feedparser@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/feedparser/-/feedparser-1.1.4.tgz#17845be84ad3fcd986daee12fe421f8b54df0def"
+  dependencies:
+    addressparser "~0.1.3"
+    array-indexofobject "~0.0.1"
+    readable-stream "~1.0.17"
+    sax "~0.6.0"
+
 filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"
@@ -1270,6 +1287,19 @@ glob@7.0.5:
 globals@^9.0.0:
   version "9.13.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.13.0.tgz#d97706b61600d8dbe94708c367d3fdcf48470b8f"
+
+google-finance:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/google-finance/-/google-finance-0.1.7.tgz#97b253a76da5d564caf59d4f3e5a4d0725a10e6f"
+  dependencies:
+    bluebird "3.4.1"
+    debug "2.2.0"
+    feedparser "1.1.4"
+    lodash "4.15.0"
+    moment "2.14.1"
+    request "2.74.0"
+    request-promise "4.1.1"
+    string "3.3.1"
 
 got@^3.2.0:
   version "3.3.1"
@@ -1597,6 +1627,10 @@ is-utf8@^0.2.0:
 isarray@^1.0.0, isarray@~1.0.0, isarray@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
+
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
 isexe@^1.1.1:
   version "1.1.2"
@@ -2400,6 +2434,15 @@ readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
 
+readable-stream@~1.0.17:
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.0.34.tgz#125820e34bc842d2f2aaafafe4c2916ee32c157c"
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "0.0.1"
+    string_decoder "~0.10.x"
+
 readable-stream@~2.0.5:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.0.6.tgz#8f90341e68a53ccc928788dacfcd11b36eb9b78e"
@@ -2595,6 +2638,10 @@ rimraf@~2.5.1, rimraf@~2.5.4, rimraf@2:
 sax@>=0.6.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
+
+sax@~0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-0.6.1.tgz#563b19c7c1de892e09bfc4f2fc30e3c27f0952b9"
 
 sax@1.1.5:
   version "1.1.5"
