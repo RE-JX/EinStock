@@ -27,3 +27,30 @@
 //   sharpeRatio: 0.4, <== annualized Sharpe ratio, a.k.a risk-adjusted return
 //   benchmarkReturn: 1 <== the cummulative return for S&P500 over test period
 // }
+var ss = require('simple-statistics');
+var moment = require('moment');
+
+var fetchHistory = function(frequency, simulation, startDate, endDate, tickerSymbol) {
+  //fetch historical price data, return an array of prices
+};
+
+var simulation = function(frequency, startDate, endDate, tickerSymbol, predictions) {
+  var prices,
+      onedayBefore,
+      increased,
+      actualMoves = [];
+
+  if(startDate.getDay() === 1) {
+    onedayBefore = moment(startDate).subtract(3, 'days');
+  } else {
+    onedayBefore = moment(startDate).subtract(1, 'days');
+  }
+
+  prices = fetchHistory(frequency, simulation, onedayBefore, endDate, tickerSymbol);
+  for(var i = 1; i < prices.length; i++) {
+    increased = (prices[i]/prices[i-1]-1) > 0 ? 1 : 0;
+    actualMoves.push(increased);
+  }
+
+
+}

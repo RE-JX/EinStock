@@ -1,15 +1,21 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('einstoc', 'root', '', {
-  dialect: 'postgres',
-  port: 5432
-});
+var db;
+if(process.env.DATABASE_URL) {
+  db = new Sequelize(process.env.DATABASE_URL, {
+    dialect:  'postgres',
+    protocol: 'postgres',
+    port:     match[4],
+    host:     match[3],
+    logging:  true
+  })
+} else {
+  db = new Sequelize('einstoc', 'root', '', {
+    dialect: 'postgres',
+    port: 5432
+  })
+};
 
-db.authenticate()
-  .then(function(err) {
-    console.log('Connection has been established successfully.');
-  }, function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
+
 var User = db.define('User', {
   username: { type: Sequelize.STRING, allowNull: false, unique: true }
 });
@@ -43,13 +49,16 @@ var Simulation = db.define('Simulation', {
   returns: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false }
 });
 
-Simulation.belongTo(User);
-User.hasMany(Simulation);
+// Simulation.belongTo(User);
+User.hasMany(Simulation, {as: 'Simulations'});
 
-User.sync();
-StockData.sync();
-Simulation.sync();
+// User.sync();
+// StockData.sync();
+// Simulation.sync();
 
-exports.User = User;
-exports.StockData = StockData;
-exports.Simulation = Simulation;
+module.exports = {
+  User: User,
+  StockData: StockData,
+  Simulation: Simulation,
+  db: db
+}
