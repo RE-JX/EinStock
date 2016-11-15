@@ -50,6 +50,8 @@ User.sync();
 StockData.sync();
 Simulation.sync();
 
-exports.User = User;
-exports.StockData = StockData;
-exports.Simulation = Simulation;
+module.exports = {
+  User: User,
+  StockData: StockData,
+  Simulation: Simulation
+}
