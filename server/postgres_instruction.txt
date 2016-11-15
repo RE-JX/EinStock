@@ -1,0 +1,12 @@
+1. install postgres
+     brew install postgres
+2. initialize postgres
+     initdb /usr/local/var/postgres
+3. (for restart postgres server:)
+     postgres -D /usr/local/var/postgres
+4. create a user called root
+     createuser --pwprompt root
+   (when prompted for password, just hit n, and then enter)
+5. create a database called einstoc
+     createdb -Oroot -Eutf8 einstoc
+6. all set!
