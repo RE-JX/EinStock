@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname + '/../client')));
 
-app.use('/public', express.static(path.join(__dirname + '/../node_modules')));  
+app.use('/public', express.static(path.join(__dirname + '/../node_modules')));
 
 //-----------------routes-------------------
 //------------------------------------------
@@ -23,6 +23,8 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
+
 app.listen(port, () => {
   console.log('listening on port: ', port);
 });
+
