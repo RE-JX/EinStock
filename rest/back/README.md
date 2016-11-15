@@ -27,6 +27,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | s | Stock Symbol |
 
 ###### Pricing
+| symbol | Meaning |
+|:---:|:---|
 | a | Ask |
 | b | Bid |
 | b2 | Ask (Realtime) |
@@ -35,12 +37,16 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | o | Open |
 
 ###### Dividends
+| symbol | Meaning |
+|:---:|:---|
 | y | Dividend Yield |
 | d | Dividend Per Share |
 | r1 | Dividend Pay Date |
 | q | Ex-Dividend Date |
 
 ###### Date
+| symbol | Meaning |
+|:---:|:---|
 | c1 | Change |
 | c | Change And Percent Change |
 | c6 | Change (Realtime) |
@@ -51,6 +57,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | t1 | Last Trade Time |
 
 ###### Averages
+| symbol | Meaning |
+|:---:|:---|
 | c8 | After Hours Change (Realtime) |
 | c3 | Commission |
 | g | Day’s Low |
@@ -67,6 +75,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | m4 | 200-day Moving Average |
 
 ###### Misc
+| symbol | Meaning |
+|:---:|:---|
 | w1 | Day’s Value Change |
 | w4 | Day’s Value Change (Realtime) |
 | p1 | Price Paid |
@@ -79,6 +89,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | g6 | Holdings Gain (Realtime) |
 
 ###### 52 Week Pricing
+| symbol | Meaning |
+|:---:|:---|
 | k | 52-week High |
 | j | 52-week Low |
 | j5 | Change From 52-week Low |
@@ -88,6 +100,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | w | 52-week Range |
 
 ###### System Info
+| symbol | Meaning |
+|:---:|:---|
 | i | More Info |
 | j1 | Market Capitalization |
 | j3 | Market Cap (Realtime) |
@@ -99,6 +113,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | j2 | Shares Outstanding |
 
 ###### Volume
+| symbol | Meaning |
+|:---:|:---|
 | v | Volume |
 | a5 | Ask Size |
 | b6 | Bid Size |
@@ -106,6 +122,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | a2 | Average Daily Volume |
 
 ###### Ratio
+| symbol | Meaning |
+|:---:|:---|
 | e | Earnings Per Share |
 | e7 | EPS Estimate Current Year |
 | e8 | EPS Estimate Next Year |
@@ -122,6 +140,8 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | s7 | Short Ratio |
 
 ###### Misc
+| symbol | Meaning |
+|:---:|:---|
 | t7 | Ticker Trend |
 | t6 | Trade Links |
 | i5 | Order Book (Realtime) |
