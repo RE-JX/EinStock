@@ -34,7 +34,7 @@ _Although currently disabled, Historical also takes in a period argument that ha
 ###### Example inputs
 
 | Argument | Input | example |
-|---|---|--|
+|---|---|---|
 | sym | String, stock symbol | 'AAPL' |
 | frm | String, from date YYYY-MM-DD | '2012-01-01' |
 | to | String, to date YYYY-MM-DD | '2012-01-10' |
@@ -61,7 +61,7 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 ###### Example inputs
 
 | Argument | Input | example |
-|---|---|--|
+|---|---|---|
 | sym | String, stock symbol | 'AAPL' |
 | flds | Array of Strings | ['s', 'n', 'd1', 'l1', 'y', 'r'] |
 
@@ -69,14 +69,13 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 ###### Example output:
 
 ```javascript
- [ { date: Tue Jan 10 2012 00:00:00 GMT-0800 (PST),
-    open: 425.909988,
-    high: 426.000004,
-    low: 421.500008,
-    close: 423.239994,
-    volume: 64549100,
-    adjClose: 55.072523,
-    symbol: 'AAPL' } ]
+{ symbol: 'AAPL',
+  name: 'Apple Inc.',
+  lastTradeDate: Mon Nov 14 2016 00:00:00 GMT-0800 (PST),
+  lastTradePriceOnly: 105.71,
+  dividendYield: 2.1,
+  peRatio: 12.72 }
+```
 
 
 Snapshot Array Options
