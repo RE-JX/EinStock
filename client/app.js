@@ -6,12 +6,14 @@ angular.module('einstock', [
     'einstock.algorithm',
     'einstock.welcome',
     'ngRoute',
-    'ngMaterial'
+    'ngMaterial',
+    'ngAria'
   ])
   // This is an Angular Material Theme setting for color schemes
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-      .primaryPalette('indigo');
+      // .primaryPalette('indigo')
+      // .accentPalette('orange')
   })
 
   // This is where we are routing our views
