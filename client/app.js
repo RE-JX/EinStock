@@ -7,7 +7,9 @@ angular.module('einstock', [
     'einstock.welcome',
     'ngRoute',
     'ngMaterial',
-    'ngAria'
+    'ngAria',
+    'highcharts-ng',
+    'chart.js'
   ])
   // This is an Angular Material Theme setting for color schemes
   .config(function($mdThemingProvider) {

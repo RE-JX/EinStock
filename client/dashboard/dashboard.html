@@ -1,3 +1,17 @@
-<div layout="column" ng-controller="dashboardController">
-  <h2>Hello Dashboard<h2>
+<div layout="column" ng-controller="dashboardController" class="dashboard">
+
+<!-- Header Banner for Dashboard -->
+  <h1 class="md-display-3">Hello Dashboard<h1>
+  <!-- Chart One -->
+  <div id="chart1" class="row" ng-controller="stockController">
+    <highchart config="chartConfig"></highchart>
+  </div>
+
+  <!-- Chart Two -->
+  <div id="chart2" class="row" ng-controller="lineController">
+    <canvas id="line" class="chart chart-line" chart-data="data"
+    chart-labels="labels" chart-series="series" chart-options="options"
+    chart-dataset-override="datasetOverride" chart-click="onClick">
+    </canvas>
+  </div>
 </div>
