@@ -3,28 +3,17 @@ var moment = require('moment');
 var Promise = require("bluebird");
 var apiMethods = require('../rest/back/index.js');
 
-var fetchHistory = function(frequency, startDate, endDate, tickerSymbol) {
-  //fetch historical price data, return an array of prices
-  apiMethods.yahoo.historical(tickerSymbol, startDate, endDate)
-    .then(function(result) {
-        return result.map(data => data.adjClose);
-    })
-    .catch(function(err) {
-      console.log('error with fetching historial data: ', err);
-    })
-};
-
 var simulation =function(prices, predictions, totalAssetValues, cashPosition, sharesOwned, callback) {
   if(predictions[0] === 1) { // long
-    sharesOwned.push[cashPosition / prices[0]];
+    sharesOwned[0] = cashPosition / prices[0];
     cashPosition[0] = 0;
   }
   if(predictions[0] === 0) { // short
     sharesOwned[0] = - cashPosition / prices[0];
-    cashPosition[0] = cashPosition[0] + sharesOwned[0] * prices[0];
+    cashPosition[0] = cashPosition[0] - sharesOwned[0] * prices[0];
   }
 
-  for(var i = 1; i<predictions.length; i++) {
+  for(var i = 1; i < predictions.length; i++) {
     if(totalAssetValues[i - 1] <= 0) {  // Basic risk control: if your asset value is negative, you won't be allowed to play for the remaining period
       sharesOwned[i] = sharesOwned[i - 1];
       cashPosition[i] = cashPosition[i - 1];
@@ -87,7 +76,8 @@ var simulationPromised = Promise.promisify(simulation);
 // }
 
 var evaluation = function(frequency, startDate, endDate, tickerSymbol, predictedMoves) {
-  var prices,
+  var pricesSpy,
+      pricesSelf,
       onedayBefore,
       increased,
       commission = 5,  // commission paid to broker per trade
@@ -105,54 +95,65 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
       cashPosition = [1000],
       stockSharesOwned = [],
       returns = [0];
+  start = new Date(startDate);
+  end = new Date(endDate);
 
-  if(startDate.getDay() === 1) {
-    onedayBefore = moment(startDate).subtract(3, 'days');
+  if(start.getDay() === 1) {
+    onedayBefore = moment(startDate).subtract(3, 'days').toDate();
   } else {
-    onedayBefore = moment(startDate).subtract(1, 'days');
+    onedayBefore = moment(startDate).subtract(1, 'days').toDate();
   }
 
-  pricesSelf = fetchHistory(frequency, onedayBefore, endDate, tickerSymbol); // fetch prices for underlining stock
-  pricesSpy = fetchHistory(frequency, onedayBefore, endDate, SPY); // fetch prices for S&P 500 index
+  // fetch prices for S&P 500 index
+  apiMethods.yahoo.historical('SPY', onedayBefore, end)
+    .then(function(result) {
+        pricesSpy = result.map(data => data.adjClose);
+        benchmarkReturnMarket = (pricesSpy[pricesSpy.length - 1] - pricesSpy[0]) / pricesSpy[0] * 100;
+    });
 
-  benchmarkReturnSelf = (pricesSelf[pricesSelf.length - 1] - pricesSelf[0]) / pricesSelf[0] * 100;
-  benchmarkReturnMarket = (pricesSpy[pricesSelf.length - 1] - pricesSpy[0]) / pricesSpy[0] * 100;
-
-// ------------ calculate actual price moves by day ------------
-  for(var i = 1; i < pricesSelf.length; i++) {
-    increased = (prices[i]/prices[i-1]-1) > 0 ? 1 : 0;
-    actualMoves.push(increased);
-  }
-// -------- calculate rates of prediction success and error -------------
-  predictedMoves.forEach((move, i) => {
-    if(move === 1 && actualMoves[i] === 0) {
-      inclusionError++;
-    } else if(move === 0 && actualMoves[i] === 1) {
-      exclusionError++;
-    } else {
-      successRate++;
-    }
-  });
-  successRate = successRate / predictedMoves.length;
-  inclusionError = inclusionError / predictedMoves.length;
-  exclusionError = exclusionError / predictedMoves.length;
-// -------- simulate trades according to predictedMoves and calculate portfolio values ---------
-  return simulationPromised(pricesSelf, predictedMoves, totalAssetValues, cashPosition, stockSharesOwned)
-  .then(function() {
-    // ------- calculate other ratios ----------
-      for(var j = 1; j < totalAssetValues.length; j++) {
-        returns[j] = (totalAssetValues[j] - totalAssetValues[j - 1]) / totalAssetValues[j - 1] * 100;
-      }
-      avgReturn = ss.mean(returns.slice(1));
-      cummuReturn = (totalAssetValues[totalAssetValues.length - 1] - totalAssetValues[0]) / totalAssetValues[0] * 100;
-      returnStd = ss.sampleStandardDeviation(returns.slice(1));
-      sharpeRatio = avgReturn / returnStd * Math.sqrt(252);
-    // -------- return results -------------
-      return {
-        frequency, startDate, endDate, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
-        predictedMoves, totalAssetValues, cashPosition, stockSharesOwned
-      };
-  });
+  // fetch prices for underlining stock
+  return apiMethods.yahoo.historical(tickerSymbol, onedayBefore, end)
+    .then(function(result) {
+        pricesSelf = result.map(data => data.adjClose);
+        benchmarkReturnSelf = (pricesSelf[pricesSelf.length - 1] - pricesSelf[0]) / pricesSelf[0] * 100;
+      // ------------ calculate actual price moves by day ------------
+        for(var i = 1; i < pricesSelf.length; i++) {
+          increased = (pricesSelf[i]/pricesSelf[i-1]-1) > 0 ? 1 : 0;
+          actualMoves.push(increased);
+        }
+      // -------- calculate rates of prediction success and error -------------
+        predictedMoves.forEach((move, i) => {
+          if(move === 1 && actualMoves[i + 1] === 0) {
+            inclusionError++;
+          } else if(move === 0 && actualMoves[i + 1] === 1) {
+            exclusionError++;
+          } else {
+            successRate++;
+          }
+        });
+        successRate = successRate / predictedMoves.length;
+        inclusionError = inclusionError / predictedMoves.length;
+        exclusionError = exclusionError / predictedMoves.length;
+    })
+    .then(function() {
+      // -------- simulate trades according to predictedMoves and calculate portfolio values ---------
+        return simulationPromised(pricesSelf, predictedMoves, totalAssetValues, cashPosition, stockSharesOwned)
+        .then(function() {
+          // ------- calculate other ratios ----------
+            for(var j = 1; j < totalAssetValues.length; j++) {
+              returns[j] = (totalAssetValues[j] - totalAssetValues[j - 1]) / totalAssetValues[j - 1] * 100;
+            }
+            avgReturn = ss.mean(returns.slice(1));
+            cummuReturn = (totalAssetValues[totalAssetValues.length - 1] - totalAssetValues[0]) / totalAssetValues[0] * 100;
+            returnStd = ss.sampleStandardDeviation(returns.slice(1));
+            sharpeRatio = avgReturn / returnStd * Math.sqrt(252);
+          // -------- return results -------------
+            return {
+              frequency, startDate, endDate, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
+              predictedMoves, totalAssetValues, cashPosition, stockSharesOwned
+            };
+        });
+    });
 };
 
-module.exports = evaluation;
+module.exports = evaluation;  // <-- this is a promise
