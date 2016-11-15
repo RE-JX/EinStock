@@ -2,7 +2,7 @@
 
 ## API's ready for use
 * Yahoo Finance API
-* Google Finance API
+* ~~Google Finance API~~
 
 ## rest/back/ Usage
 
