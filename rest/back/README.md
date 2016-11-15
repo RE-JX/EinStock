@@ -2,6 +2,7 @@
 
 ## API's ready for use
 * Yahoo Finance API
+* Google Finance API
 
 ## rest/back/ Usage
 
@@ -12,15 +13,74 @@ We are using the npm yahoo-finance node module for the yahoo API calls. There ar
 1. apiMethods.yahoo.historical
 2. apiMethods.yahoo.snapshot
 
-### Historical
+Both are meant to be used as promises.
+
+### Google
+### BROKEN, do not use
+
+We are using the npm google-finance node module for the google API calls. There are currently two functions available for use:
+
+1. apiMethods.google.historical
+2. apiMethods.google.snapshot
+
+Both are meant to be used as promises.
+
+### Yahoo Historical
 
 Historical is meant to provide information of the historical stock price for a given stock. Historical is passed a symbol as a string, and two dates as strings using the 'YYYY-MM-DD' day format. The first date is the starting date and the second is the ending date.
 
 _Although currently disabled, Historical also takes in a period argument that has daily, weekly, monthly, dividends only as options._
 
-### Snapshot
+###### Example inputs
 
-Snapshot provides a large variety of data for a stock (_assumed_) today. Snapshot is passed a symbol as a string, and an array containing different options. The options for the array are listed below along with what they give back:
+| Argument | Input | example |
+|---|---|--|
+| sym | String, stock symbol | 'AAPL' |
+| frm | String, from date YYYY-MM-DD | '2012-01-01' |
+| to | String, to date YYYY-MM-DD | '2012-01-10' |
+
+###### Example output:
+
+```javascript
+ [ { date: Tue Jan 10 2012 00:00:00 GMT-0800 (PST),
+    open: 425.909988,
+    high: 426.000004,
+    low: 421.500008,
+    close: 423.239994,
+    volume: 64549100,
+    adjClose: 55.072523,
+    symbol: 'AAPL' } ]
+```
+
+---
+
+### Yahoo Snapshot
+
+Snapshot provides a large variety of data for a stock (_assumed_) today. Snapshot is passed a symbol as a string, and an array containing different options. The options for the array are listed below along with what they give back.
+
+###### Example inputs
+
+| Argument | Input | example |
+|---|---|--|
+| sym | String, stock symbol | 'AAPL' |
+| flds | Array of Strings | ['s', 'n', 'd1', 'l1', 'y', 'r'] |
+
+
+###### Example output:
+
+```javascript
+ [ { date: Tue Jan 10 2012 00:00:00 GMT-0800 (PST),
+    open: 425.909988,
+    high: 426.000004,
+    low: 421.500008,
+    close: 423.239994,
+    volume: 64549100,
+    adjClose: 55.072523,
+    symbol: 'AAPL' } ]
+
+
+Snapshot Array Options
+------
 
 ###### Symbol
 | symbol | Meaning |
@@ -82,3 +142,4 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | g5 | Holdings Gain Percent (Realtime) | e1 | Error Indication (returned for symbol changed or invalid) |
 | g6 | Holdings Gain (Realtime) |
 
+---
