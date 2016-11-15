@@ -22,39 +22,22 @@ _Although currently disabled, Historical also takes in a period argument that ha
 
 Snapshot provides a large variety of data for a stock (_assumed_) today. Snapshot is passed a symbol as a string, and an array containing different options. The options for the array are listed below along with what they give back:
 
+###### Symbol
 | symbol | Meaning |
 |:---:|:---|
 | s | Stock Symbol |
 
-###### Pricing
-| symbol | Meaning |
-|:---:|:---|
-| a | Ask |
-| b | Bid |
-| b2 | Ask (Realtime) |
-| b3 | Bid (Realtime) |
-| p | Previous Close |
-| o | Open |
+###### Pricing, Dividends, Date
+| Pricing | Pricing | Dividends | Dividends | Date | Date |
+|:---:|:---|:---:|:---|:---:|:---|
+| a | Ask | y | Dividend Yield | c1 | Change |
+| b | Bid | d | Dividend Per Share | c | Change And Percent Change |
+| b2 | Ask (Realtime) | r1 | Dividend Pay Date | c6 | Change (Realtime) |
+| b3 | Bid (Realtime) | q | Ex-Dividend Date | k2 | Change Percent (Realtime) |
+| p | Previous Close  | p2 | Change in Percent |
+| | | | | d2 | Trade Date |
+| | | | | t1 | Last Trade Time |
 
-###### Dividends
-| symbol | Meaning |
-|:---:|:---|
-| y | Dividend Yield |
-| d | Dividend Per Share |
-| r1 | Dividend Pay Date |
-| q | Ex-Dividend Date |
-
-###### Date
-| symbol | Meaning |
-|:---:|:---|
-| c1 | Change |
-| c | Change And Percent Change |
-| c6 | Change (Realtime) |
-| k2 | Change Percent (Realtime) |
-| p2 | Change in Percent |
-| d1 | Last Trade Date |
-| d2 | Trade Date |
-| t1 | Last Trade Time |
 
 ###### Averages
 | symbol | Meaning |
@@ -151,3 +134,4 @@ Snapshot provides a large variety of data for a stock (_assumed_) today. Snapsho
 | v7 | Holdings Value (Realtime) |
 | s6 | Revenue |
 | e1 | Error Indication (returned for symbol changed or invalid) |
+
