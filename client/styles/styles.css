@@ -3,6 +3,26 @@ body {
   font-family: 'Unica One', cursive;
 }
 
+#chart1 {
+  display: inline-block;
+  width: 49%;
+}
+
+#chart2 {
+  display: inline-block;
+  width: 49%;
+}
+
+#disclaimer {
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.dashboard{
+  text-align: center;
+}
+
 #title {
   text-align: center;
   position: absolute;
@@ -33,7 +53,8 @@ body {
 }
 
 .about {
-  text-align: center;
+  text-align: left;
+  padding: 20px;
 }
 
 .welcome {
@@ -41,7 +62,12 @@ body {
 }
 
 .howto {
-  text-align: center;
+  text-align: left;
+  padding: 20px;
+}
+
+p {
+  font-family: 'Open Sans';
 }
 
 .team {

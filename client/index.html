@@ -13,11 +13,16 @@
   <script src="/public/angular-route/angular-route.js"></script>
   <script src="/public/angular-aria/angular-aria.js"></script>
   <script src="/public/angular-animate/angular-animate.js"></script>
-  <script src="/public/angular-material/angular-material.js"></script>
+  <script src="/public/chart.js/dist/chart.js"></script>
+  <script src="/public/angular-chart.js/angular-chart.js"></script>
+  <script src="/public/highcharts-ng/dist/highcharts-ng.js"></script>
+  <script src="http://code.highcharts.com/stock/highstock.src.js"></script>
   <!-- Angular Material CSS and Font -->
+  <script src="/public/angular-material/angular-material.js"></script>
   <link rel="stylesheet" href="/public/angular-material/angular-material.css">
   <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 
 <body>
@@ -31,8 +36,9 @@
 <!-- Navigation Bar -->
 <div class="container" id="navbar">
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
-    <md-nav-item class="md-primary" md-nav-click="goto('algorithm')" name="algorithm">Algorithm</md-nav-item>
-    <md-nav-item md-nav-click="goto('dashboard')" name="dashboard">Dashboard</md-nav-item>
+    <md-nav-item md-nav-href="#/welcome" name="welcome">Welcome</md-nav-item>
+    <md-nav-item md-nav-href="#/algorithm" name="algorithm">Algorithm</md-nav-item>
+    <md-nav-item md-nav-href="#/dashboard" name="dashboard">Dashboard</md-nav-item>
   </md-nav-bar>
 </div>
 
@@ -42,7 +48,6 @@
 </div>
 
 <!-- Local routes for files -->
-  <script src="/assets"></script>
   <script src="/services/services.js"></script>
   <script src="/dashboard/dashboard.js"></script>
   <script src="/algorithm/algorithm.js"></script>
