@@ -2944,6 +2944,10 @@ supports-color@3.1.2:
   dependencies:
     has-flag "^1.0.0"
 
+synaptic:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/synaptic/-/synaptic-1.0.8.tgz#ebb32699554a9d4937ae359c96df2f590b19dac4"
+
 tar-pack@~3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/tar-pack/-/tar-pack-3.3.0.tgz#30931816418f55afc4d21775afdd6720cee45dae"
