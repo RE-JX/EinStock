@@ -13,6 +13,7 @@ angular.module('einstock', [
     'einstock.welcome',
     'ngRoute',
     'ngMaterial',
+    'ngMessages',
     'ngAria',
     'highcharts-ng',
     'chart.js'
