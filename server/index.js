@@ -27,10 +27,8 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
-app.get('/dashboard', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname + '/../client/algorithm/algorithm.html'))
-})
-
+//-----------------database-----------------
+//------------------------------------------
 
 database.db.sync().then(() => {
   console.log('database connected');
