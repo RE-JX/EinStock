@@ -61,13 +61,13 @@ database.db.sync().then(() => {
   console.log('listening on port: ', port);
 });
 
-
-const indicators = new PreProcess(sampleData);
-indicators.index();
-indicators.ema(2);
-indicators.std(2);
-indicators.maGap(2);
-indicators.BB(2);
-indicators.percentBB(2);
+// ------- example usage of PreProcess function for creating predictors, to be deleted later ---------
+const predictors = new PreProcess(sampleData);
+predictors.index();
+predictors.ema(2);
+predictors.std(2);
+predictors.maGap(2);
+predictors.BB(2);
+predictors.percentBB(2);
 console.log(indicators.data);
 
