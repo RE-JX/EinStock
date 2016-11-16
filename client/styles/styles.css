@@ -19,8 +19,12 @@ body {
   font-style: italic;
 }
 
-.dashboard{
+#dashboard-banner {
   text-align: center;
+}
+
+.dashboard{
+  background-color: #CFD8DC;
 }
 
 #title {
@@ -38,8 +42,8 @@ body {
 }
 
 #navbar {
-/*  background-color: #3F51B5;
-*/}
+  background-color: #E0E0E0;
+}
 
 #navbar * {
 /*  color: #E8EAF6;
