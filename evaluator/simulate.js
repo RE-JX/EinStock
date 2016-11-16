@@ -98,15 +98,17 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
       cashPosition = [1000],
       stockSharesOwned = [],
       returns = [0];
-
+  var start = new Date(startDate), end = new Date(endDate);
+  start = moment(start).format().slice(0, 10);
+  end =  moment(end).format().slice(0, 10);
   // fetch prices of S&P 500 index
-  return apiMethods.yahoo.historical('SPY', startDate, endDate)
+  return apiMethods.yahoo.historical('SPY', start, end)
     .then(function(result) {
         pricesSpy = result.map(data => data.adjClose);
         benchmarkReturnMarket = (pricesSpy[pricesSpy.length - 1] - pricesSpy[0]) / pricesSpy[0] * 100;
     })
     .then(function() {
-        return apiMethods.yahoo.historical(tickerSymbol, startDate, endDate)   // fetch prices of underlining ticker symbol
+        return apiMethods.yahoo.historical(tickerSymbol, start, end)   // fetch prices of underlining ticker symbol
         .then(function(result) {
             pricesSelf = result.map(data => data.adjClose);
             benchmarkReturnSelf = (pricesSelf[pricesSelf.length - 1] - pricesSelf[0]) / pricesSelf[0] * 100;
@@ -118,6 +120,7 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
               benchmarkAssetValuesMarket[i] = benchmarkAssetValuesMarket[i - 1] * pricesSpy[i] / pricesSpy[i - 1];
             }
           // -------- calculate rates of prediction success and error -------------
+
             actualMoves.forEach((move, i) => {
               if(move === 1 && predictedMoves[i] === 0) {
                 exclusionError++;
@@ -145,7 +148,7 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
                 sharpeRatio = avgReturn / returnStd * Math.sqrt(252);
               // -------- return results -------------
                 return {
-                  frequency, startDate, endDate, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
+                  frequency, startDate: start, endDate: end, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
                   predictedMoves, totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned
                 };
             });

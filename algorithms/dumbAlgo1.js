@@ -25,15 +25,15 @@ var a2 = function(startDate, endDate, tickerSymbol) {
   var start = new Date(startDate);
   var end = new Date(endDate);
   var twoDaysBefore, actualPrices = [], predictions = [];
-  console.log('start.getDay: ',startDate, moment(startDate).day());
-  if(moment(startDate).day() === 1) {
-    twoDaysBefore = moment(startDate).subtract(4, 'days').toDate();
+
+  if(moment(start).day() === 1) {
+    twoDaysBefore = moment(start).subtract(4, 'days');
   } else {
-    twoDaysBefore = moment(startDate).subtract(2, 'days').toDate();
+    twoDaysBefore = moment(start).subtract(2, 'days');
   }
-  return apiMethods.yahoo.historical(tickerSymbol, twoDaysBefore, endDate)
+
+  return apiMethods.yahoo.historical(tickerSymbol, twoDaysBefore.format().slice(0, 10), moment(end).format().slice(0, 10))
     .then(result => {
-      console.log('twoDaysBefore: ', twoDaysBefore);
       actualPrices = result.map(data => data.adjClose);
      })
     .then(() => {
