@@ -1252,6 +1252,10 @@ gauge@~2.6.0:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
+gauss@^0.2.12:
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/gauss/-/gauss-0.2.12.tgz#51255ad216c76938b3c5493269763f0fd57753f7"
+
 generate-function@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/generate-function/-/generate-function-2.0.0.tgz#6858fe7c0969b7d4e9093337647ac79f60dfbe74"
