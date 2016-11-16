@@ -122,11 +122,11 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
               actualMoves[i - 1] = increased;
             }
           // -------- calculate rates of prediction success and error -------------
-            predictedMoves.forEach((move, i) => {
-              if(move === 1 && actualMoves[i] === 0) {
-                inclusionError++;
-              } else if(move === 0 && actualMoves[i] === 1) {
+            actualMoves.forEach((move, i) => {
+              if(move === 1 && predictedMoves[i] === 0) {
                 exclusionError++;
+              } else if(move === 0 && predictedMoves[i] === 1) {
+                inclusionError++;
               } else {
                 successRate++;
               }
