@@ -29,6 +29,7 @@
     "angular-aria": "^1.5.8",
     "angular-chart.js": "^1.0.3",
     "angular-material": "^1.1.1",
+    "angular-messages": "^1.5.8",
     "angular-route": "^1.5.8",
     "aws-sdk": "^2.6.15",
     "axios": "^0.15.2",

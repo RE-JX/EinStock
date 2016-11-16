@@ -8,13 +8,13 @@
 
   Algorithm.$inject = ['$http'];
   function Algorithm($http) {
-        return {
-          post: function(data) {
-            return $http.post('/api/data', data);
-            // console.log(data); //just for testing purposes
-          }
-        }
+    return {
+      post: function(data) {
+        return $http.post('/api/data', data);
+        // console.log(data); //just for testing purposes
       }
+    }
+  }
 
 })();
 
