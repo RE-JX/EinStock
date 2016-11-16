@@ -8,8 +8,9 @@
 
   function Algorithm($http) {
         return {
-          show: function(data) {
-            console.log(data); //just for testing purposes
+          get: function() {
+            return $http.get('/api/data');
+            // console.log(data); //just for testing purposes
           }
         }
       }
