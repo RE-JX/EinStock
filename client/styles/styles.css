@@ -1,6 +1,14 @@
 /*Additional styling on top of our Angular Material*/
+
 body {
   font-family: 'Unica One', cursive;
+}
+
+#scroll-down {
+  position: absolute;
+  top: 400px;
+  left: 47%;
+  text-align: center;
 }
 
 #chart1 {
@@ -23,8 +31,31 @@ body {
   text-align: center;
 }
 
-.dashboard{
+.dashboard {
   background-color: #CFD8DC;
+}
+
+#welcome-header {
+  position: absolute;
+  top: 1050px;
+  left: 0;
+  width: 100%;
+  color: white;
+  z-index: 1;
+  text-shadow: 3px 3px gray;
+
+}
+
+.welcome-hello-banner {
+  background-image: url("/assets/balloons.jpg");
+}
+
+#welcome-banner {
+  width: 100%;
+  height: 30%;
+  -webkit-clip-path: polygon(80% 0%, 100% 50%, 80% 100%, 0% 100%, 20% 50%, 0% 0%);
+  clip-path: polygon(80% 0%, 100% 50%, 80% 100%, 0% 100%, 20% 50%, 0% 0%);
+  object-fit: cover;
 }
 
 #title {
@@ -34,8 +65,9 @@ body {
   left: 0;
   width: 100%;
   color: white;
-/*  font-weight: bold;
-*/  -webkit-text-stroke-width: 1px;
+  /*  font-weight: bold;
+*/
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   text-shadow: 3px 3px black;
   font-size: 95px;
@@ -46,13 +78,15 @@ body {
 }
 
 #navbar * {
-/*  color: #E8EAF6;
-*/  font-size: 20px;
+  /*  color: #E8EAF6;
+*/
+  font-size: 20px;
 }
 
 .background {
-  height: 600px;
+  height: auto;
   width: 100%;
+  left: 50%;
   object-fit: cover;
 }
 
