@@ -3,16 +3,21 @@
 
   angular
     .module('einstock.algorithm', [
-      'ngMaterial'
+      'ngMaterial',
+      'ngMessages'
     ])
 
     //this will be the controller to create new campaigns
     .controller('algorithmController', algoCtrl)
 
   function algoCtrl($scope, Algorithm) {
+    //init a start date
+    var firstDate = new Date();
+    firstDate.setDate(firstDate.getDate() - 1);
+    //-----------------------------------------
     $scope.data = {
       ticker: 'GOOG',
-      startDate: new Date(),
+      startDate: firstDate,
       endDate: new Date()
     }
     $scope.log = function() {
@@ -24,3 +29,5 @@
   }
 
 })();
+
+
