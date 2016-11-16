@@ -3,14 +3,15 @@ var moment = require('moment');
 var Promise = require("bluebird");
 var apiMethods = require('../rest/back/index.js');
 
+//---------- function for simulating trading decisions based on predictions ------------
 var simulation =function(prices, predictions, totalAssetValues, cashPosition, sharesOwned, callback) {
   if(predictions[0] === 1) { // long
     sharesOwned[0] = cashPosition / prices[0];
     cashPosition[0] = 0;
   }
   if(predictions[0] === 0) { // short
-    sharesOwned[0] = - cashPosition / prices[0];
-    cashPosition[0] = cashPosition[0] - sharesOwned[0] * prices[0];
+    sharesOwned[0] = - cashPosition * 0.5 / prices[0]; // can use at most half of cash for shorting
+    cashPosition[0] = cashPosition[0] + Math.abs(sharesOwned[0]) * prices[0];
   }
 
   for(var i = 1; i < predictions.length; i++) {
@@ -21,19 +22,19 @@ var simulation =function(prices, predictions, totalAssetValues, cashPosition, sh
       if(predictions[i] === predictions[i - 1]) { // if prediction for next day is same as previous day, stay put
         sharesOwned[i] = sharesOwned[i - 1];
         cashPosition[i] = cashPosition[i - 1];
-      } else if(predictions[i] === 1 && predictions[i - 1] === 0) { // if prediction for next day is bearish
-          cashPosition[i] = cashPosition[i - 1] + sharesOwned[i - 1] * prices[i]; // first sell all shares you own
-          sharesOwned[i] = 0;
-          if(cashPosition[i] > 0) { // then borrow shares and short it
-            sharesOwned[i] = - cashPosition[i] / prices[i];
-            cashPosition[i] = cashPosition[i] + sharesOwned[i] * prices[i];
-          }
-      } else if(predictions[i] === 0 && predictions[i - 1] === 1) { // if prediction for next day is bullish
+      } else if(predictions[i] === 1 && predictions[i - 1] === 0) { // if prediction for next day is bullish
           cashPosition[i] = cashPosition[i - 1] - Math.abs(sharesOwned[i - 1]) * prices[i];
           sharesOwned[i] = 0; // first wrap up the previous short position
           if(cashPosition[i] > 0) { // then buy more shares
             sharesOwned[i] = cashPosition[i] / prices[i];
             cashPosition[i] = 0;
+          }
+      } else if(predictions[i] === 0 && predictions[i - 1] === 1) { // if prediction for next day is bearish
+          cashPosition[i] = cashPosition[i - 1] + sharesOwned[i - 1] * prices[i]; // first sell all shares you own
+          sharesOwned[i] = 0;
+          if(cashPosition[i] > 0) { // then borrow shares with half the cash and short it
+            sharesOwned[i] = - cashPosition[i] * 0.5 / prices[i];
+            cashPosition[i] = cashPosition[i] + Math.abs(sharesOwned[i]) * prices[i];
           }
       }
     }
@@ -45,7 +46,7 @@ var simulation =function(prices, predictions, totalAssetValues, cashPosition, sh
 
 var simulationPromised = Promise.promisify(simulation);
 
-// inputs to the simulation function:
+// inputs to the evaluation function:
 // 1. frequency (e.g. d, h, m)
 // 2. start date (and/or time)
 // 3. end date
@@ -104,56 +105,57 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
     onedayBefore = moment(startDate).subtract(1, 'days').toDate();
   }
 
-  // fetch prices for S&P 500 index
-  apiMethods.yahoo.historical('SPY', onedayBefore, end)
+  // fetch prices of S&P 500 index
+  return apiMethods.yahoo.historical('SPY', onedayBefore, end)
     .then(function(result) {
         pricesSpy = result.map(data => data.adjClose);
         benchmarkReturnMarket = (pricesSpy[pricesSpy.length - 1] - pricesSpy[0]) / pricesSpy[0] * 100;
-    });
-
-  // fetch prices for underlining stock
-  return apiMethods.yahoo.historical(tickerSymbol, onedayBefore, end)
-    .then(function(result) {
-        pricesSelf = result.map(data => data.adjClose);
-        benchmarkReturnSelf = (pricesSelf[pricesSelf.length - 1] - pricesSelf[0]) / pricesSelf[0] * 100;
-      // ------------ calculate actual price moves by day ------------
-        for(var i = 1; i < pricesSelf.length; i++) {
-          increased = (pricesSelf[i]/pricesSelf[i-1]-1) > 0 ? 1 : 0;
-          actualMoves.push(increased);
-        }
-      // -------- calculate rates of prediction success and error -------------
-        predictedMoves.forEach((move, i) => {
-          if(move === 1 && actualMoves[i + 1] === 0) {
-            inclusionError++;
-          } else if(move === 0 && actualMoves[i + 1] === 1) {
-            exclusionError++;
-          } else {
-            successRate++;
-          }
-        });
-        successRate = successRate / predictedMoves.length;
-        inclusionError = inclusionError / predictedMoves.length;
-        exclusionError = exclusionError / predictedMoves.length;
     })
     .then(function() {
-      // -------- simulate trades according to predictedMoves and calculate portfolio values ---------
-        return simulationPromised(pricesSelf, predictedMoves, totalAssetValues, cashPosition, stockSharesOwned)
-        .then(function() {
-          // ------- calculate other ratios ----------
-            for(var j = 1; j < totalAssetValues.length; j++) {
-              returns[j] = (totalAssetValues[j] - totalAssetValues[j - 1]) / totalAssetValues[j - 1] * 100;
+        return apiMethods.yahoo.historical(tickerSymbol, onedayBefore, end)   // fetch prices of underlining ticker symbol
+        .then(function(result) {
+            pricesSelf = result.map(data => data.adjClose);
+            benchmarkReturnSelf = (pricesSelf[pricesSelf.length - 1] - pricesSelf[0]) / pricesSelf[0] * 100;
+          // ------------ calculate actual price moves by day ------------
+            for(var i = 1; i < pricesSelf.length; i++) {
+              increased = (pricesSelf[i]/pricesSelf[i-1]-1) > 0 ? 1 : 0;
+              actualMoves.push(increased);
             }
-            avgReturn = ss.mean(returns.slice(1));
-            cummuReturn = (totalAssetValues[totalAssetValues.length - 1] - totalAssetValues[0]) / totalAssetValues[0] * 100;
-            returnStd = ss.sampleStandardDeviation(returns.slice(1));
-            sharpeRatio = avgReturn / returnStd * Math.sqrt(252);
-          // -------- return results -------------
-            return {
-              frequency, startDate, endDate, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
-              predictedMoves, totalAssetValues, cashPosition, stockSharesOwned
-            };
+          // -------- calculate rates of prediction success and error -------------
+            predictedMoves.forEach((move, i) => {
+              if(move === 1 && actualMoves[i + 1] === 0) {
+                inclusionError++;
+              } else if(move === 0 && actualMoves[i + 1] === 1) {
+                exclusionError++;
+              } else {
+                successRate++;
+              }
+            });
+            successRate = successRate / predictedMoves.length;
+            inclusionError = inclusionError / predictedMoves.length;
+            exclusionError = exclusionError / predictedMoves.length;
+        })
+        .then(function() {
+          // -------- simulate trades according to predictedMoves and calculate portfolio values ---------
+            return simulationPromised(pricesSelf, predictedMoves, totalAssetValues, cashPosition, stockSharesOwned)
+            .then(function() {
+              // ------- calculate other ratios ----------
+                for(var j = 1; j < totalAssetValues.length; j++) {
+                  returns[j] = (totalAssetValues[j] - totalAssetValues[j - 1]) / totalAssetValues[j - 1] * 100;
+                }
+                avgReturn = ss.mean(returns.slice(1));
+                cummuReturn = (totalAssetValues[totalAssetValues.length - 1] - totalAssetValues[0]) / totalAssetValues[0] * 100;
+                returnStd = ss.sampleStandardDeviation(returns.slice(1));
+                sharpeRatio = avgReturn / returnStd * Math.sqrt(252);
+              // -------- return results -------------
+                return {
+                  frequency, startDate, endDate, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
+                  predictedMoves, totalAssetValues, cashPosition, stockSharesOwned
+                };
+            });
         });
-    });
+
+  });
 };
 
 module.exports = evaluation;  // <-- this is a promise
