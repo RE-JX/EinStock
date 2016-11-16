@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 const port = 8080;
 const database = require('../database');
 const evaluation = require('../evaluator/simulate.js');
@@ -27,13 +28,19 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
-app.get('/api/data', (req, res) => {
-  dumbAlgo2(req.startDate, req.endDate, req.ticker)
+app.post('/api/data', (req, res) => {
+  console.log(req.data, req.body, req.query);
+  function dateFormat(date) {
+    var date = new Date(date);
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  }
+   
+  dumbAlgo2(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker)
     .then((result) => {
       predictions = result;
     })
     .then(() => {
-      evaluation('d', req.startDate, req.endDate, req.ticker)
+      evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker)
         .then((result) => {
           res.send(result);
           console.log(result);
