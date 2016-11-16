@@ -5,53 +5,61 @@ var Neuron = synaptic.Neuron,
     Trainer = synaptic.Trainer,
     Architect = synaptic.Architect;
 
+//Data and normalization
 var stockTraining = require('../sampleData/aapl6').data;
 var normalizer = require('../normalizers').normalizer;
+var normalizedData = normalizer(stockTraining, ['stock', 'symbol', 'date']);
 
-console.log(normalizer(stockTraining, ['stock', 'symbol', 'date']));
 
+//Setup NN and Trainer
 var myNetwork = new Architect.Perceptron(6,6,1);
-// var myNetwork = new Architect.Perceptron(2, 2, 1)
-// var trainer = new Trainer(myNetwork)
+var trainer = new Trainer(myNetwork);
 
-// var trainingSet = [
-//   {
-//     input: [0,0],
-//     output: [0]
-//   },
-//   {
-//     input: [0,1],
-//     output: [1]
-//   },
-//   {
-//     input: [1,0],
-//     output: [1]
-//   },
-//   {
-//     input: [1,1],
-//     output: [0]
-//   },
-// ]
+//Create a training set
+var trainingSet = [
+  {
+    input: normalizedData[0],
+    output: normalizedData[1].adjClose
+  },
+  {
+    input: normalizedData[1],
+    output: normalizedData[2].adjClose
+  },
+  {
+    input: normalizedData[2],
+    output: normalizedData[3].adjClose
+  },
+  {
+    input: normalizedData[3],
+    output: normalizedData[4].adjClose
+  },
+  {
+    input: normalizedData[4],
+    output: normalizedData[5].adjClose
+  }
 
-// // trainer.train(trainingSet);
+]
 
-// trainer.train(trainingSet,{
-//     rate: .1,
-//     iterations: 40000,
-//     error: .000005,
-//     shuffle: true,
-//     log: 1000,
-//     cost: Trainer.cost.CROSS_ENTROPY,
-//     schedule: {
-//     every: 500, // repeat this task every 500 iterations
-//     do: function(data) {
-//         // custom log
-//         console.log("error", data.error, "iterations", data.iterations, "rate", data.rate);
-//         // if (someCondition)
-//         //     return true; // abort/stop training
-//     }
-// }
-// });
+//train the NN
+trainer.train(trainingSet,{
+    rate: .1,
+    iterations: 4000,
+    error: .005,
+    shuffle: false,
+    log: 1000,
+    cost: Trainer.cost.CROSS_ENTROPY,
+    schedule: {
+    every: 500, // repeat this task every 500 iterations
+    do: function(data) {
+        // custom log
+        console.log("error", data.error, "iterations", data.iterations, "rate", data.rate);
+        // if (someCondition)
+        //     return true; // abort/stop training
+    }
+}
+});
+
+
 
 
 
