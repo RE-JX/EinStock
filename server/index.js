@@ -35,7 +35,7 @@ database.db.sync().then(() => {
 });
 
 // test evaluation function, to be deleted later
-var startDate = '2016-10-20',
+var startDate = '2016-10-10',
     endDate = '2016-10-28';
 // var predictions = dumbAlgo1(startDate, endDate, 'ABC');
 dumbAlgo2(startDate, endDate, 'AAPL')
