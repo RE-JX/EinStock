@@ -6,10 +6,12 @@
     .module('einstock.services', [])
     .factory('Algorithm', Algorithm)
 
+  Algorithm.$inject = ['$http'];
   function Algorithm($http) {
         return {
-          show: function(data) {
-            console.log(data); //just for testing purposes
+          post: function(data) {
+            return $http.post('/api/data', data);
+            // console.log(data); //just for testing purposes
           }
         }
       }

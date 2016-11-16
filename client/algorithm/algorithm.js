@@ -16,7 +16,9 @@
       endDate: new Date()
     }
     $scope.log = function() {
-      Algorithm.show($scope.data);
+      Algorithm.post($scope.data).success(function(data) {
+        console.log(data);
+      });
     }
   }
 
