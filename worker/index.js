@@ -12,7 +12,7 @@ apiMethods.yahoo.historical = Promise.promisify(function (sym, frm, to, callback
   yahoo.historical({
     symbol: sym,
     from: frm,
-    to: to,
+    to: to || frm,
     // period: 'd'  // 'd' (daily), 'w' (weekly), 'm' (monthly), 'v' (dividends only)
   }, callback);
 });
