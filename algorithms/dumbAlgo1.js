@@ -1,5 +1,5 @@
 var moment = require('moment');
-var apiMethods = require('../rest/back/index.js');
+var apiMethods = require('../worker/index.js');
 
 // ------------- Dumb algorithm #1: prediction is a random number -------------
 var a1 = function(startDate, endDate, tickerSymbol) {
