@@ -28,6 +28,9 @@ app.get('/', (req, res) => {
 });
 
 
+//-----------------database-----------------
+//------------------------------------------
+
 database.db.sync().then(() => {
   console.log('database connected');
   app.listen(process.env.PORT || port);

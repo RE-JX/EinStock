@@ -1,6 +1,6 @@
 //connect to Various APIs server up data to ML services
-var yahoo = require('../node_modules/yahoo-finance');
-var google = require('../node_modules/google-finance');
+var yahoo = require('../../node_modules/yahoo-finance');
+var google = require('../../node_modules/google-finance');
 var Promise    = require("bluebird");
 
 apiMethods = {};

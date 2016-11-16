@@ -1,4 +1,26 @@
 <!-- Main Algorithim selector div with input form -->
 <div layout="column" ng-controller="algorithmController">
   <h2>Hello Algorithm<h2>
+    <md-content layout-padding>
+      <div layout-gt-xs="row">
+        <div flex-gt-xs>
+          <h4>Choose Ticker</h4>
+            <md-input-container>
+              <input ng-model="data.ticker">
+            </md-input-container>
+        </div>
+      </div>
+      <div layout-gt-xs="row">
+        <div flex-gt-xs>
+          <h4>Select Start Date:</h4>
+          <md-datepicker ng-model="data.startDate" md-placeholder="start date"></md-datepicker>
+        </div>
+        <div flex-gt-xs>
+          <h4>Select End Date:</h4>
+          <md-datepicker ng-model="data.endDate" md-placeholder="end date"></md-datepicker>
+        </div>
+      </div>
+      <md-button ng-click="log()" class="md-raised submit" type="submit">Submit</md-button>
+    </md-content>
+
 </div>
