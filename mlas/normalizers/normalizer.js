@@ -1,4 +1,4 @@
-var yahooHistoricalNormalizer = function(data, ignoreKeys, max, min) {
+var normalizer = function(data, ignoreKeys, max, min) {
   max = max || {};
   min = min || {};
   ignoreKeys = ignoreKeys || [];
@@ -42,8 +42,8 @@ var yahooHistoricalNormalizer = function(data, ignoreKeys, max, min) {
 }
 
 var obj = {
-  name: 'yahooHistoricalNormalizer',
-  func: yahooHistoricalNormalizer
+  name: 'normalizer',
+  func: normalizer
 }
 
 module.exports = obj;
