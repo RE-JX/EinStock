@@ -47,6 +47,8 @@ var Simulation = db.define('Simulation', {
   predictedMoves: { type: Sequelize.ARRAY(Sequelize.BOOLEAN), allowNull: false },
   actualMoves: { type: Sequelize.ARRAY(Sequelize.BOOLEAN), allowNull: false },
   totalAssetValues: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
+  benchmarkAssetValuesSelf: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
+  benchmarkAssetValuesMarket: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
   returns: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
   cashPosition: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
   stockSharesOwned: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false }
