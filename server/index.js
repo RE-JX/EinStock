@@ -27,6 +27,20 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
+app.get('/api/data', (req, res) => {
+  dumbAlgo2(req.startDate, req.endDate, req.ticker)
+    .then((result) => {
+      predictions = result;
+    })
+    .then(() => {
+      evaluation('d', req.startDate, req.endDate, req.ticker)
+        .then((result) => {
+          res.send(result);
+          console.log(result);
+        })
+    })
+})
+
 
 //-----------------database-----------------
 //------------------------------------------
