@@ -33,6 +33,13 @@
   <h1 class="md-display-3" id="title">EinStock</h1>
 </div>
 
+<!-- Scroll Down Arrow Button -->
+<div ng-controller="scrollerController">
+  <md-button id="scroll-down" class="md-fab md-primary md-hue-2" aria-label="Scroll Down" ng-click="scrollDown()">
+    <md-icon md-svg-src="assets/icons/timeline.svg"></md-icon>
+  </md-button>
+</div>
+
 <!-- Navigation Bar -->
 <div class="container" id="navbar">
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">

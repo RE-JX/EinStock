@@ -1,10 +1,14 @@
 <!-- Div for main Welcome to Einstock -->
 <div class="welcome" ng-controller="welcomeController">
-  <h1 class="md-display-3">Hello Welcome Page</h1>
-
+<div class="welcome-hello-banner">
+  <h1 class="md-display-3" id="welcome-header">Hello Welcome Page</h1>
+  <div>
+    <img id="welcome-banner" src="/assets/balloons.jpg">
+  </div>
+</div>
   <!-- Div for How to Use Algorithm Selector -->
   <div class="howto">
-    <h2>How the heck do you use this Algorithm Selector?</h2>
+    <h2 class="md-display-2">How the heck do you use this Algorithm Selector?</h2>
     <p>{{how}}</p>
     <p id="disclaimer">{{disclaimer}}</p>
   </div>
@@ -16,14 +20,14 @@
   <!-- Div for About Us and Team -->
   <div class="about">
     <!-- About Us description -->
-    <h2>About Us</h2>
+    <h2 class="md-display-2">About Us</h2>
 
 
   </div>
 <md-divider></md-divider>
 <!-- Team Pics -->
   <div>
-    <h2>Meet Our Sexy Team</h2>
+    <h2 class="md-display-2">Meet Our Sexy Team</h2>
     <!-- First Line of pics -->
       <div class="team">
         <h3>Kevin</h3>
@@ -33,8 +37,6 @@
         <h3>Lucas</h3>
         <img class="teampic" src="/assets/lucas.png">
       </div>
-    <!-- Second Line of pics -->
-    <div>
       <div class="team">
         <h3>Natasha</h3>
         <img class="teampic" src="../assets/natasha.jpeg">
