@@ -1,7 +1,7 @@
 var ss = require('simple-statistics');
 var moment = require('moment');
 var Promise = require("bluebird");
-var apiMethods = require('../rest/back/index.js');
+var apiMethods = require('../worker/index.js');
 
 //---------- function for simulating trading decisions based on predictions ------------
 var simulation =function(prices, predictions, totalAssetValues, cashPosition, sharesOwned, callback) {
@@ -92,18 +92,12 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
       sharpeRatio,
       benchmarkReturnSelf,
       benchmarkReturnMarket,
-      totalAssetValues = [1000], // starting with $1000 cash on the day before startDate
+      totalAssetValues = [1000], // starting with $1000 cash startDate
+      benchmarkAssetValuesSelf = [1000],  // asset values if you buy and hold underlining stock over test period
+      benchmarkAssetValuesMarket = [1000], // asset values if you buy and hold SPY over test period
       cashPosition = [1000],
       stockSharesOwned = [],
       returns = [0];
-  start = new Date(startDate);
-  end = new Date(endDate);
-
-  // if(start.getDay() === 1) {
-  //   onedayBefore = moment(startDate).subtract(3, 'days').toDate();
-  // } else {
-  //   onedayBefore = moment(startDate).subtract(1, 'days').toDate();
-  // }
 
   // fetch prices of S&P 500 index
   return apiMethods.yahoo.historical('SPY', startDate, endDate)
@@ -120,6 +114,8 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
             for(var i = 1; i < pricesSelf.length; i++) {
               increased = (pricesSelf[i] / pricesSelf[i - 1] - 1) > 0 ? 1 : 0;
               actualMoves[i - 1] = increased;
+              benchmarkAssetValuesSelf[i] = benchmarkAssetValuesSelf[i - 1] * pricesSelf[i] / pricesSelf[i - 1];
+              benchmarkAssetValuesMarket[i] = benchmarkAssetValuesMarket[i - 1] * pricesSpy[i] / pricesSpy[i - 1];
             }
           // -------- calculate rates of prediction success and error -------------
             actualMoves.forEach((move, i) => {
@@ -150,7 +146,7 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
               // -------- return results -------------
                 return {
                   frequency, startDate, endDate, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
-                  predictedMoves, totalAssetValues, cashPosition, stockSharesOwned
+                  predictedMoves, totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned
                 };
             });
         });
