@@ -1,8 +1,8 @@
-var yahooHistoricalNormalizer = function(arrOfObj, ignoreKeys, max, min) {
+var yahooHistoricalNormalizer = function(data, ignoreKeys, max, min) {
   max = max || {};
   min = min || {};
   ignoreKeys = ignoreKeys || [];
-  var normalized = arrOfObj.slice('');
+  var normalized = data.slice('');
 
   //used to set fields to ignore from the data
   var ignoreThisKey = function (key) {
@@ -10,7 +10,7 @@ var yahooHistoricalNormalizer = function(arrOfObj, ignoreKeys, max, min) {
   }
 
   //get the min and max values into our objects
-  arrOfObj.forEach(function (obj) {
+  data.forEach(function (obj) {
     for (var key in obj) {
       if (max[key] === undefined && min[key] === undefined && !ignoreThisKey(key)) {
         max[key] = obj[key];

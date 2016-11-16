@@ -67,17 +67,14 @@ apiMethods.google.historical = function () {
 //   console.log(quotes);
 // });
 
-
-
-
 // EXAMPLES
 // apiMethods.yahoo.snapshot('AAPL', ['s', 'n', 'd1', 'l1', 'y', 'r'])
 // .then(function (a) {console.log(a);})
 // .error(function (a) {console.log(a);});
 
-apiMethods.yahoo.historical('AAPL', '2012-01-01', '2012-01-10')
-.then(function (a) {console.log(a);})
-.error(function (a) {console.log(a);});
+// apiMethods.yahoo.historical('AAPL', '2012-01-01', '2012-01-10')
+// .then(function (a) {console.log(a);})
+// .error(function (a) {console.log(a);});
 
 // apiMethods.google.companyNews('AAPL')
 // .then(function (a) {console.log(a);})
