@@ -6,6 +6,7 @@ module.exports = {data:[
     close: 411.23,
     volume: 75555200,
     adjClose: 53.509768,
+
     symbol: 'AAPL' },
   { date: 'Wed Jan 04 2012 00:00:00 GMT-0800 (PST)',
     open: 410.000011,
