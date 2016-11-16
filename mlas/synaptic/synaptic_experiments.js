@@ -6,9 +6,9 @@ var Neuron = synaptic.Neuron,
     Architect = synaptic.Architect;
 
 var stockTraining = require('../sampleData/aapl6').data;
-var yahooHistoricalNormalizer = require('../normalizers').yahooHistoricalNormalizer;
+var normalizer = require('../normalizers').normalizer;
 
-console.log(yahooHistoricalNormalizer(stockTraining, ['stock', 'symbol', 'date']));
+console.log(normalizer(stockTraining, ['stock', 'symbol', 'date']));
 
 var myNetwork = new Architect.Perceptron(6,6,1);
 // var myNetwork = new Architect.Perceptron(2, 2, 1)

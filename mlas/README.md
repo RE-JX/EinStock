@@ -21,13 +21,15 @@ var obj = {
 module.exports = obj;
 
 ```
-To use any of the normalizer functions require them like so: `require('../normalizers').yahooHistoricalNormalizer;`
+To use any of the normalizer functions require them like so: `require('../normalizers').normalizer;`
 
 ###### Current normalizers
 
+The General Normalizer is written in such a way that it is resuable for any data following the array of objects format. So long as the `ignoreKeys` property is correctly set, the General Normalizer should not have any trouble normalizing the data.
+
 | Name | Function Name | Argument | Example Input | Optional |
 |---|---|---|---|---|
-| Yahoo Historical | yahooHistoricalNormalizer | data | [{}, {}, ...] | No |
+| General Normalizer | normalizer | data | [{}, {}, ...] | No |
 | | | ignoreKeys | ['str', 'str', ...] | Yes |
 | | | max | Object with maxed values | Yes |
 | | | min | Object with mined values | Yes |
