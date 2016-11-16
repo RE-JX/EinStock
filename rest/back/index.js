@@ -1,6 +1,6 @@
 //connect to Various APIs server up data to ML services
-var yahoo = require('../../node_modules/yahoo-finance');
-var google = require('../../node_modules/google-finance');
+var yahoo = require('../node_modules/yahoo-finance');
+var google = require('../node_modules/google-finance');
 var Promise    = require("bluebird");
 
 apiMethods = {};
@@ -9,7 +9,6 @@ apiMethods.google = {};
 
 // apiMethods.yahoo.historical = function (sym = 'AAPL', frm = '2012-01-01', to = '2012-12-31', ) {
 apiMethods.yahoo.historical = Promise.promisify(function (sym, frm, to, callback) {
-
   yahoo.historical({
     symbol: sym,
     from: frm,
@@ -76,9 +75,9 @@ apiMethods.google.historical = function () {
 // .then(function (a) {console.log(a);})
 // .error(function (a) {console.log(a);});
 
-// apiMethods.yahoo.historical('AAPL', '2012-01-01', '2012-01-10')
-// .then(function (a) {console.log(a);})
-// .error(function (a) {console.log(a);});
+apiMethods.yahoo.historical('AAPL', '2012-01-01', '2012-01-10')
+.then(function (a) {console.log(a);})
+.error(function (a) {console.log(a);});
 
 // apiMethods.google.companyNews('AAPL')
 // .then(function (a) {console.log(a);})
