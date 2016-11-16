@@ -1,5 +1,5 @@
 var dashboardCtrl = function() {
-
+  console.log('GET REQUEST FROM DASHBOARD', localStorage.getItem('data'));
 };
 
 var stockCtrl = function($scope, $timeout) {

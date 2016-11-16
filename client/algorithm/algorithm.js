@@ -1,6 +1,6 @@
 (function() {
   'use strict'
-  
+
   angular
     .module('einstock.algorithm', [
       'ngMaterial'
@@ -18,6 +18,7 @@
     $scope.log = function() {
       Algorithm.post($scope.data).success(function(data) {
         console.log(data);
+        localStorage.setItem('data', angular.toJson(data));
       });
     }
   }
