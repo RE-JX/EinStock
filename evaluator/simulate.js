@@ -5,11 +5,11 @@ var apiMethods = require('../rest/back/index.js');
 
 //---------- function for simulating trading decisions based on predictions ------------
 var simulation =function(prices, predictions, totalAssetValues, cashPosition, sharesOwned, callback) {
-  if(predictions[0] === 1) { // long
+  if(predictions[0] === 1) { // predicting price rise for tomorrow, therefore go long
     sharesOwned[0] = cashPosition / prices[0];
     cashPosition[0] = 0;
   }
-  if(predictions[0] === 0) { // short
+  if(predictions[0] === 0) { // predicting price drop for tomorrow, therefore go short
     sharesOwned[0] = - cashPosition * 0.5 / prices[0]; // can use at most half of cash for shorting
     cashPosition[0] = cashPosition[0] + Math.abs(sharesOwned[0]) * prices[0];
   }
@@ -99,33 +99,33 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
   start = new Date(startDate);
   end = new Date(endDate);
 
-  if(start.getDay() === 1) {
-    onedayBefore = moment(startDate).subtract(3, 'days').toDate();
-  } else {
-    onedayBefore = moment(startDate).subtract(1, 'days').toDate();
-  }
+  // if(start.getDay() === 1) {
+  //   onedayBefore = moment(startDate).subtract(3, 'days').toDate();
+  // } else {
+  //   onedayBefore = moment(startDate).subtract(1, 'days').toDate();
+  // }
 
   // fetch prices of S&P 500 index
-  return apiMethods.yahoo.historical('SPY', onedayBefore, end)
+  return apiMethods.yahoo.historical('SPY', startDate, endDate)
     .then(function(result) {
         pricesSpy = result.map(data => data.adjClose);
         benchmarkReturnMarket = (pricesSpy[pricesSpy.length - 1] - pricesSpy[0]) / pricesSpy[0] * 100;
     })
     .then(function() {
-        return apiMethods.yahoo.historical(tickerSymbol, onedayBefore, end)   // fetch prices of underlining ticker symbol
+        return apiMethods.yahoo.historical(tickerSymbol, startDate, endDate)   // fetch prices of underlining ticker symbol
         .then(function(result) {
             pricesSelf = result.map(data => data.adjClose);
             benchmarkReturnSelf = (pricesSelf[pricesSelf.length - 1] - pricesSelf[0]) / pricesSelf[0] * 100;
           // ------------ calculate actual price moves by day ------------
             for(var i = 1; i < pricesSelf.length; i++) {
-              increased = (pricesSelf[i]/pricesSelf[i-1]-1) > 0 ? 1 : 0;
-              actualMoves.push(increased);
+              increased = (pricesSelf[i] / pricesSelf[i - 1] - 1) > 0 ? 1 : 0;
+              actualMoves[i - 1] = increased;
             }
           // -------- calculate rates of prediction success and error -------------
             predictedMoves.forEach((move, i) => {
-              if(move === 1 && actualMoves[i + 1] === 0) {
+              if(move === 1 && actualMoves[i] === 0) {
                 inclusionError++;
-              } else if(move === 0 && actualMoves[i + 1] === 1) {
+              } else if(move === 0 && actualMoves[i] === 1) {
                 exclusionError++;
               } else {
                 successRate++;
