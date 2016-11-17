@@ -31,6 +31,10 @@
     $scope.tickTest = function() {
      return TickValidation.isValid($scope.data.ticker);
     }
+
+    $scope.dash = function() {
+      return Algorithm.redirect();
+    }
   }
 
 })();
