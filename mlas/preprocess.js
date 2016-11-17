@@ -80,6 +80,7 @@ PreProcess.prototype.lags = function(lagCount, w) {  // <-- lagCount needs to be
   }
   for(var i = lagCount; i < this.data.length; i++) {
     for(var j = 2; j <= lagCount; j++) {
+      this.data[i][`movement_lag${j}`] = this.data[i - j]['movement'];
       this.data[i][`ema${w}_lag${j}`] = this.data[i - j][`ema${w}`];
       this.data[i][`std${w}_lag${j}`] = this.data[i - j][`std${w}`];
       this.data[i][`gap_ema${w}_lag${j}`] = this.data[i - j][`gap_ema${w}`];
