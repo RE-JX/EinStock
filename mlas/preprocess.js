@@ -5,11 +5,18 @@ var PreProcess = function(dataInput) { // trainingData is array of objects from 
   this.data = dataInput.slice(0);
 };
 
-PreProcess.prototype.index = function() {
+PreProcess.prototype.index = function() { //<-- index for each object
   this.data.forEach((item, i) => {
     item.index = i;
   })
 };
+
+PreProcess.prototype.movement = function() { // <--- price movement: 1 -- up, 0 -- down
+  var prices = this.data.map(item => item.adjClose);
+  for(var i = 1; i < prices.length; i++) {
+    this.data[i]['movement'] = prices[i] - prices[i - 1] >= 0 ? 1 : 0;
+  }
+}
 
 PreProcess.prototype.ema = function(w) { // <-- produce EMA-w, w === 5, 20, 50
   var prices = this.data.map(item => item.adjClose).toVector();
