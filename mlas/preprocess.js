@@ -66,6 +66,21 @@ PreProcess.prototype.percentBB = function(w) { // <-- percentBB = (price − low
   })
 };
 
-
+PreProcess.prototype.lags = function(lagCount, w) {  // <-- lagCount needs to be >= 2
+  if(lagCount < 2) {
+    console.log('lag must be >= 2');
+    return;
+  }
+  for(var i = lagCount; i < this.data.length; i++) {
+    for(var j = 2; j <= lagCount; j++) {
+      this.data[i][`ema${w}_lag${j}`] = this.data[i - j][`ema${w}`];
+      this.data[i][`std${w}_lag${j}`] = this.data[i - j][`std${w}`];
+      this.data[i][`gap_ema${w}_lag${j}`] = this.data[i - j][`gap_ema${w}`];
+      this.data[i][`lowerBB${w}_lag${j}`] = this.data[i - j][`lowerBB${w}`];
+      this.data[i][`upperBB${w}_lag${j}`] = this.data[i - j][`upperBB${w}`];
+      this.data[i][`percentBB${w}_lag${j}`] = this.data[i - j][`percentBB${w}`];
+    }
+  }
+}
 
 module.exports = PreProcess;
