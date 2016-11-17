@@ -1,14 +1,15 @@
 //connect to Various APIs server up data to ML services
 var yahoo = require('../node_modules/yahoo-finance');
 var google = require('../node_modules/google-finance');
-var Promise    = require("bluebird");
+var Promise    = require('bluebird');
 
-apiMethods = {};
+var apiMethods = {};
 apiMethods.yahoo = {};
 apiMethods.google = {};
 
 // apiMethods.yahoo.historical = function (sym = 'AAPL', frm = '2012-01-01', to = '2012-12-31', ) {
 apiMethods.yahoo.historical = Promise.promisify(function (sym, frm, to, callback) {
+  'use strict';
   yahoo.historical({
     symbol: sym,
     from: frm,
@@ -19,6 +20,7 @@ apiMethods.yahoo.historical = Promise.promisify(function (sym, frm, to, callback
 
 // apiMethods.yahoo.historical = function (sym = 'AAPL', flds = ['s', 'n', 'd1', 'l1', 'y', 'r']) {
 apiMethods.yahoo.snapshot = Promise.promisify(function (sym, flds, callback) {
+  'use strict';
   yahoo.snapshot({
     symbol: sym,
     fields: flds,
@@ -26,6 +28,7 @@ apiMethods.yahoo.snapshot = Promise.promisify(function (sym, flds, callback) {
 });
 
 apiMethods.google.companyNews = Promise.promisify(function (sym, callback) {
+  'use strict';
   google.companyNews({
     // symbol: 'NASDAQ:' + sym
     symbol: 'NASDAQ:APPL'
@@ -33,6 +36,7 @@ apiMethods.google.companyNews = Promise.promisify(function (sym, callback) {
 });
 
 apiMethods.google.historical = Promise.promisify(function (sym, frm, to, callback) {
+  'use strict';
   google.historical({
     // symbol: 'NASDAQ:' + sym,
     symbol: 'NASDAQ:AAPL',
@@ -42,11 +46,13 @@ apiMethods.google.historical = Promise.promisify(function (sym, frm, to, callbac
 });
 
 apiMethods.google.companyNews = function () {
+  'use strict';
   console.error('Google companyNews is currently broken. Do not use.');
-}
+};
 apiMethods.google.historical = function () {
+  'use strict';
   console.error('Google historical is currently broken. Do not use.');
-}
+};
 
 //GOOGLE NOT WORKING
 // google.historical({
