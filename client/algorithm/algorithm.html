@@ -28,7 +28,7 @@
       </div>
       <div layout-gt-xs="row">
         <div flex-gt-xs>
-        <md-button ng-disabled="!tickTest() || !(data.ticker.length > 0) && !(data.ticker.length < 6)" ng-click="log()" 
+        <md-button ng-disabled="!tickTest() || !(data.ticker.length > 0) && !(data.ticker.length < 6)" ng-click="log(); dash()" 
             class="md-raised submit" type="submit">Submit</md-button>
         </div>
       </div>
