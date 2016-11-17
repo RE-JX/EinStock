@@ -64,6 +64,7 @@ database.db.sync().then(() => {
 // ------- example usage of PreProcess function for creating predictors, to be deleted later ---------
 const predictors = new PreProcess(sampleData);
 predictors.index();
+predictors.movement();
 predictors.ema(2);
 predictors.std(2);
 predictors.maGap(2);
