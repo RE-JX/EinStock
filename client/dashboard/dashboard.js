@@ -7,13 +7,13 @@
     ])
     // Dashboard for users to see charts
     .controller('DashboardController', DashboardController)
-    .controller('BarController', BarController)
+    .controller('RadarController', RadarController)
     .controller('LineController', LineController)
     .controller('PieController', PieController)
     .controller('BubbleController', BubbleController);
 
   DashboardController.$inject = ['$scope'];
-  BarController.$inject = ['$scope'];
+  RadarController.$inject = ['$scope'];
   LineController.$inject = ['$scope'];
   PieController.$inject = ['$scope'];
 
@@ -51,29 +51,27 @@
   };
 
   //Chart top left bar chart to show if it went up or down
-  function BarController($scope) {
+  function RadarController($scope) {
     var data = $scope.data;
-    $scope.series = ['Predicted', 'Actual'];
-    $scope.bar = [];
-    $scope.options = {
-      scales: {
-        yAxes: [{
-          display: false
-        }]
-      }
-    };
+    $scope.labels = ['Algorithm Cumulative Return', 'Algorithm Average Return', 'Sharpe Ratio', 'Market Benchmark', 'Self Benchmark'];
+    $scope.colors = ['#FDB45C'];
+    $scope.radar = [];
 
-    //Add to bar data
-    $scope.bar.push(data.actualMoves);
-    $scope.bar.push(data.predictedMoves);
+    //Add to Radar data
+    $scope.radar.push(data.cummuReturn);
+    $scope.radar.push(data.avgReturn);
+    $scope.radar.push(data.sharpeRatio);
+    $scope.radar.push(data.benchmarkReturnMarket);
+    $scope.radar.push(data.benchmarkReturnSelf);
   };
 
   //Line chart on top right to show returns
   function LineController($scope) {
+    var data = $scope.data;
     $scope.line = [
-      [65, -59, 80, 81, -56, 55, -40],
-      [28, 48, -40, 19, 86, 27, 90],
-      [28, 48, -40, 19, 86, 27, 90],
+      data.benchmarkAssetValuesMarket,
+      data.benchmarkAssetValuesSelf,
+      data.totalAssetValues
     ];
 
     $scope.onClick = function(points, evt) {
@@ -82,17 +80,17 @@
 
     $scope.datasetOverride = [
       {
-        label: "line chart 1",
+        label: "Benchmark Asset Value",
         borderWidth: 3,
         type: 'line'
       },
       {
-        label: "line chart 2",
+        label: "Chosen Asset Value",
         borderWidth: 3,
         type: 'line',
       },
       {
-        label: "Bar chart",
+        label: "Algorithm Asset Value",
         borderWidth: 1,
         type: 'bar'
       }
@@ -109,6 +107,7 @@
   //Bottom right bubble graph
   function BubbleController($scope) {
     var data = $scope.data;
+    $scope.label = 'New';
     $scope.bubble = [];
 
     var count = 0;
@@ -116,7 +115,7 @@
       var droplet = {
         x: data.benchmarkAssetValuesSelf[count] / 10,
         y: data.benchmarkAssetValuesMarket[count] / 10,
-        r: data.totalAssetValues[count] / 100
+        r: data.totalAssetValues[count] / 40
       };
       count++;
       $scope.bubble.push(droplet);
