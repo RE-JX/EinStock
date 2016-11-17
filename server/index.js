@@ -69,5 +69,5 @@ predictors.std(2);
 predictors.maGap(2);
 predictors.BB(2);
 predictors.percentBB(2);
-console.log(indicators.data);
+console.log(predictors.data);
 
