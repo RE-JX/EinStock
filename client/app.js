@@ -11,8 +11,7 @@
     'ngMaterial',
     'ngMessages',
     'ngAria',
-    'highcharts-ng',
-    'chart.js'
+    'chart.js',
   ])
 
   // Pass off scrolling function to FAB button on main banner
