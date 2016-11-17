@@ -1,4 +1,6 @@
 var normalizer = function(data, ignoreKeys, max, min) {
+  'use strict';
+
   max = max || {};
   min = min || {};
   ignoreKeys = ignoreKeys || [];
@@ -7,7 +9,7 @@ var normalizer = function(data, ignoreKeys, max, min) {
   //used to set fields to ignore from the data
   var ignoreThisKey = function (key) {
     return ignoreKeys.indexOf(key) === -1 ? false : true;
-  }
+  };
 
   //get the min and max values into our objects
   data.forEach(function (obj) {
@@ -39,11 +41,11 @@ var normalizer = function(data, ignoreKeys, max, min) {
   });
 
   return normalized;
-}
+};
 
 var obj = {
   name: 'normalizer',
   func: normalizer
-}
+};
 
 module.exports = obj;

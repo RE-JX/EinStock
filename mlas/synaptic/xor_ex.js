@@ -1,13 +1,14 @@
 var synaptic = require('../../node_modules/synaptic'); // this line is not needed in the browser
-var Neuron = synaptic.Neuron,
-    Layer = synaptic.Layer,
-    Network = synaptic.Network,
-    Trainer = synaptic.Trainer,
-    Architect = synaptic.Architect;
+var Neuron = synaptic.Neuron;
+var Layer = synaptic.Layer;
+var Network = synaptic.Network;
+var Trainer = synaptic.Trainer;
+var Architect = synaptic.Architect;
 
-function Perceptron(input, hidden, output)
-{
-    // create the layers
+function Perceptron(input, hidden, output) {
+  // create the layers
+  'use strict';
+
     var inputLayer = new Layer(input);
     var hiddenLayer = new Layer(hidden);
     var outputLayer = new Layer(output);
