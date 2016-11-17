@@ -3,22 +3,10 @@
 // var forestjs = require('forestjs');
 // var rf = new forestjs.RandomForest();
 var ss = require('simple-statistics');
-var SVM = require('ml-svm');
 var KNN = require('ml-knn');
-var options = {
-  C: 0.01,
-  tol: 10e-4,
-  maxPasses: 10,
-  maxIterations: 10000,
-  kernel: 'poly',
-  kernelOptions: {
-    sigma: 0.5
-  }
-};
 var knn = new KNN();
 
 var moment = require('moment');
-var Promise = require('bluebird');
 var apiMethods = require('../../worker/index.js');
 var PreProcess = require('../preprocess.js');
 
@@ -52,7 +40,7 @@ var predictors = [
   'percentBB20_lag4'
 ];
 
-var RandomForest = function(startDate, endDate, tickerSymbol) {
+var Neighbors = function(startDate, endDate, tickerSymbol) {
   this.startDate = moment(new Date(startDate)).format().slice(0, 10);
   this.endDate = moment(new Date(endDate)).format().slice(0, 10);
   this.tickerSymbol = tickerSymbol;
@@ -71,15 +59,8 @@ var RandomForest = function(startDate, endDate, tickerSymbol) {
   this.startTrain = startTrain.format().slice(0, 10);
 };
 
-RandomForest.prototype.preProcess = function() {
+Neighbors.prototype.preProcess = function() {
   var that = this;
-  // if(endTrain.day() === 0) {
-  //   endTrain = endTrain.subtract(2, 'days');
-  // }
-  // if(endTrain.day() === 6) {
-  //   endTrain = endTrain.subtract(1, 'days');
-  // }
-
   return apiMethods.yahoo.historical(this.tickerSymbol, this.startTrain, this.endDate)
     .then(function(data) {  // <------- preprocess all data, including training data and test data
       var predictors = new PreProcess(data);
@@ -114,9 +95,7 @@ RandomForest.prototype.preProcess = function() {
     });
 };
 
-RandomForest.prototype.predict = function() {
-  // console.log('test data: ', this.testData);
-  // console.log('trees: ', trees);
+Neighbors.prototype.predict = function() {
   var testFeatures = this.testData.map(item => {
     var features = [];
     predictors.forEach(predictor => {
@@ -125,24 +104,20 @@ RandomForest.prototype.predict = function() {
     return features;
   });
 
-
   for(var i = 0; i < testFeatures[0].length; i++) {
     var vector = testFeatures.map(item => item[i]);
-    // console.log('vector:', vector);
     var std = ss.sampleStandardDeviation(vector);
     var mean = ss.mean(vector);
-    // console.log('std and mean:', std, mean);
     testFeatures.forEach(item => {
       item[i] = (item[i] - mean) / std;
     })
   };
-  console.log('test features: ', testFeatures);
 
   this.predictions = knn.predict(testFeatures);
   console.log('predictions: ', this.predictions);
 };
 
-RandomForest.prototype.train = function(callback) {
+Neighbors.prototype.train = function(callback) {
   var that = this;
   var trainingOutcomes = this.trainingData.map(item => {
     return item.movement;
@@ -177,18 +152,9 @@ RandomForest.prototype.train = function(callback) {
     })
   };
 
-  // console.log('training features: ', trainingFeatures);
-  // var options = {};
-  // options.numTrees = 200;
-  // options.maxDepth = 11;
-  // options.numTries = 11;
   console.log('trainingFeatures: ', trainingFeatures.length);
   knn.train(trainingFeatures, trainingOutcomes);
 
 };
 
-RandomForest.prototype.trainPromise = Promise.promisify(RandomForest.prototype.train);
-
-
-
-module.exports = RandomForest;
+module.exports = Neighbors;

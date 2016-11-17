@@ -11,7 +11,7 @@ const dumbAlgo1 = require('../algorithms/dumbAlgo1.js').a1;
 const dumbAlgo2 = require('../algorithms/dumbAlgo1.js').a2;
 const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
-const RandomForest = require('../mlas/randomForest/rf.js');
+const Neighbors = require('../mlas/MLs/knn.js');
 let predictions;
 
 //-----------------middleware---------------
@@ -60,7 +60,7 @@ app.post('/api/data/knn', (req, res) => {
     return date;
   };
 
-  var forest = new RandomForest(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
+  var knn = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
   forest.preProcess()
     .then(function() {
       forest.train();
@@ -96,4 +96,11 @@ database.db.sync().then(() => {
 // predictors.lags(2, 2);
 // console.log(predictors.data);
 
-
+var forest = new Neighbors('10/31/2016', '11/15/2016', 'AAPL');
+  forest.preProcess()
+    .then(function() {
+      forest.train();
+    })
+    .then(function() {
+      forest.predict();
+    });
