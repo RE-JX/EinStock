@@ -13,7 +13,7 @@
   function algoCtrl($scope, Algorithm, TickValidation) {
     //init a start date
     var firstDate = new Date();
-    firstDate.setDate(firstDate.getDate() - 1);
+    firstDate.setDate(firstDate.getDate() - 7);
     //-----------------------------------------
     $scope.data = {
       ticker: 'GOOG',
