@@ -7792,7 +7792,6 @@ var tickers = {
   ZYNE: true 
 };
 
-<<<<<<< HEAD
 var tickers1 = { 
   A: 'A',
   AA: 'AA',
