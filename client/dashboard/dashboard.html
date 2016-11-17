@@ -7,12 +7,12 @@
     <h3 id=dashboard-title>{{data.tickerSymbol}}</h3>
       <!-- Chart One -->
       <md-grid-tile md-rowspan="1" md-colspan="2">
-        <div id="chart1" ng-controller="BarController">
-          <canvas id="bar" class="chart chart-bar" chart-series="series" chart-data="bar" chart-labels="labels" chart-options="options">
+        <div id="chart1" ng-controller="RadarController">
+          <canvas id="radar" class="chart chart-radar" chart-data="radar" chart-labels="labels" chart-colors="colors">
           </canvas>
         </div>
         <md-grid-tile-footer>
-          <h3>Bar Chart</h3>
+          <h3>Radar Chart</h3>
         </md-grid-tile-footer>
       </md-grid-tile>
 
@@ -41,7 +41,7 @@
       <!-- Chart Four -->
       <md-grid-tile md-rowspan="1" md-colspan="3">
         <div id="chart4" ng-controller="BubbleController" >
-          <canvas id="bubble" class="chart-bubble" chart-data="bubble" chart-series="labels">
+          <canvas id="bubble" class="chart-bubble" chart-data="bubble" chart-series="label">
           </canvas>
         </div>
         <md-grid-tile-footer>
