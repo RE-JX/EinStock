@@ -1,5 +1,4 @@
 /*Additional styling on top of our Angular Material*/
-
 body {
   font-family: 'Unica One', cursive;
 }
@@ -11,14 +10,37 @@ body {
   text-align: center;
 }
 
+h3 {
+  font-family: 'Open Sans';
+}
+
+md-grid-list {
+  margin: 8px;
+  background-color: white;
+}
+
+#dashboard-title {
+  text-align: center;
+}
+
 #chart1 {
-  display: inline-block;
-  width: 49%;
+  display: block;
+  width: 100%;
 }
 
 #chart2 {
-  display: inline-block;
-  width: 49%;
+  display: block;
+  width: 100%;
+}
+
+#chart3 {
+  display: block;
+  width: 100%;
+}
+
+#chart4 {
+  display: block;
+  width: 90%;
 }
 
 #disclaimer {
@@ -32,7 +54,9 @@ body {
 }
 
 .dashboard {
-  background-color: #CFD8DC;
+/*  background-color: #CFD8DC;
+*/
+  background-color: #949FB1;
 }
 
 #welcome-header {
@@ -43,7 +67,6 @@ body {
   color: white;
   z-index: 1;
   text-shadow: 3px 3px gray;
-
 }
 
 .welcome-hello-banner {
