@@ -51,7 +51,6 @@
     "open": "0.0.5",
     "path": "^0.12.7",
     "pg": "^6.1.0",
-    "random-forest-classifier": "^0.6.0",
     "request": "^2.76.0",
     "sequelize": "^3.25.0",
     "simple-statistics": "^2.2.0",
