@@ -1,7 +1,9 @@
 var synaptic = require('../../node_modules/synaptic'); // this line is not needed in the browser
+/* jshint ignore:start */
 var Neuron = synaptic.Neuron;
 var Layer = synaptic.Layer;
 var Network = synaptic.Network;
+/* jshint ignore:end */
 var Trainer = synaptic.Trainer;
 var Architect = synaptic.Architect;
 
