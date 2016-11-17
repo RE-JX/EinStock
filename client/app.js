@@ -10,6 +10,7 @@ angular.module('einstock', [
     'einstock.services',
     'einstock.dashboard',
     'einstock.algorithm',
+    'einstock.validation',
     'einstock.welcome',
     'ngRoute',
     'ngMaterial',
