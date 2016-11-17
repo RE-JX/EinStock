@@ -10,7 +10,7 @@
   function Algorithm($http, $location) {
     return {
       post: function(data) {
-        return $http.post('/api/data', data);
+        return $http.post('/api/data/knn', data);
         // console.log(data); //just for testing purposes
       },
       redirect: function() {

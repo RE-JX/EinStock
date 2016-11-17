@@ -53,11 +53,12 @@ app.post('/api/data', (req, res) => {
 });
 
 app.post('/api/data/knn', (req, res) => {
+
   function dateFormat(dateOriginal) {
     var date = new Date(dateOriginal);
     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     return date;
-  }
+  };
 
   var forest = new RandomForest(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
   forest.preProcess()
@@ -71,10 +72,9 @@ app.post('/api/data/knn', (req, res) => {
       evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, forest.predictions)
         .then((result) => {
           res.send(result);
+      });
     });
-
 });
-
 //-----------------database-----------------
 //------------------------------------------
 
