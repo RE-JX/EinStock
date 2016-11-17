@@ -11,6 +11,7 @@ const dumbAlgo1 = require('../algorithms/dumbAlgo1.js').a1;
 const dumbAlgo2 = require('../algorithms/dumbAlgo1.js').a2;
 const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
+const RandomForest = require('../mlas/randomForest/rf.js');
 let predictions;
 
 //-----------------middleware---------------
@@ -51,7 +52,29 @@ app.post('/api/data', (req, res) => {
     })
 });
 
+app.post('/api/data/knn', (req, res) => {
 
+  function dateFormat(dateOriginal) {
+    var date = new Date(dateOriginal);
+    date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return date;
+  };
+
+  var forest = new RandomForest(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
+  forest.preProcess()
+    .then(function() {
+      forest.train();
+    })
+    .then(function() {
+      forest.predict();
+    })
+    .then(function() {
+      evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, forest.predictions)
+        .then((result) => {
+          res.send(result);
+      });
+    });
+});
 //-----------------database-----------------
 //------------------------------------------
 
@@ -62,14 +85,15 @@ database.db.sync().then(() => {
 });
 
 // ------- example usage of PreProcess function for creating predictors, to be deleted later ---------
-const predictors = new PreProcess(sampleData);
-predictors.index();
-predictors.movement();
-predictors.ema(2);
-predictors.std(2);
-predictors.maGap(2);
-predictors.BB(2);
-predictors.percentBB(2);
-predictors.lags(2, 2);
-console.log(predictors.data);
+// const predictors = new PreProcess(sampleData);
+// predictors.index();
+// predictors.movement();
+// predictors.ema(2);
+// predictors.std(2);
+// predictors.maGap(2);
+// predictors.BB(2);
+// predictors.percentBB(2);
+// predictors.lags(2, 2);
+// console.log(predictors.data);
+
 
