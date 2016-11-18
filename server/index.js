@@ -76,7 +76,27 @@ app.post('/api/data/knn', (req, res) => {
       return database.Simulation.create({ //<------ save in database
         userId: req.userId,
         algorithm: 'knn',
-        ...result
+        frequency: result.frequency,
+        startDate: result.startDate,
+        endDate: result.endDate,
+        tickerSymbol: result.tickerSymbol,
+        successRate: result.successRate,
+        inclusionError: result.inclusionError,
+        exclusionError: result.exclusionError,
+        avgReturn: result.avgReturn,
+        cummuReturn: result.cummuReturn,
+        returnStd: result.returnStd,
+        sharpeRatio: result.sharpeRatio,
+        benchmarkReturnSelf: result.benchmarkReturnSelf,
+        benchmarkReturnMarket: result.benchmarkReturnMarket,
+        predictedMoves: result.predictedMoves,
+        actualMoves: result.actualMoves,
+        totalAssetValues: result.totalAssetValues,
+        benchmarkAssetValuesSelf: result.benchmarkAssetValuesSelf,
+        benchmarkAssetValuesMarket: result.benchmarkAssetValuesMarket,
+        returns: result.returns,
+        cashPosition: result.cashPosition,
+        stockSharesOwned: result.stockSharesOwned
       });
     })
     .then(result => {
