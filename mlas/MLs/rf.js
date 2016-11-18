@@ -1,12 +1,16 @@
 // ------- implement random forest algorithm using https://github.com/jessfraz/random-forest-classifier ---------------
 
 var ss = require('simple-statistics');
-var KNN = require('ml-knn');
-var knn = new KNN();
+var RandomForest = require('./lib/randomforest.js').RandomForest;
+// var forestjs = require('forestjs');
+// var forest = new forestjs.RandomForest();
+var forest = new RandomForest();
 
 var moment = require('moment');
 var apiMethods = require('../../worker/index.js');
 var PreProcess = require('../preprocess.js');
+
+var min, max, mean, std;
 
 var predictors = [
   'movement_lag2',
@@ -32,15 +36,17 @@ var predictors = [
   'percentBB20_lag4'
 ];
 
-var Neighbors = function(startDate, endDate, tickerSymbol) {
+var Forest = function(startDate, endDate, tickerSymbol) {
   this.startDate = moment(new Date(startDate)).format().slice(0, 10);
   this.endDate = moment(new Date(endDate)).format().slice(0, 10);
   this.tickerSymbol = tickerSymbol;
   this.trainingData = [];
   this.testData = [];
+  this.trees = [];
+  this.predictions = [];
 
   var startTrain = moment(this.startDate).subtract(12, 'months'); //<-- use the previous half year for training
-  // var endTrain = moment(startDate).subtract(2, 'days');
+
   if(startTrain.day() === 0) {
     startTrain = startTrain.add(1, 'days');
   };
@@ -50,7 +56,7 @@ var Neighbors = function(startDate, endDate, tickerSymbol) {
   this.startTrain = startTrain.format().slice(0, 10);
 };
 
-Neighbors.prototype.preProcess = function() {
+Forest.prototype.preProcess = function() {
   var that = this;
   return apiMethods.yahoo.historical(this.tickerSymbol, this.startTrain, this.endDate)
     .then(function(data) {  // <------- preprocess all data, including training data and test data
@@ -92,7 +98,7 @@ Neighbors.prototype.preProcess = function() {
     });
 };
 
-Neighbors.prototype.predict = function() {
+Forest.prototype.predict = function() {
   var testFeatures = this.testData.map(item => {
     var features = [];
     predictors.forEach(predictor => {
@@ -101,24 +107,30 @@ Neighbors.prototype.predict = function() {
     return features;
   });
 
-  for(var i = 0; i < testFeatures[0].length; i++) {
-    var vector = testFeatures.map(item => item[i]);
-    var std = ss.sampleStandardDeviation(vector);
-    var mean = ss.mean(vector);
-    testFeatures.forEach(item => {
-      item[i] = (item[i] - mean) / std;
-    })
-  };
+  var testOutcomes = this.testData.map(item => item.movement);
 
-  this.predictions = knn.predict(testFeatures).slice(1);
-  console.log('predictions: ', this.predictions);
+  // for(var i = 0; i < testFeatures[0].length; i++) {
+  //   var vector = testFeatures.map(item => item[i]);
+  //   // var std = ss.sampleStandardDeviation(vector);
+  //   // var mean = ss.mean(vector);
+  //   testFeatures.forEach(item => {
+  //     item[i] = (item[i] - mean) / std;
+  //     // item[i] = (item[i] - min) / (max - min);
+  //   });
+  // };
+  // console.log('testFeatures: ', testFeatures);
+  this.predictions = forest.predict(testFeatures).slice(1);
+
+  console.log('predictions and actual outcome: ', this.predictions, testOutcomes);
 };
 
-Neighbors.prototype.train = function(callback) {
+Forest.prototype.train = function() {
   var that = this;
   var trainingOutcomes = this.trainingData.map(item => {
-    return item.movement;
+    // return item.movement;
+    return item.movement === 1 ? 1 : -1;
   });
+  // console.log('trainingOutcomes: ', trainingOutcomes);
   var trainingFeatures = this.trainingData.map(item => {
     var features = [];
     predictors.forEach(predictor => {
@@ -138,18 +150,24 @@ Neighbors.prototype.train = function(callback) {
     trainingOutcomes = trainingOutcomes.slice(1);
   }
 
-  for(var i = 0; i < trainingFeatures[0].length; i++) {
-    var vector = trainingFeatures.map(item => item[i]);
-    // console.log('vector:', vector);
-    var std = ss.sampleStandardDeviation(vector);
-    var mean = ss.mean(vector);
-    // console.log('std and mean:', std, mean);
-    trainingFeatures.forEach(item => {
-      item[i] = (item[i] - mean) / std;
-    })
-  };
-
-  knn.train(trainingFeatures, trainingOutcomes);
+  // for(var i = 0; i < trainingFeatures[0].length; i++) {
+  //   var vector = trainingFeatures.map(item => item[i]);
+  //   // console.log('vector:', vector);
+  //   std = ss.sampleStandardDeviation(vector);
+  //   mean = ss.mean(vector);
+  //   min = ss.min(vector);
+  //   max = ss.max(vector);
+  //   // console.log('std and mean:', std, mean);
+  //   trainingFeatures.forEach(item => {
+  //     item[i] = (item[i] - mean) / std;
+  //     // item[i] = (item[i] - min) / (max - min);
+  //   })
+  // };
+  var options = {};
+  options.numTrees = 200;
+  options.maxDepth = 10;
+  options.numTries = 10;
+  forest.train(trainingFeatures, trainingOutcomes, options);
 };
 
-module.exports = Neighbors;
+module.exports = Forest;

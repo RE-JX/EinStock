@@ -1,8 +1,8 @@
 // ------- implement random forest algorithm using https://github.com/jessfraz/random-forest-classifier ---------------
 
 var ss = require('simple-statistics');
-var KNN = require('ml-knn');
-var knn = new KNN();
+var SVM = require('machine_learning').SVM;
+var svm;
 
 var moment = require('moment');
 var apiMethods = require('../../worker/index.js');
@@ -32,12 +32,13 @@ var predictors = [
   'percentBB20_lag4'
 ];
 
-var Neighbors = function(startDate, endDate, tickerSymbol) {
+var SupportVector = function(startDate, endDate, tickerSymbol) {
   this.startDate = moment(new Date(startDate)).format().slice(0, 10);
   this.endDate = moment(new Date(endDate)).format().slice(0, 10);
   this.tickerSymbol = tickerSymbol;
   this.trainingData = [];
   this.testData = [];
+  this.predictions = [];
 
   var startTrain = moment(this.startDate).subtract(12, 'months'); //<-- use the previous half year for training
   // var endTrain = moment(startDate).subtract(2, 'days');
@@ -50,7 +51,7 @@ var Neighbors = function(startDate, endDate, tickerSymbol) {
   this.startTrain = startTrain.format().slice(0, 10);
 };
 
-Neighbors.prototype.preProcess = function() {
+SupportVector.prototype.preProcess = function() {
   var that = this;
   return apiMethods.yahoo.historical(this.tickerSymbol, this.startTrain, this.endDate)
     .then(function(data) {  // <------- preprocess all data, including training data and test data
@@ -92,7 +93,7 @@ Neighbors.prototype.preProcess = function() {
     });
 };
 
-Neighbors.prototype.predict = function() {
+SupportVector.prototype.predict = function() {
   var testFeatures = this.testData.map(item => {
     var features = [];
     predictors.forEach(predictor => {
@@ -103,22 +104,29 @@ Neighbors.prototype.predict = function() {
 
   for(var i = 0; i < testFeatures[0].length; i++) {
     var vector = testFeatures.map(item => item[i]);
-    var std = ss.sampleStandardDeviation(vector);
-    var mean = ss.mean(vector);
+    // var std = ss.sampleStandardDeviation(vector);
+    // var mean = ss.mean(vector);
+    var min = ss.min(vector);
+    var max = ss.max(vector);
     testFeatures.forEach(item => {
-      item[i] = (item[i] - mean) / std;
-    })
+      // item[i] = (item[i] - mean) / std;
+      item[i] = (item[i] - min) / (max - min);
+    });
   };
-
-  this.predictions = knn.predict(testFeatures).slice(1);
+  console.log('testFeatures: ', testFeatures);
+  for(var i = 0; i < testFeatures.length; i++) {
+    this.predictions.push(svm.predict(testFeatures[2]));
+  }
+  this.predictions = this.predictions.slice(1);
   console.log('predictions: ', this.predictions);
 };
 
-Neighbors.prototype.train = function(callback) {
+SupportVector.prototype.train = function(callback) {
   var that = this;
   var trainingOutcomes = this.trainingData.map(item => {
-    return item.movement;
+    return item.movement === 1 ? 1 : -1;
   });
+  // console.log('trainingOutcomes: ', trainingOutcomes);
   var trainingFeatures = this.trainingData.map(item => {
     var features = [];
     predictors.forEach(predictor => {
@@ -141,15 +149,31 @@ Neighbors.prototype.train = function(callback) {
   for(var i = 0; i < trainingFeatures[0].length; i++) {
     var vector = trainingFeatures.map(item => item[i]);
     // console.log('vector:', vector);
-    var std = ss.sampleStandardDeviation(vector);
-    var mean = ss.mean(vector);
+    // var std = ss.sampleStandardDeviation(vector);
+    // var mean = ss.mean(vector);
+    var min = ss.min(vector);
+    var max = ss.max(vector);
     // console.log('std and mean:', std, mean);
     trainingFeatures.forEach(item => {
-      item[i] = (item[i] - mean) / std;
+      // item[i] = (item[i] - mean) / std;
+      item[i] = (item[i] - min) / (max - min);
     })
   };
 
-  knn.train(trainingFeatures, trainingOutcomes);
+  svm = new SVM({
+    x: trainingFeatures,
+    y: trainingOutcomes
+  });
+
+  svm.train({
+    // C : 1.1, // default : 1.0. C in SVM.
+    C: 2,
+    tol : 1e-8, // default : 1e-4. Higher tolerance --> Higher precision
+    max_passes : 50, // default : 20. Higher max_passes --> Higher precision
+    alpha_tol : 1e-8 // default : 1e-5. Higher alpha_tolerance --> Higher precision
+    // kernel : { type: "polynomial", c: 1, d: 5}
+    // kernel: { type: 'linear' }
+  });
 };
 
-module.exports = Neighbors;
+module.exports = SupportVector;

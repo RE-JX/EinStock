@@ -12,6 +12,8 @@ const dumbAlgo2 = require('../algorithms/dumbAlgo1.js').a2;
 const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
 const Neighbors = require('../mlas/MLs/knn.js');
+const SupportVector = require('../mlas/MLs/svm.js');
+const Forest = require('../mlas/MLs/rf.js');
 let predictions;
 
 //-----------------middleware---------------
@@ -96,11 +98,13 @@ database.db.sync().then(() => {
 // predictors.lags(2, 2);
 // console.log(predictors.data);
 
-var forest = new Neighbors('10/31/2016', '11/15/2016', 'AAPL');
+var forest = new Forest('10/03/2016', '11/03/2016', 'GOOG');
   forest.preProcess()
     .then(function() {
+      console.log('training!');
       forest.train();
     })
     .then(function() {
+      console.log('predicting!');
       forest.predict();
     });
