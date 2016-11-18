@@ -12,6 +12,8 @@ const dumbAlgo2 = require('../algorithms/dumbAlgo1.js').a2;
 const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
 const Neighbors = require('../mlas/MLs/knn.js');
+const SupportVector = require('../mlas/MLs/svm.js');
+const Forest = require('../mlas/MLs/rf.js');
 let predictions;
 
 //-----------------middleware---------------
@@ -53,7 +55,6 @@ app.post('/api/data', (req, res) => {
 });
 
 app.post('/api/data/knn', (req, res) => {
-
   function dateFormat(dateOriginal) {
     var date = new Date(dateOriginal);
     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -69,12 +70,32 @@ app.post('/api/data/knn', (req, res) => {
       forest.predict();
     })
     .then(function() {
-      evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, forest.predictions)
-        .then((result) => {
-          res.send(result);
+      return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, forest.predictions)
+    })
+    .then((result) => {
+      return database.Simulation.create({ //<------ save in database
+        userId: req.userId,
+        algorithm: 'knn',
+        ...result
       });
+    })
+    .then(result => {
+      res.send(result);
     });
 });
+
+app.get('/api/data/knn', (req, res) => { // <-- get all simulations created by this user
+  database.Simulation.findAll({
+    where: {
+      userId: req.query.userId
+    }
+  })
+  .then(function(data) {
+    res.send(data);
+  });
+});
+
+
 //-----------------database-----------------
 //------------------------------------------
 
@@ -96,11 +117,13 @@ database.db.sync().then(() => {
 // predictors.lags(2, 2);
 // console.log(predictors.data);
 
-var forest = new Neighbors('10/31/2016', '11/15/2016', 'AAPL');
+var forest = new Forest('10/03/2016', '11/03/2016', 'GOOG');
   forest.preProcess()
     .then(function() {
+      console.log('training!');
       forest.train();
     })
     .then(function() {
+      console.log('predicting!');
       forest.predict();
     });
