@@ -17,10 +17,11 @@ if(process.env.DATABASE_URL) {
 
 
 var User = db.define('User', {
-  username: { type: Sequelize.STRING, allowNull: false, unique: true }
+  username: { type: Sequelize.STRING, allowNull: false, unique: true },
+  userId: { type: Sequelize.UUID, primaryKey: true}
 });
 
-var StockData = db.define('StockData', {
+var StockData = db.define('StockData', { //<------ historical data
   tickerSymbol: Sequelize.STRING,
   date: { type: Sequelize.DATE, allowNull: false },
   openPrice: { type: Sequelize.FLOAT, allowNull: false },
@@ -30,7 +31,8 @@ var StockData = db.define('StockData', {
   lowPrice: { type: Sequelize.FLOAT, allowNull: false }
 });
 
-var Simulation = db.define('Simulation', {
+var Simulation = db.define('Simulation', {  //<-- store simulated results and evaluation results
+  algorithm: { type: Sequelize.STRING, allowNull: false },
   frequency: { type: Sequelize.STRING, allowNull: false },
   startDate: { type: Sequelize.DATE, allowNull: false },
   endDate: { type: Sequelize.DATE, allowNull: false },
@@ -54,8 +56,11 @@ var Simulation = db.define('Simulation', {
   stockSharesOwned: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false }
 });
 
-// Simulation.belongTo(User);
-User.hasMany(Simulation, {as: 'Simulations'});
+
+
+Simulation.belongTo(User);
+// User.hasMany(Simulation, {as: 'Simulations'});
+
 
 // User.sync();
 // StockData.sync();

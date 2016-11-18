@@ -55,7 +55,6 @@ app.post('/api/data', (req, res) => {
 });
 
 app.post('/api/data/knn', (req, res) => {
-
   function dateFormat(dateOriginal) {
     var date = new Date(dateOriginal);
     date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -71,12 +70,32 @@ app.post('/api/data/knn', (req, res) => {
       forest.predict();
     })
     .then(function() {
-      evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, forest.predictions)
-        .then((result) => {
-          res.send(result);
+      return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, forest.predictions)
+    })
+    .then((result) => {
+      return database.Simulation.create({ //<------ save in database
+        userId: req.userId,
+        algorithm: 'knn',
+        ...result
       });
+    })
+    .then(result => {
+      res.send(result);
     });
 });
+
+app.get('/api/data/knn', (req, res) => { // <-- get all simulations created by this user
+  database.Simulation.findAll({
+    where: {
+      userId: req.query.userId
+    }
+  })
+  .then(function(data) {
+    res.send(data);
+  });
+});
+
+
 //-----------------database-----------------
 //------------------------------------------
 

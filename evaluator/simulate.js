@@ -147,9 +147,32 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
                 returnStd = ss.sampleStandardDeviation(returns.slice(1));
                 sharpeRatio = avgReturn / returnStd * Math.sqrt(252);
               // -------- return results -------------
+                var rounding = valueOrArray => {
+                  if(Array.isArray(valueOrArray)) {
+                    return valueOrArray.map(item => Math.round(item * 100) / 100);
+                  } else {
+                    return Math.round(valueOrArray * 100) / 100;
+                  }
+                };
+                successRate = rounding(successRate); //<------ round to two decimal points
+                inclusionError = rounding(inclusionError);
+                exclusionError = rounding(exclusionError);
+                avgReturn = rounding(avgReturn);
+                cummuReturn = rounding(cummuReturn);
+                returnStd = rounding(returnStd);
+                sharpeRatio = rounding(sharpeRatio);
+                benchmarkReturnSelf = rounding(benchmarkReturnSelf);
+                benchmarkReturnMarket = rounding(benchmarkReturnMarket);
+                returns = rounding(returns);
+                totalAssetValues = rounding(totalAssetValues);
+                benchmarkAssetValuesSelf = rounding(benchmarkAssetValuesSelf);
+                benchmarkAssetValuesMarket = rounding(benchmarkAssetValuesMarket);
+                cashPosition = rounding(cashPosition);
+                stockSharesOwned = rounding(stockSharesOwned);
+
                 return {
                   frequency, startDate: start, endDate: end, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
-                  predictedMoves, totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned
+                   totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned
                 };
             });
         });
