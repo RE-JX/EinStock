@@ -36,6 +36,6 @@ The General Normalizer is written in such a way that it is resuable for any data
 
 ### Synaptic
 
-Currently working on an index file to reduce future non-DRY code.
-
 xor_ex.js has a working example of how to train a NN to become a XOR gate.
+
+synapticAlg1 (synaptic algortithum 1) takes in a symbol, start date, end date and
