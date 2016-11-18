@@ -60,19 +60,20 @@
   </md-nav-bar>
 </div>
 
-<!-- Where we'll have the different views rendering through the ng-router -->
-<div class="container">
-  <div ng-view></div>
-</div>
+<!-- UI Router -->
+<div ui-view></div>
 
 <!-- Local routes for files -->
   <script src="/services/services.js"></script>
+  <script src="/services/auth.js"></script>
   <script src="/services/ticks.js"></script>
-  <script src="/dashboard/dashboard.js"></script>
   <script src="/algorithm/algorithm.js"></script>
+  <script src="/app/run.js"></script>
+  <script src="/app/scroller.js"></script>
+  <script src="/dashboard/dashboard.js"></script>
+  <script src="/login/login.js"></script>
   <script src="/welcome/welcome.js"></script>
   <script src="/app.js"></script>
-
 </body>
 
 </html>

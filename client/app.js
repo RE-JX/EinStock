@@ -10,7 +10,7 @@
     'einstock.authService',
     'einstock.run',
     'einstock.scroller',
-    // 'ngRoute',
+    'einstock.login',
     'ngMaterial',
     'ngMessages',
     'ngAria',
@@ -25,6 +25,9 @@
 
   // This is where we are routing our views
   .config(function($stateProvider, lockProvider, $urlRouterProvider) {
+
+    // Right now the default page is set to the algorithm selector view
+    $urlRouterProvider.otherwise('/login');
 
     //routes under the header
     $stateProvider
@@ -42,9 +45,9 @@
       })
       .state('login', {
         url: '/login',
-        templateUrl: '/login/login.html'
-        // controller: 'LoginController',
-        // controllerAs: 'vm'
+        templateUrl: '/login/login.html',
+        controller: 'LoginController',
+        controllerAs: 'vm'
       });
 
     //auth0 login initializer
@@ -52,9 +55,6 @@
       clientID: 'FcVikV153yHFMA0dKqDNA12cATurOR86',
       domain: 'gsuppy.auth0.com'
     });
-
-    // Right now the default page is set to the algorithm selector view
-    $urlRouterProvider.otherwise('/login');
   })
 
   function mdTheme ($mdThemingProvider) {
