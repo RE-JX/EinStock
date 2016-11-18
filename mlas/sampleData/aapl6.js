@@ -46,4 +46,21 @@ module.exports = {data:[
     close: 423.239994,
     volume: 64549100,
     adjClose: 55.072523,
-    symbol: 'AAPL' } ]};
+    symbol: 'AAPL' },
+  { date: '2012-01-11T08:00:00.000Z',
+    open: 422.680008,
+    high: 422.849998,
+    low: 419.309998,
+    close: 422.549992,
+    volume: 53771200,
+    adjClose: 54.982739,
+    symbol: 'AAPL' },
+  { date: '2012-01-12T08:00:00.000Z',
+    open: 422.279999,
+    high: 422.900013,
+    low: 418.750011,
+    close: 421.389992,
+    volume: 53146800,
+    adjClose: 54.831799,
+    symbol: 'AAPL' }
+     ]};
