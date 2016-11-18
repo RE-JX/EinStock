@@ -1962,6 +1962,10 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
+machine_learning@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/machine_learning/-/machine_learning-0.1.1.tgz#74a2ec84eeda7392ec6dd8209bab3f4d1b5cd44f"
+
 map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
