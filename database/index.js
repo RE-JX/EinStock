@@ -58,8 +58,8 @@ var Simulation = db.define('Simulation', {  //<-- store simulated results and ev
 
 
 
-Simulation.belongTo(User);
-// User.hasMany(Simulation, {as: 'Simulations'});
+Simulation.belongsTo(User);
+User.hasMany(Simulation, {as: 'Simulations'});
 
 
 // User.sync();
