@@ -5,7 +5,7 @@
     .module('einstock.authService', [])
     .service('authService', authService);
 
-  authService.$inject = ['lock', 'authManager'];
+  authService.$inject = ['lock', 'authManager', 'UserData'];
 
   function authService(lock, authManager) {
     function login() {
@@ -19,6 +19,10 @@
         localStorage.setItem('id_token', authResult.idToken);
         authManager.authenticate();
       });
+      // Posts user data to the datbase upon registration
+      UserData.post(localStorage.getItem('id_token')).success(function(data) {
+        console.log(data);
+      })
     };
 
     //Logout function to remove token from user
