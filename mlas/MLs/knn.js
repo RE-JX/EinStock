@@ -1,4 +1,4 @@
-// ------- implement random forest algorithm using https://github.com/jessfraz/random-forest-classifier ---------------
+// ------- implement k nearest neighbors algorithm ---------------
 
 var ss = require('simple-statistics');
 var KNN = require('ml-knn');

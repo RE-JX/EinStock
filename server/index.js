@@ -13,7 +13,8 @@ const sampleData = require('../mlas/sampleData/aapl6.js').data;
 const Neighbors = require('../mlas/MLs/knn.js');
 const SupportVector = require('../mlas/MLs/svm.js');
 const Forest = require('../mlas/MLs/rf.js');
-const Logistic = require('../mlas/MLs/logistic.js')
+const Logistic = require('../mlas/MLs/logistic.js');
+const NaiveBayes = require('../mlas/MLs/nb.js');
 let predictions;
 
 //-----------------middleware---------------
@@ -138,13 +139,13 @@ database.db.sync().then(() => {
 // console.log(predictors.data);
 
 // ------- example usage of preProcess + algorithm, to be deleted later --------------
-// var logistic = new Logistic('10/03/2016', '11/03/2016', 'AAPL');
-//   logistic.preProcess()
-//     .then(function() {
-//       console.log('training!');
-//       logistic.train();
-//     })
-//     .then(function() {
-//       console.log('predicting!');
-//       logistic.predict();
-//     });
+var nb = new NaiveBayes('10/03/2016', '11/03/2016', 'SPY');
+  nb.preProcess()
+    .then(function() {
+      console.log('training!');
+      nb.train();
+    })
+    .then(function() {
+      console.log('predicting!');
+      nb.predict();
+    });
