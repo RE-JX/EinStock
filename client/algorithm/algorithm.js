@@ -8,9 +8,11 @@
     ])
 
     //this will be the controller to create new campaigns
-    .controller('algorithmController', algoCtrl)
+    .controller('AlgorithmController', AlgorithmController);
 
-  function algoCtrl($scope, Algorithm, TickValidation) {
+  AlgorithmController.$inject = ['$scope', 'Algorithm', 'TickValidation'];
+
+  function AlgorithmController($scope, Algorithm, TickValidation) {
     //init a start date
     var firstDate = new Date();
     firstDate.setDate(firstDate.getDate() - 1);

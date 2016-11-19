@@ -27,25 +27,28 @@
   .config(function($stateProvider, lockProvider, $urlRouterProvider) {
 
     // Right now the default page is set to the algorithm selector view
-      $urlRouterProvider.otherwise('/login');
+      $urlRouterProvider.otherwise('/welcome');
 
     //routes under the header
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: '/dashboard/dashboard.html'
+        templateUrl: 'dashboard/dashboard.html',
+        controller: 'DashboardController'
       })
       .state('algorithm', {
         url: '/algorithm',
-        templateUrl: '/algorithm/algorithm.html'
+        templateUrl: 'algorithm/algorithm.html',
+        controller: 'AlgorithmController'
       })
       .state('welcome', {
         url: '/welcome',
-        templateUrl: '/welcome/welcome.html'
+        templateUrl: 'welcome/welcome.html',
+        controller: 'WelcomeController'
       })
       .state('login', {
         url: '/login',
-        templateUrl: '/login/login.html',
+        templateUrl: 'login/login.html',
         controller: 'LoginController',
         controllerAs: 'vm'
       });
