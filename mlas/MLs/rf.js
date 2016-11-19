@@ -110,16 +110,6 @@ Forest.prototype.predict = function() {
 
   var testOutcomes = this.testData.map(item => item.movement);
 
-  // for(var i = 0; i < testFeatures[0].length; i++) {
-  //   var vector = testFeatures.map(item => item[i]);
-  //   // var std = ss.sampleStandardDeviation(vector);
-  //   // var mean = ss.mean(vector);
-  //   testFeatures.forEach(item => {
-  //     item[i] = (item[i] - mean) / std;
-  //     // item[i] = (item[i] - min) / (max - min);
-  //   });
-  // };
-  // console.log('testFeatures: ', testFeatures);
   this.predictionsRaw = forest.predict(testFeatures).slice(1);
   this.predictions = this.predictionsRaw.map(prediction => prediction > 0.5 ? 1 : 0);
   console.log('predictions and actual outcome: ', this.predictionsRaw, testOutcomes);
