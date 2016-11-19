@@ -4,19 +4,7 @@ const port = 8080;
 const path = require('path');
 const bodyParser = require('body-parser');
 const moment = require('moment');
-//---------------------------------------- 
 const database = require('../database');
-const evaluation = require('../evaluator/simulate.js');
-const dumbAlgo2 = require('../algorithms/dumbAlgo1.js').a2;
-const PreProcess = require('../mlas/preprocess.js');
-const sampleData = require('../mlas/sampleData/aapl6.js').data;
-const Neighbors = require('../mlas/MLs/knn.js');
-const SupportVector = require('../mlas/MLs/svm.js');
-const Forest = require('../mlas/MLs/rf.js');
-const Logistic = require('../mlas/MLs/logistic.js');
-const NaiveBayes = require('../mlas/MLs/nb.js');
-let predictions;
-
 
 //-----------------middleware---------------
 //------------------------------------------
@@ -35,7 +23,8 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
-require('./routes.js')(app);
+require('./routes.js')(app); 
+require('./DBroutes.js')(app);
 //-----------------database-----------------
 //------------------------------------------
 
@@ -56,15 +45,3 @@ database.db.sync().then(() => {
 // predictors.percentBB(2);
 // predictors.lags(2, 2);
 // console.log(predictors.data);
-
-// ------- example usage of preProcess + algorithm, to be deleted later --------------
-var nb = new NaiveBayes('10/03/2016', '11/03/2016', 'SPY');
-  nb.preProcess()
-    .then(function() {
-      console.log('training!');
-      nb.train();
-    })
-    .then(function() {
-      console.log('predicting!');
-      nb.predict();
-    });

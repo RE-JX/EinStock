@@ -10,11 +10,23 @@ const Neighbors = require('../mlas/MLs/knn.js');
 const SupportVector = require('../mlas/MLs/svm.js');
 const Forest = require('../mlas/MLs/rf.js');
 const Logistic = require('../mlas/MLs/logistic.js');
+const NaiveBayes = require('../mlas/MLs/nb.js');
 //--------------------------------------------
 let predictions;
+var algorithmInstance;
 
 module.exports = function(app) {
-  var algorithmInstance;
+
+  app.get('/api/data', (req, res) => { // <-- get all simulations created by this user
+    database.Simulation.findAll({
+      where: {
+        userId: req.query.userId
+      }
+    })
+    .then(function(data) {
+      res.send(data);
+    });
+  });
 
   app.post('/api/data', (req, res) => {
     function dateFormat(dateOriginal) {
@@ -30,6 +42,8 @@ module.exports = function(app) {
       algorithmInstance = new Logistic(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     } else if (req.body.algorithm === 'svm') {
       algorithmInstance = new SupportVector(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
+    } else if (req.body.algorithm === 'nb') {
+      algorithmInstance = new NaiveBayes(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     }
 
     algorithmInstance.preProcess()
@@ -73,16 +87,4 @@ module.exports = function(app) {
         res.send(result);
       });
   });
-
-  app.get('/api/data', (req, res) => { // <-- get all simulations created by this user
-    database.Simulation.findAll({
-      where: {
-        userId: req.query.userId
-      }
-    })
-    .then(function(data) {
-      res.send(data);
-    });
-  });
-
 }
