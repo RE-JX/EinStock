@@ -7,6 +7,7 @@
     'einstock.dashboard',
     'einstock.algorithm',
     'einstock.welcome',
+    'einstock.machine',
     'einstock.authService',
     'einstock.run',
     'einstock.scroller',
@@ -23,6 +24,11 @@
 
   .config(mdTheme)
   .config(routes)
+  .config(auth)
+
+  mdTheme.$inject = ['$mdThemingProvider'];
+  routes.$inject = ['$stateProvider', 'lockProvider', '$urlRouterProvider'];
+  auth.$inject = ['$httpProvider', 'jwtOptionsProvider'];
 
   // This is an Angular Material Theme setting for color schemes
   function mdTheme ($mdThemingProvider) {
@@ -30,11 +36,17 @@
   };
 
   // This is where we are routing our views
-  function routes ($stateProvider, lockProvider, $urlRouterProvider) {
-    // Right now the default page is set to the algorithm selector view
-      $urlRouterProvider.otherwise('/welcome');
+  function routes ($stateProvider, lockProvider, $urlRouterProvider, $rootScope, $state) {
 
-    //routes under the header
+    $urlRouterProvider.rule(function($injector, $location) {
+      var path = $location.path();
+      if (localStorage.getItem('id_token') === null) {
+        $location.replace().path('/login')
+      } else {
+        $urlRouterProvider.otherwise('/welcome');
+      }
+    })
+
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
@@ -51,6 +63,11 @@
         templateUrl: 'welcome/welcome.html',
         controller: 'WelcomeController'
       })
+      .state('machine', {
+        url: '/machine_learning',
+        templateUrl: 'machine/machine.html',
+        controller: 'MachineController'
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'login/login.html',
@@ -63,7 +80,26 @@
       clientID: 'FcVikV153yHFMA0dKqDNA12cATurOR86',
       domain: 'gsuppy.auth0.com'
     });
+
+    // Right now the default page is set to the algorithm selector view
+    console.log(localStorage.getItem('id_token'));
+
+    //End of routing
+    };
+
+    //Auth0 Configuration
+    function auth($httpProvider, jwtOptionsProvider) {
+    // Configuration for angular-jwt
+    jwtOptionsProvider.config({
+      tokenGetter: function () {
+        return localStorage.getItem('id_token');
+      },
+      whiteListedDomains: ['localhost'],
+      unauthenticatedRedirectPath: '/login'
+    });
+
+    // Add the jwtInterceptor to the array of HTTP interceptors
+    // so that JWTs are attached as Authorization headers
+    $httpProvider.interceptors.push('jwtInterceptor');
   };
-
-
 })();
