@@ -10,11 +10,12 @@
   function Algorithm($http, $location) {
     return {
       post: function(data) {
-        return $http.post('/api/data/knn', data);
+        return $http.post('/api/data', data); //start, end , ticker, algo, userid
+        //localStorage.getItem('id_token')
         // console.log(data); //just for testing purposes
       },
       redirect: function() {
-        $location.path('/dashboard')
+        $location.path('/dashboard');
       }
     }
   }
