@@ -16,6 +16,11 @@
   <script src="/public/chart.js/dist/chart.js"></script>
   <script src="/public/angular-chart.js/angular-chart.js"></script>
   <script src="/public/moment/moment.js"></script>
+  <script src="/public/angular-ui-router/release/angular-ui-router.js"></script>
+  <!-- Auth0 Authentication Modules -->
+  <script src="public/angular-lock/dist/angular-lock.js"></script>
+  <script src="public/angular-jwt/dist/angular-jwt.js"></script>
+  <script type="text/javascript" src="https://cdn.auth0.com/js/lock/10.5/lock.min.js"></script>
   <!-- Angular Material CSS and Font -->
   <script src="/public/angular-material/angular-material.js"></script>
   <script src="/public/angular-messages/angular-messages.js"></script>
@@ -49,19 +54,28 @@
   </md-nav-bar>
 </div>
 
-<!-- Where we'll have the different views rendering through the ng-router -->
+<!-- Logout Button for Auth0 -->
+<div ng-if="isAuthenticated">
+  <p>Thank you for logging in!</p>
+  <button ng-click="vm.authService.logout()">Log Out</button>
+</div>
+
+<!-- UI Router -->
 <div class="container">
-  <div ng-view></div>
+  <div ui-view></div>
 </div>
 
 <!-- Local routes for files -->
   <script src="/services/services.js"></script>
+  <script src="/services/auth.js"></script>
   <script src="/services/ticks.js"></script>
-  <script src="/dashboard/dashboard.js"></script>
   <script src="/algorithm/algorithm.js"></script>
+  <script src="/app/run.js"></script>
+  <script src="/app/scroller.js"></script>
+  <script src="/dashboard/dashboard.js"></script>
+  <script src="/login/login.js"></script>
   <script src="/welcome/welcome.js"></script>
   <script src="/app.js"></script>
-
 </body>
 
 </html>

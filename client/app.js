@@ -6,47 +6,64 @@
     'einstock.services',
     'einstock.dashboard',
     'einstock.algorithm',
-    'einstock.validation',
     'einstock.welcome',
-    'ngRoute',
+    'einstock.authService',
+    'einstock.run',
+    'einstock.scroller',
+    'einstock.login',
+    'einstock.validation',
     'ngMaterial',
     'ngMessages',
     'ngAria',
     'chart.js',
+    'auth0.lock',
+    'angular-jwt',
+    'ui.router'
   ])
 
-  // Pass off scrolling function to FAB button on main banner
-  .controller('ScrollerController', ScrollerController)
-    // This is an Angular Material Theme setting for color schemes
-    .config(function($mdThemingProvider) {
-      $mdThemingProvider.theme('default')
-        // .primaryPalette('indigo')
-        // .accentPalette('orange')
-    })
-    // This is where we are routing our views
-    .config(function($routeProvider, $httpProvider) {
-      $routeProvider
-        .when('/dashboard', {
-          templateUrl: '/dashboard/dashboard.html',
-        })
-        .when('/algorithm', {
-          templateUrl: '/algorithm/algorithm.html'
-        })
-        .when('/welcome', {
-          templateUrl: '/welcome/welcome.html'
-        })
-        // Right now the default page is set to the algorithm selector view
-        .otherwise({
-          redirectTo: '/welcome'
-        })
-    });
+  .config(mdTheme)
+  .config(routes)
 
-  //Scroller Controller defined here
-  function ScrollerController($scope, $location, $anchorScroll) {
-    $scope.scrollDown = function() {
-      $location.hash('navbar');
-      $anchorScroll();
-    }
+  // This is an Angular Material Theme setting for color schemes
+  function mdTheme ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
   };
-})();
 
+  // This is where we are routing our views
+  function routes ($stateProvider, lockProvider, $urlRouterProvider) {
+    // Right now the default page is set to the algorithm selector view
+      $urlRouterProvider.otherwise('/welcome');
+
+    //routes under the header
+    $stateProvider
+      .state('dashboard', {
+        url: '/dashboard',
+        templateUrl: 'dashboard/dashboard.html',
+        controller: 'DashboardController'
+      })
+      .state('algorithm', {
+        url: '/algorithm',
+        templateUrl: 'algorithm/algorithm.html',
+        controller: 'AlgorithmController'
+      })
+      .state('welcome', {
+        url: '/welcome',
+        templateUrl: 'welcome/welcome.html',
+        controller: 'WelcomeController'
+      })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'login/login.html',
+        controller: 'LoginController',
+        controllerAs: 'vm'
+      });
+
+    //auth0 login initializer
+    lockProvider.init({
+      clientID: 'FcVikV153yHFMA0dKqDNA12cATurOR86',
+      domain: 'gsuppy.auth0.com'
+    });
+  };
+
+
+})();
