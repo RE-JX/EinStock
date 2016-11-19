@@ -7,6 +7,7 @@
     'einstock.dashboard',
     'einstock.algorithm',
     'einstock.welcome',
+    'einstock.machine',
     'einstock.authService',
     'einstock.run',
     'einstock.scroller',
@@ -61,6 +62,11 @@
         url: '/welcome',
         templateUrl: 'welcome/welcome.html',
         controller: 'WelcomeController'
+      })
+      .state('machine', {
+        url: '/machine_learning',
+        templateUrl: 'machine/machine.html',
+        controller: 'MachineController'
       })
       .state('login', {
         url: '/login',

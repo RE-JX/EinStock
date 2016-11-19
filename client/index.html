@@ -49,6 +49,7 @@
 <div class="container" id="navbar">
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
     <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+    <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
     <md-nav-item md-nav-href="#/algorithm#navbar" name="algorithm">Settings</md-nav-item>
     <md-nav-item md-nav-href="#/dashboard#navbar" name="dashboard">Dashboard</md-nav-item>
   </md-nav-bar>
@@ -60,9 +61,6 @@
     <p>Thank you for logging in!</p>
     <button ng-click="vm.authService.logout()">Log Out</button>
   </div>
-<!--   <div class="container">
-    <div ui-view></div>
-  </div> -->
 </div>
 
 <!-- UI Router -->
@@ -82,6 +80,7 @@
   <script src="/dashboard/dashboard.js"></script>
   <script src="/login/login.js"></script>
   <script src="/welcome/welcome.js"></script>
+  <script src="/machine/machine.js"></script>
   <script src="/app.js"></script>
 </body>
 
