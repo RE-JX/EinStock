@@ -56,14 +56,21 @@
 
 <!-- Logout Button for Auth0 -->
 <div ng-if="isAuthenticated">
-  <p>Thank you for logging in!</p>
-  <button ng-click="vm.authService.logout()">Log Out</button>
+  <div class="loggedin">
+    <p>Thank you for logging in!</p>
+    <button ng-click="vm.authService.logout()">Log Out</button>
+  </div>
+<!--   <div class="container">
+    <div ui-view></div>
+  </div> -->
 </div>
 
 <!-- UI Router -->
 <div class="container">
   <div ui-view></div>
 </div>
+
+
 
 <!-- Local routes for files -->
   <script src="/services/services.js"></script>
