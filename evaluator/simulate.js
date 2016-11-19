@@ -83,6 +83,7 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
       increased,
       commission = 5,  // commission paid to broker per trade
       actualMoves = [],
+      success = 0,
       successRate = 0,
       inclusionError = 0,
       exclusionError = 0,
@@ -126,13 +127,14 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
                 exclusionError++;
               } else if(move === 0 && predictedMoves[i] === 1) {
                 inclusionError++;
-              } else {
-                successRate++;
+              } else if(move === predictedMoves[i])  {
+                success++;
               }
             });
-            successRate = successRate / predictedMoves.length;
-            inclusionError = inclusionError / predictedMoves.length;
-            exclusionError = exclusionError / predictedMoves.length;
+            var total = success + exclusionError + inclusionError;
+            successRate = success / total;
+            inclusionError = inclusionError / total;
+            exclusionError = exclusionError / total;
         })
         .then(function() {
           // -------- simulate trades according to predictedMoves and calculate portfolio values ---------
