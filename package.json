@@ -4,7 +4,7 @@
   "description": "stock trading simulator with machine learning algorithms",
   "main": "index.js",
   "scripts": {
-    "start": "$(npm bin)/nodemon",
+    "start": "$(npm bin)/nodemon server/index.js",
     "test": "$(npm bin)/mocha"
   },
   "repository": {
