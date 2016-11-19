@@ -7,7 +7,6 @@ const moment = require('moment');
 const port = 8080;
 const database = require('../database');
 const evaluation = require('../evaluator/simulate.js');
-const dumbAlgo1 = require('../algorithms/dumbAlgo1.js').a1;
 const dumbAlgo2 = require('../algorithms/dumbAlgo1.js').a2;
 const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
