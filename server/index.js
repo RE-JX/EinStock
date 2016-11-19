@@ -14,6 +14,7 @@ const sampleData = require('../mlas/sampleData/aapl6.js').data;
 const Neighbors = require('../mlas/MLs/knn.js');
 const SupportVector = require('../mlas/MLs/svm.js');
 const Forest = require('../mlas/MLs/rf.js');
+const Logistic = require('../mlas/MLs/logistic.js')
 let predictions;
 
 //-----------------middleware---------------
@@ -62,15 +63,15 @@ app.post('/api/data/knn', (req, res) => {
   };
 
   var knn = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-  forest.preProcess()
+  knn.preProcess()
     .then(function() {
-      forest.train();
+      knn.train();
     })
     .then(function() {
-      forest.predict();
+      knn.predict();
     })
     .then(function() {
-      return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, forest.predictions)
+      return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, knn.predictions)
     })
     .then((result) => {
       return database.Simulation.create({ //<------ save in database
@@ -137,13 +138,14 @@ database.db.sync().then(() => {
 // predictors.lags(2, 2);
 // console.log(predictors.data);
 
-var forest = new Forest('10/03/2016', '11/03/2016', 'GOOG');
-  forest.preProcess()
-    .then(function() {
-      console.log('training!');
-      forest.train();
-    })
-    .then(function() {
-      console.log('predicting!');
-      forest.predict();
-    });
+// ------- example usage of preProcess + algorithm, to be deleted later --------------
+// var logistic = new Logistic('10/03/2016', '11/03/2016', 'AAPL');
+//   logistic.preProcess()
+//     .then(function() {
+//       console.log('training!');
+//       logistic.train();
+//     })
+//     .then(function() {
+//       console.log('predicting!');
+//       logistic.predict();
+//     });
