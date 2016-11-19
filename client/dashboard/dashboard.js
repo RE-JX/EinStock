@@ -49,12 +49,12 @@
     //Way to get day labels
     while (labelCount > 1) {
       if (0 < current.day() && current.day() < 6) {
-        $scope.labels.push(current.format("MM-DD-YYYY"));
+        $scope.labels.push(current.format('MM-DD-YYYY'));
         current.add(1, 'days');
       }
       if (6 <= current.day()) {
         current = current.weekday(8);
-        $scope.labels.push(current.format("MM-DD-YYYY"));
+        $scope.labels.push(current.format('MM-DD-YYYY'));
         current.add(1, 'days');
       }
       labelCount--;
@@ -91,17 +91,17 @@
 
     $scope.datasetOverride = [
       {
-        label: "Benchmark Asset Value",
+        label: 'Benchmark Asset Value',
         borderWidth: 3,
         type: 'line'
       },
       {
-        label: "Chosen Asset Value",
+        label: 'Chosen Asset Value',
         borderWidth: 3,
         type: 'line',
       },
       {
-        label: "Algorithm Asset Value",
+        label: 'Algorithm Asset Value',
         borderWidth: 1,
         type: 'bar'
       }
