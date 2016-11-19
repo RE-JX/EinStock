@@ -11,6 +11,7 @@
     'einstock.run',
     'einstock.scroller',
     'einstock.login',
+    'einstock.validation',
     'ngMaterial',
     'ngMessages',
     'ngAria',
@@ -20,12 +21,16 @@
     'ui.router'
   ])
 
-  // This is an Angular Material Theme setting for color schemes
   .config(mdTheme)
+  .config(routes)
+
+  // This is an Angular Material Theme setting for color schemes
+  function mdTheme ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+  };
 
   // This is where we are routing our views
-  .config(function($stateProvider, lockProvider, $urlRouterProvider) {
-
+  function routes ($stateProvider, lockProvider, $urlRouterProvider) {
     // Right now the default page is set to the algorithm selector view
       $urlRouterProvider.otherwise('/welcome');
 
@@ -58,9 +63,7 @@
       clientID: 'FcVikV153yHFMA0dKqDNA12cATurOR86',
       domain: 'gsuppy.auth0.com'
     });
-  })
-
-  function mdTheme ($mdThemingProvider) {
-    $mdThemingProvider.theme('default')
   };
+
+
 })();
