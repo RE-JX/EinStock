@@ -45,12 +45,6 @@
   </md-button>
 </div>
 
-<!-- Logout Button for Auth0 -->
-<div ng-if="isAuthenticated">
-  <p>Thank you for logging in!</p>
-  <button ng-click="vm.authService.logout()">Log Out</button>
-</div>
-
 <!-- Navigation Bar -->
 <div class="container" id="navbar">
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
@@ -58,6 +52,12 @@
     <md-nav-item md-nav-href="#/algorithm#navbar" name="algorithm">Settings</md-nav-item>
     <md-nav-item md-nav-href="#/dashboard#navbar" name="dashboard">Dashboard</md-nav-item>
   </md-nav-bar>
+</div>
+
+<!-- Logout Button for Auth0 -->
+<div ng-if="isAuthenticated">
+  <p>Thank you for logging in!</p>
+  <button ng-click="vm.authService.logout()">Log Out</button>
 </div>
 
 <!-- UI Router -->

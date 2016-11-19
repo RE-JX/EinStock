@@ -27,7 +27,7 @@
   .config(function($stateProvider, lockProvider, $urlRouterProvider) {
 
     // Right now the default page is set to the algorithm selector view
-    $urlRouterProvider.otherwise('/login');
+      $urlRouterProvider.otherwise('/login');
 
     //routes under the header
     $stateProvider
