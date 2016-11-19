@@ -10,6 +10,7 @@
 
   //Welcome controller for static welcome page
   function MachineController($scope) {
-    $scope.about = "Machine Learning"
+    $scope.about = "Machine Learning";
+    $scope.methods = "";
   }
 })();
