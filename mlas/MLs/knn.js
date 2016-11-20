@@ -7,6 +7,7 @@ var knn = new KNN();
 var moment = require('moment');
 var apiMethods = require('../../worker/index.js');
 var PreProcess = require('../preprocess.js');
+var mean, std;
 
 var predictors = [
   'movement_lag2',
@@ -102,9 +103,6 @@ Neighbors.prototype.predict = function() {
   });
 
   for(var i = 0; i < testFeatures[0].length; i++) {
-    var vector = testFeatures.map(item => item[i]);
-    var std = ss.sampleStandardDeviation(vector);
-    var mean = ss.mean(vector);
     testFeatures.forEach(item => {
       item[i] = (item[i] - mean) / std;
     })
@@ -141,8 +139,8 @@ Neighbors.prototype.train = function(callback) {
   for(var i = 0; i < trainingFeatures[0].length; i++) {
     var vector = trainingFeatures.map(item => item[i]);
     // console.log('vector:', vector);
-    var std = ss.sampleStandardDeviation(vector);
-    var mean = ss.mean(vector);
+    std = ss.sampleStandardDeviation(vector);
+    mean = ss.mean(vector);
     // console.log('std and mean:', std, mean);
     trainingFeatures.forEach(item => {
       item[i] = (item[i] - mean) / std;

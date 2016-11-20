@@ -7,6 +7,7 @@ var nb = new NB();
 var moment = require('moment');
 var apiMethods = require('../../worker/index.js');
 var PreProcess = require('../preprocess.js');
+var mean, std;
 
 var predictors = [
   'movement_lag2',
@@ -100,6 +101,13 @@ NaiveBayes.prototype.predict = function() {
     })
     return features;
   });
+
+  for(var i = 0; i < testFeatures[0].length; i++) {
+    testFeatures.forEach(item => {
+      item[i] = (item[i] - mean) / std;
+    })
+  };
+
   var testOutcomes = this.testData.map(item => item.movement);
 
   this.predictions = nb.predict(testFeatures).slice(1);
@@ -129,6 +137,17 @@ NaiveBayes.prototype.train = function(callback) {
     trainingFeatures = trainingFeatures.slice(1);
     trainingOutcomes = trainingOutcomes.slice(1);
   }
+
+  for(var i = 0; i < trainingFeatures[0].length; i++) {
+    var vector = trainingFeatures.map(item => item[i]);
+    // console.log('vector:', vector);
+    std = ss.sampleStandardDeviation(vector);
+    mean = ss.mean(vector);
+    // console.log('std and mean:', std, mean);
+    trainingFeatures.forEach(item => {
+      item[i] = (item[i] - mean) / std;
+    })
+  };
 
   nb.train(trainingFeatures, trainingOutcomes);
 };

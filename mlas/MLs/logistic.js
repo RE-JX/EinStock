@@ -107,18 +107,14 @@ Logistic.prototype.predict = function() {
 
   var testOutcomes = this.testData.map(item => item.movement);
 
-  // for(var i = 0; i < testFeatures[0].length; i++) {
-  //   var vector = testFeatures.map(item => item[i]);
-  //   // var std = ss.sampleStandardDeviation(vector);
-  //   // var mean = ss.mean(vector);
-  //   testFeatures.forEach(item => {
-  //     item[i] = (item[i] - mean) / std;
-  //     // item[i] = (item[i] - min) / (max - min);
-  //   });
-  // };
+  for(var i = 0; i < testFeatures[0].length; i++) {
+    testFeatures.forEach(item => {
+      item[i] = (item[i] - mean) / std;
+    });
+  };
   // console.log('testFeatures: ', testFeatures);
   this.predictionsRaw = logistic.predict(testFeatures).slice(1);
-  this.predictions = this.predictionsRaw.map(prediction => prediction > 0.5 ? 1 : 0);
+  this.predictions = this.predictionsRaw.map(prediction => prediction[0] > 0.5 ? 1 : 0);
   console.log('predictions and actual outcome: ', this.predictionsRaw, testOutcomes);
 };
 
@@ -147,6 +143,17 @@ Logistic.prototype.train = function() {
     trainingFeatures = trainingFeatures.slice(1);
     trainingOutcomes = trainingOutcomes.slice(1);
   }
+
+  for(var i = 0; i < trainingFeatures[0].length; i++) {
+    var vector = trainingFeatures.map(item => item[i]);
+    // console.log('vector:', vector);
+    std = ss.sampleStandardDeviation(vector);
+    mean = ss.mean(vector);
+    // console.log('std and mean:', std, mean);
+    trainingFeatures.forEach(item => {
+      item[i] = (item[i] - mean) / std;
+    })
+  };
 
   var options = {};
   options.input = trainingFeatures;
