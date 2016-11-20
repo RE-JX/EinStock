@@ -20,6 +20,21 @@
       </div>
       <div layout-gt-xs="row">
         <div flex-gt-xs>
+          <h4>Pick an Algorithim below</h4>
+          <div layout="row">
+            <md-input-container>
+              <label>Algorithims</label>
+              <md-select ng-model="selection">
+                <md-optgroup label="Algorithims">
+                  <md-option ng-value="item" ng-repeat="item in algSelections">{{item}}</md-option>
+                </md-optgroup>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+      <div layout-gt-xs="row">
+        <div flex-gt-xs>
           <h4>Select Start Date:</h4>
           <md-datepicker ng-model="data.startDate" md-placeholder="start date"></md-datepicker>
           <h4>Select End Date:</h4>
