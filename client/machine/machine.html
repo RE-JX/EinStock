@@ -1,14 +1,32 @@
 <!-- Machine Learning Info -->
 <div class="machine" ng-controller="MachineController">
-  <!-- Machine Learning -->
+  <!-- Learning Banner -->
+  <div >
+    <img class="learn-banner" src="/assets/learn.jpg">
+  </div>
+    <!-- Machine Learning -->
   <div>
     <h2 class="md-display-2">What is Machine Learning?</h2>
     <p>{{about}}</p>
+    <ul>
+      <li ng-repeat="type in types"> {{type}} </li>
+    </ul>
   </div>
+  <!-- Cool Machine Learning Gif -->
+  <div>
+    <img class="learn-gif" src="/assets/mlgif.gif">
+  </div>
+
   <!-- Machine Learning Methods -->
   <div>
     <h2 class="md-display-2">Some Common Methods</h2>
     <p>{{methods}}</p>
   </div>
+    <!-- Machine Learning Cheatsheet -->
+  <div>
+    <img class="learn-cheat" src="/assets/mlcheat.png">
+  </div>
 </div>
+
+
 
