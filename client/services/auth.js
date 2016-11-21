@@ -7,7 +7,7 @@
 
   authService.$inject = ['lock', 'authManager', 'UserData'];
 
-  function authService(lock, authManager) {
+  function authService(lock, authManager, UserData) {
     function login() {
       lock.show();
     };

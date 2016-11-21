@@ -11,6 +11,7 @@
 
   Algorithm.$inject = ['$http', '$location'];
   DashboardData.$inject = ['$http'];
+  UserData.$inject = ['$http'];
 
   function Algorithm($http, $location) {
     return {
