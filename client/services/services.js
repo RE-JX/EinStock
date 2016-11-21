@@ -29,7 +29,7 @@
   function DashboardData($http) {
     return {
       get: function(data) {
-        return $http.get('/api/data/knn', data);
+        return $http.get('/api/data', data);
       }
     }
   };

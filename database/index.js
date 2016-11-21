@@ -17,7 +17,6 @@ if(process.env.DATABASE_URL) {
 
 
 var User = db.define('User', {
-  username: { type: Sequelize.STRING, allowNull: false, unique: true },
   userId: { type: Sequelize.UUID, primaryKey: true}
 });
 

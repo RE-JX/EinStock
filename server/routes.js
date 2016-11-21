@@ -17,14 +17,35 @@ var algorithmInstance;
 
 module.exports = function(app) {
 
+  app.get('/api/user', (req, res) => {
+    console.log('requested user: ', req.body);
+    database.User.findAll({
+      where: {
+        userId: req.body
+      }
+    })
+    .then((data) => {
+      if(data[0]) {
+        res.send(data[0]);
+      } else {
+        database.User.create({
+          userId: req.body
+        })
+        .then(data => {
+          res.send(data);
+        })
+      }
+    });
+  });
+
   app.get('/api/data', (req, res) => { // <-- get all simulations created by this user
     database.Simulation.findAll({
       where: {
         userId: req.query.userId
       }
     })
-    .then(function(data) {
-      res.send(data);
+    .then(function(userData) {
+      res.send(userData);
     });
   });
 

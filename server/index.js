@@ -4,7 +4,7 @@ const port = 8080;
 const path = require('path');
 const bodyParser = require('body-parser');
 const moment = require('moment');
-//---------------------------------------- 
+//----------------------------------------
 const database = require('../database');
 
 
@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
-require('./routes.js')(app); 
-require('./DBroutes.js')(app);
+require('./routes.js')(app);
+// require('./DBroutes.js')(app);
 //-----------------database-----------------
 //------------------------------------------
 
