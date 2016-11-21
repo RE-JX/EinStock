@@ -34,15 +34,16 @@ module.exports = function(app) {
       date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       return date;
     }
-    if (req.body.algorithm === 'knn') {
+    console.log('ALGORITHM BODY ------------>', req.body.algorithm);
+    if (req.body.algorithm === 'Neighbors') {
       algorithmInstance = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-    } else if (req.body.algorithm === 'rf') {
+    } else if (req.body.algorithm === 'Forest') {
       algorithmInstance = new Forest(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-    } else if (req.body.algorithm === 'logistic') {
+    } else if (req.body.algorithm === 'Logistic') {
       algorithmInstance = new Logistic(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-    } else if (req.body.algorithm === 'svm') {
+    } else if (req.body.algorithm === 'Support Vectors') {
       algorithmInstance = new SupportVector(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-    } else if (req.body.algorithm === 'nb') {
+    } else if (req.body.algorithm === 'Naive Bayes') {
       algorithmInstance = new NaiveBayes(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     }
 

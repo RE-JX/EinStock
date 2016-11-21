@@ -24,8 +24,8 @@
     $scope.data = {
       startDate: firstDate,
       endDate: new Date(),
-      ticker: 'GOOG',
-      algorithm: '',
+      ticker: '',
+      algorithm: $scope.selection,
       userid: ''
     }
 
@@ -34,16 +34,16 @@
       Algorithm.post($scope.data).success(function(data) {
         console.log(data);
         localStorage.setItem('data', angular.toJson(data));
-      });
+      }).then(Algorithm.redirect());
     }
 
     $scope.tickTest = function() {
      return TickValidation.isValid($scope.data.ticker);
     }
 
-    $scope.dash = function() {
-      return Algorithm.redirect();
-    }
+    // $scope.dash = function() {
+    //   return Algorithm.redirect();
+    // }
   }
 
 })();
