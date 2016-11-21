@@ -12,9 +12,19 @@ var normalizer = require('../normalizers').normalizer;
 var worker = require('../../worker').yahoo.historical;
 // var stockTraining = require('../sampleData/aapl6').data;
 
-var NN = (symbol = 'AAPL', from = '2012-01-01', to = '2014-01-01') => {
+var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10') => {
 
-  worker(symbol, from, to).then(function(data) {
+  var yearBefore = from.split('-');
+  yearBefore[0] = String(Number(yearBefore[0]) - 1);
+  yearBefore = yearBefore.join('-');
+
+  var duration = Math.round((new Date(to) - new Date(from))/(1000 * 60 * 60 * 24));
+
+  // console.log(duration, from, to, yearBefore);
+
+
+
+  worker(symbol, yearBefore, to).then(function(data) {
     var normalizedData = normalizer(data, ['stock', 'symbol', 'date']);
 
     // console.log(normalizedData);
@@ -57,20 +67,27 @@ var NN = (symbol = 'AAPL', from = '2012-01-01', to = '2014-01-01') => {
       }
     });
 
-    var correct = 0;
-    normalizedData.forEach((data, i, arr) => {
-      if (i !== normalizedData.length - 1) {
-        var prediction = Math.round(myNetwork.activate(data)); // 1 means an increase in price
-        var actual = (arr[i + 1][5] - arr[i][5]) > 0;  // true means an increase in price
-        correct += prediction === +actual ? 1 : 0;
-        entries++;
-      if (i % 5 === 0) {
-        // console.log('prediction:', prediction, 'actual:', actual);
-        console.log(correct/normalizedData.length * 100,'%');
-        }
-      }
-    });
-    console.log('NN got:', correct/normalizedData.length * 100, '%', correct, normalizedData.length);
+
+    // normalizedData.forEach((data, i, arr) => {
+    //   if (i !== normalizedData.length - 1) {
+    //     var prediction = Math.round(myNetwork.activate(data)); // 1 means an increase in price
+    //     var actual = (arr[i + 1][5] - arr[i][5]) > 0;  // true means an increase in price
+    //     correct += prediction === +actual ? 1 : 0;
+    //     entries++;
+    //   if (i % 5 === 0) {
+    //     // console.log('prediction:', prediction, 'actual:', actual);
+    //     console.log(correct/normalizedData.length * 100,'%');
+    //     }
+    //   }
+    // });
+  var algPredictions = [];
+
+  for (var i = normalizedData.length - 1; i >= normalizedData.length - duration; i--) {
+
+    algPredictions.push(Math.round(myNetwork.activate(normalizedData[i])));
+  }
+  return algPredictions;
+    // console.log('NN got:', correct/normalizedData.length * 100, '%', correct, normalizedData.length);
   });
 };
 
