@@ -6,16 +6,30 @@
       'chart.js'
     ])
     // Dashboard for users to see charts
+    .controller('NavController', NavController)
     .controller('DashboardController', DashboardController)
     .controller('RadarController', RadarController)
     .controller('LineController', LineController)
     .controller('PieController', PieController)
     .controller('BubbleController', BubbleController);
 
+  NavController.$inject = ['$scope', '$timeout', '$mdSidenav'];
   DashboardController.$inject = ['$scope'];
   RadarController.$inject = ['$scope'];
   LineController.$inject = ['$scope'];
   PieController.$inject = ['$scope'];
+
+  //Sidebar navigation controller
+  function NavController($scope, $timeout, $mdSidenav) {
+    $scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+
+    function buildToggler(componentId) {
+      return function() {
+        $mdSidenav(componentId).toggle();
+      }
+    }
+  };
 
   //Using to pass local storage to scope of all charts in dashboard
   function DashboardController($scope) {

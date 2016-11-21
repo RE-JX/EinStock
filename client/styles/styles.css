@@ -3,11 +3,34 @@ body {
   font-family: 'Unica One', cursive;
 }
 
+ul li {
+  font-family: 'Open Sans';
+  padding: 10px;
+}
+
 #scroll-down {
   position: absolute;
   top: 400px;
   left: 47%;
   text-align: center;
+}
+
+.learn-banner {
+  width: 100%;
+  object-fit: cover;
+  height: 400px;
+}
+
+.learn-gif {
+  width: 100%;
+  object-fit: cover;
+  height: 30%;
+}
+
+.learn-cheat {
+  width: 100%;
+  object-fit: cover;
+  height: 30%;
 }
 
 h3 {
