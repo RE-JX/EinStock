@@ -55,7 +55,7 @@ module.exports = function(app) {
       date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       return date;
     }
-    console.log('ALGORITHM BODY ------------>', req.body.algorithm);
+    
     if (req.body.algorithm === 'Neighbors') {
       algorithmInstance = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     } else if (req.body.algorithm === 'Forest') {
