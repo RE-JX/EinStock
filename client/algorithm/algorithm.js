@@ -29,21 +29,18 @@
       userId: angular.fromJson(localStorage.getItem('profile')).identities[0].user_id
     }
 
-
     $scope.log = function() {
       Algorithm.post($scope.data).success(function(data) {
         console.log(data);
         localStorage.setItem('data', angular.toJson(data));
-      }).then(Algorithm.redirect());
+        Algorithm.redirect();
+      })
     }
 
     $scope.tickTest = function() {
      return TickValidation.isValid($scope.data.ticker);
     }
 
-    // $scope.dash = function() {
-    //   return Algorithm.redirect();
-    // }
   }
 
 })();
