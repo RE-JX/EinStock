@@ -78,7 +78,7 @@ module.exports = function(app) {
       })
       .then((result) => {
         return database.Simulation.create({ //<------ save in database
-          userId: req.userId,
+          UserUserId: req.userId,
           algorithm: req.body.algorithm,
           frequency: result.frequency,
           startDate: result.startDate,
