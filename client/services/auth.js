@@ -20,7 +20,12 @@
         authManager.authenticate();
       });
       // Posts user data to the datbase upon registration
-      UserData.post(localStorage.getItem('id_token')).success(function(data) {
+      var id = localStorage.getItem('id_token');
+      var token = {
+        userid: id
+      };
+      console.log(token);
+      UserData.post(angular.toJson(token)).success(function(data) {
         console.log(data);
       })
     };
@@ -29,6 +34,7 @@
     function logout() {
       localStorage.removeItem('id_token');
       authManager.unauthenticate();
+      document.location.reload(true);
     };
 
     return {
