@@ -23,7 +23,7 @@
 
       var id = localStorage.getItem('id_token');
       var token = {
-        userid: id
+        userId: id
       };
       console.log(token);
       UserData.post(angular.toJson(token)).success(function(data) {
