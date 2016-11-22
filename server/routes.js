@@ -39,7 +39,7 @@ module.exports = function(app) {
   app.get('/api/data', (req, res) => { // <-- get all simulations created by this user
     database.Simulation.findAll({
       where: {
-        userId: req.query.userId
+        UserUserId: req.query.userId
       }
     })
     .then(function(userData) {
