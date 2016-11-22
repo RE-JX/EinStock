@@ -6,37 +6,58 @@ var Network = synaptic.Network;
 /* jshint ignore:end */
 var Trainer = synaptic.Trainer;
 var Architect = synaptic.Architect;
-var Promise = require("bluebird");
+var Promise = require('bluebird');
 
 //Data and normalization
 var normalizer = require('../normalizers').normalizer;
 var worker = require('../../worker').yahoo.historical;
-// var stockTraining = require('../sampleData/aapl6').data;
-
-var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10', callback) => {
-
-  var yearBefore = from.split('-');
-  yearBefore[0] = String(Number(yearBefore[0]) - 1);
-  yearBefore = yearBefore.join('-');
-
-  var duration = Math.round((new Date(to) - new Date(from))/(1000 * 60 * 60 * 24));
-
-  // console.log(duration, from, to, yearBefore);
 
 
 
-  worker(symbol, yearBefore, to).then(function(data) {
-    var normalizedData = normalizer(data, ['stock', 'symbol', 'date']);
 
-    // console.log(normalizedData);
-    //Setup NN and Trainer
-    // var myNetwork = new Architect.Perceptron(6,7,1);
-    var myNetwork = new Architect.Perceptron(normalizedData[0].length,normalizedData[0].length * 1, 1);
-    var trainer = new Trainer(myNetwork);
 
-    //Create a training set
-    var trainingSet = normalizedData.reduce((arr, datum, i, a) => {
-      // console.log(datum);
+
+var NN = function (symbol, from, to) {
+  // 'use strict';
+
+  this.symbol = symbol;
+  this.from = from;
+  this.to = to;
+  this.trainer;
+  this.trainingSet;
+  this.prediction = [];
+
+  this.yearBefore = this.from.split('-');
+  this.yearBefore[0] = String(Number(this.yearBefore[0]) - 1);
+  this.yearBefore = this.yearBefore.join('-');
+
+  console.log('from, to', from, to);
+  console.log(arguments);
+
+  this.duration = Math.round((new Date(to) - new Date(from))/(1000 * 60 * 60 * 24));
+
+
+};
+
+
+
+
+
+
+
+NN.prototype.preProcess = function () {
+  'use strict';
+
+  const obj = this;
+
+  return worker(this.symbol, this.yearBefore, this.to)
+  .then(function(data) {
+    return normalizer(data, ['stock', 'symbol', 'date']);
+  })
+  .then(function (normalizedData) {
+
+    return normalizedData.reduce((arr, datum, i, a) => {
+
       if (normalizedData.length - 1 !== i) {
         var temp = {input: datum};
         temp.output = [+ (a[i + 1][5] > datum[5])];
@@ -45,8 +66,40 @@ var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10', callback) => 
       return arr;
     }, []);
 
+  })
+  .then(function (normalizedData) {
+
+    var myNetwork = new Architect.Perceptron(normalizedData[0].length, normalizedData[0].length * 1, 1);
+    obj.trainingSet = normalizedData;
+    return new Trainer(myNetwork);
+  })
+  .then(function (trainer) {
+    obj.trainer = trainer;
+  })
+  // .then(function () {
+  //   console.log(obj.symbol,
+  //   obj.from,
+  //   obj.to,
+  //   obj.trainer,
+  //   obj.trainingSet);
+  // })
+  .error(function (err) {
+    console.log(err);
+    obj.trainer = null;
+  });
+
+};
+
+
+
+
+
+
+
+NN.prototype.train = function () {
+
     //train the NN
-    trainer.train(trainingSet, {
+    this.trainer.train(this.trainingSet, {
       rate: 0.01,
       iterations: 100000,
       error: 0.0005,
@@ -56,45 +109,42 @@ var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10', callback) => 
       schedule: {
         every: 1000, // repeat this task every 500 iterations
         do: function(data) {
-          // console.log('error', data.error, 'iterations', data.iterations, 'rate', data.rate);
-          // if (data.error > 0.5) {
-          //   data.rate = 0.5;
-          // } else if (data.error > 0.3) {
-          //   data.rate = 0.3;
-          // } else {
-          //   data.rate = 0.1;
-          // }
-console.log('Percent complete: ', Math.round((data.iterations/100000) * 100), '%');
+          console.log('Percent complete: ', Math.round((data.iterations/100000) * 100), '%');
         }
       }
     });
-
-
-    // normalizedData.forEach((data, i, arr) => {
-    //   if (i !== normalizedData.length - 1) {
-    //     var prediction = Math.round(myNetwork.activate(data)); // 1 means an increase in price
-    //     var actual = (arr[i + 1][5] - arr[i][5]) > 0;  // true means an increase in price
-    //     correct += prediction === +actual ? 1 : 0;
-    //     entries++;
-    //   if (i % 5 === 0) {
-    //     // console.log('prediction:', prediction, 'actual:', actual);
-    //     console.log(correct/normalizedData.length * 100,'%');
-    //     }
-    //   }
-    // });
-  var algPredictions = [];
-
-  for (var i = normalizedData.length - 1; i >= normalizedData.length - duration; i--) {
-
-    algPredictions.push(Math.round(myNetwork.activate(normalizedData[i])));
-  }
-// console.log(algPredictions);
-  callback(algPredictions);
-    // console.log('NN got:', correct/normalizedData.length * 100, '%', correct, normalizedData.length);
-  });
 };
 
-// NN();
 
 
-module.exports = Promise.promisify(NN);
+
+
+NN.prototype.predict = function () {
+  'use strict';
+console.log('ran');
+console.log('this.trainingSet',this.trainingSet.length);
+console.log('this.duration',this.duration);
+console.log('this.prediction', this.prediction);
+  for (var i = this.trainingSet.length - 1; i >= this.trainingSet.length - this.duration; i--) {
+    this.prediction.push(Math.round(this.myNetwork.activate(this.trainingSet[i])));
+    console.log('happened');
+  }
+};
+
+
+
+
+var a = new NN('AAPL', '2014-01-01', '2014-01-10');
+a.preProcess()
+.then(function () {
+  a.train();
+})
+.then(function () {
+  a.predict();
+})
+.then(function () {
+  console.log(a.prediction);
+});
+
+
+module.exports = NN;
