@@ -5,9 +5,9 @@
     .module('einstock.authService', [])
     .service('authService', authService);
 
-  authService.$inject = ['lock', 'authManager', 'UserData'];
+  authService.$inject = ['lock', 'authManager', 'UserData', '$q', '$timeout'];
 
-  function authService(lock, authManager, UserData) {
+  function authService(lock, authManager, UserData, $q, $timeout) {
     function login() {
       lock.show();
     };
@@ -32,13 +32,33 @@
         })
 
       });
-      // Posts user data to the datbase upon registration
 
+      // Posts user data to the datbase upon registration
 
       // UserData.post(angular.toJson(token)).success(function(data) {
 
       //   console.log(data);
       // })
+
+      function getId () {
+        return $timeout(function() {
+          return localStorage.getItem('id_token');
+        }, 2000);
+        return deferred.promise;
+      };
+
+      var promise = getId();
+      promise.then(function(id) {
+        var token = {
+          userid: id
+        };
+        console.log(token);
+
+        UserData.post(angular.toJson(token)).success(function(data) {
+          console.log(data);
+        })
+      });
+>>>>>>> Add a FAB button to try to access old history and promisify local storage to wait for id token to return
     };
 
     //Logout function to remove token from user
