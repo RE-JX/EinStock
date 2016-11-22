@@ -16,7 +16,7 @@ var algorithmInstance;
 module.exports = function(app) {
 
   app.post('/api/user', (req, res) => {
-    console.log('requested user: ', typeof req.body.userId);
+    console.log('requested user: ', req.body.userId);
     database.User.findAll({
       where: {
         userId: req.body.userId
