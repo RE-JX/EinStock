@@ -26,7 +26,7 @@
       endDate: new Date(),
       ticker: '',
       algorithm: $scope.selection,
-      userid: ''
+      userId: angular.fromJson(localStorage.getItem('profile')).identities[0].user_id
     }
 
 
