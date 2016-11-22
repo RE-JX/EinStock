@@ -17,24 +17,24 @@ var worker = require('../../worker').yahoo.historical;
 
 
 
-var NN = function (symbol, from, to) {
+var NN = function (symbol, fromD, toD) {
   // 'use strict';
 
   this.symbol = symbol;
-  this.from = from;
-  this.to = to;
+  this.fromD = fromD;
+  this.to = toD;
   this.trainer;
   this.trainingSet;
   this.prediction = [];
 
-  this.yearBefore = this.from.split('-');
+  this.yearBefore = this.fromD.split('-');
   this.yearBefore[0] = String(Number(this.yearBefore[0]) - 1);
   this.yearBefore = this.yearBefore.join('-');
 
-  console.log('from, to', from, to);
-  console.log(arguments);
+  // console.log('fromD, toD', fromD, toD);
+  // console.log(arguments);
 
-  this.duration = Math.round((new Date(to) - new Date(from))/(1000 * 60 * 60 * 24));
+  this.duration = Math.round((new Date(toD) - new Date(fromD))/(1000 * 60 * 60 * 24));
 
 
 };
@@ -78,7 +78,7 @@ NN.prototype.preProcess = function () {
   })
   // .then(function () {
   //   console.log(obj.symbol,
-  //   obj.from,
+  //   obj.fromD,
   //   obj.to,
   //   obj.trainer,
   //   obj.trainingSet);
@@ -134,17 +134,17 @@ console.log('this.prediction', this.prediction);
 
 
 
-var a = new NN('AAPL', '2014-01-01', '2014-01-10');
-a.preProcess()
-.then(function () {
-  a.train();
-})
-.then(function () {
-  a.predict();
-})
-.then(function () {
-  console.log(a.prediction);
-});
+// var a = new NN('AAPL', '2014-01-01', '2014-01-10');
+// a.preProcess()
+// .then(function () {
+//   a.train();
+// })
+// .then(function () {
+//   a.predict();
+// })
+// .then(function () {
+//   console.log(a.prediction);
+// });
 
 
 module.exports = NN;
