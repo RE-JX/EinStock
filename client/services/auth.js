@@ -20,12 +20,14 @@
         authManager.authenticate();
       });
       // Posts user data to the datbase upon registration
+
       var id = localStorage.getItem('id_token');
       var token = {
         userid: id
       };
       console.log(token);
       UserData.post(angular.toJson(token)).success(function(data) {
+
         console.log(data);
       })
     };

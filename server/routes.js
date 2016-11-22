@@ -1,8 +1,6 @@
 const moment = require('moment');
 const database = require('../database');
 const evaluation = require('../evaluator/simulate.js');
-const dumbAlgo1 = require('../algorithms/dumbAlgo1.js').a1;
-const dumbAlgo2 = require('../algorithms/dumbAlgo1.js').a2;
 const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
 //----------------algorithms------------------
@@ -17,8 +15,8 @@ var algorithmInstance;
 
 module.exports = function(app) {
 
-  app.get('/api/user', (req, res) => {
-    console.log('requested user: ', req.body);
+  app.post('/api/user', (req, res) => {
+    console.log('requested user: ', req.body.userId);
     database.User.findAll({
       where: {
         userId: req.body
