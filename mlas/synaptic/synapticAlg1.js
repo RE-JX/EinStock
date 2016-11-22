@@ -6,13 +6,14 @@ var Network = synaptic.Network;
 /* jshint ignore:end */
 var Trainer = synaptic.Trainer;
 var Architect = synaptic.Architect;
+var Promise = require("bluebird");
 
 //Data and normalization
 var normalizer = require('../normalizers').normalizer;
 var worker = require('../../worker').yahoo.historical;
 // var stockTraining = require('../sampleData/aapl6').data;
 
-var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10') => {
+var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10', callback) => {
 
   var yearBefore = from.split('-');
   yearBefore[0] = String(Number(yearBefore[0]) - 1);
@@ -47,13 +48,13 @@ var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10') => {
     //train the NN
     trainer.train(trainingSet, {
       rate: 0.01,
-      iterations: 200000,
+      iterations: 100000,
       error: 0.0005,
       shuffle: false,
-      log: 100,
+      // log: 100,
       cost: Trainer.cost.CROSS_ENTROPY,
       schedule: {
-        every: 20000, // repeat this task every 500 iterations
+        every: 1000, // repeat this task every 500 iterations
         do: function(data) {
           // console.log('error', data.error, 'iterations', data.iterations, 'rate', data.rate);
           // if (data.error > 0.5) {
@@ -63,6 +64,7 @@ var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10') => {
           // } else {
           //   data.rate = 0.1;
           // }
+console.log('Percent complete: ', Math.round((data.iterations/100000) * 100), '%');
         }
       }
     });
@@ -86,9 +88,13 @@ var NN = (symbol = 'AAPL', from = '2014-01-01', to = '2014-01-10') => {
 
     algPredictions.push(Math.round(myNetwork.activate(normalizedData[i])));
   }
-  return algPredictions;
+// console.log(algPredictions);
+  callback(algPredictions);
     // console.log('NN got:', correct/normalizedData.length * 100, '%', correct, normalizedData.length);
   });
 };
 
-module.exports = NN;
+// NN();
+
+
+module.exports = Promise.promisify(NN);
