@@ -2,39 +2,46 @@
   <!-- Header Banner for Dashboard -->
   <h1 class="md-display-3" id="dashboard-banner">Hello Dashboard<h1>
   <!-- Where we will have our side nav to pick old searches -->
-<div ng-controller="NavController" layout="column" style="height: 500px;" ng-cloak>
-  <section layout="row" flex>
-    <md-sidenav class="md-sidenav-left" md-component-id="left"
-                md-disable-backdrop md-whiteframe="4">
+  <div ng-controller="NavController" layout="column" ng-cloak>
+    <!-- Sidenav that pops out on button click -->
+    <md-sidenav class="md-sidenav-left" md-component-id="left">
+      <!-- Header for the popout -->
       <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
-  </md-toolbar>
-  <md-content layout-margin>
-    <p>
-      Sidenav backdrop
-    </p>
-    <md-button ng-click="toggleLeft()" class="md-accent">
-      Close this Sidenav
-    </md-button>
-  </md-content>
-  </md-sidenav>
-  <md-content flex layout-padding>
-    <div layout="column" layout-align="top center">
-      <p>
-        Sidenav
-      </p>
-      <div>
+        <h1 class="md-toolbar-tools">History of Searches</h1>
+      </md-toolbar>
+      <!-- Actual Content on the popout -->
+      <md-content layout-margin>
+        <p>
+          Past Searches
+        </p>
         <md-button ng-click="toggleLeft()" class="md-raised">
-          Toggle Sidenav
+          Close History
         </md-button>
-      </div>
-    </div>
-  </md-content>
-  </section>
-</div>
+      </md-content>
+    </md-sidenav>
+  </div>
+
+  <!-- Sidenav button on dashboard page -->
+  <div class="sidenav-button">
+    <md-button ng-click="toggleLeft()" class="md-raised">
+      Choose a Past History
+    </md-button>
+  </div>
 
 <!-- Material Grid List Container -->
 <md-grid-list md-cols="4" md-row-height="500px" md-gutter="20px">
+
+  <!-- fill up the space between left and right area -->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h3>My App's Title</h3>
+      <span flex></span>
+      <md-button>
+        Right Bar Button
+      </md-button>
+    </div>
+  </md-toolbar>
+  <!-- Stocker Symbol -->
   <h3 id=dashboard-title>{{data.tickerSymbol}}</h3>
   <!-- Chart One -->
   <md-grid-tile md-rowspan="1" md-colspan="2">

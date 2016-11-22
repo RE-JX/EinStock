@@ -8,6 +8,18 @@ ul li {
   padding: 10px;
 }
 
+.loggedin{
+  z-index: 1;
+}
+
+.sidenav-button {
+  text-align: center;
+  top: 880px;
+  position: absolute;
+  left: 42%;
+  z-index: 1;
+}
+
 #scroll-down {
   position: absolute;
   top: 400px;
