@@ -8,15 +8,13 @@ ul li {
   padding: 10px;
 }
 
-.loggedin{
+#history {
   z-index: 1;
+  position: absolute;
+  right: 10px;
 }
 
-.sidenav-button {
-  text-align: center;
-  top: 880px;
-  position: absolute;
-  left: 42%;
+.loggedin{
   z-index: 1;
 }
 
@@ -100,7 +98,7 @@ md-grid-list {
   left: 0;
   width: 100%;
   color: white;
-  z-index: 1;
+  z-index: 2;
   text-shadow: 3px 3px gray;
 }
 
