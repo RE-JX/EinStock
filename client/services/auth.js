@@ -20,7 +20,7 @@
         authManager.authenticate();
         lock.getProfile(authResult.idToken, function(err, profile) {
           if(err) console.log(err);
-          console.log('profileId:',profile.identities[0].user_id);
+          console.log('profileId:', profile.identities[0].user_id);
           var token = {
             userId: profile.identities[0].user_id
           };
