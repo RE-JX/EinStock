@@ -18,18 +18,27 @@
       lock.on('authenticated', function (authResult) {
         localStorage.setItem('id_token', authResult.idToken);
         authManager.authenticate();
+        lock.getProfile(authResult.idToken, function(err, profile) {
+          if(err) console.log(err);
+          console.log('profileId:',profile.identities[0].user_id);
+          var token = {
+            userId: profile.identities[0].user_id
+          };
+          UserData.post(angular.toJson(token)).success(function(data) {
+
+            console.log(data);
+          });
+          localStorage.setItem('profile', JSON.stringify(profile));
+        })
+
       });
       // Posts user data to the datbase upon registration
 
-      var id = localStorage.getItem('id_token');
-      var token = {
-        userId: id
-      };
-      console.log(token);
-      UserData.post(angular.toJson(token)).success(function(data) {
 
-        console.log(data);
-      })
+      // UserData.post(angular.toJson(token)).success(function(data) {
+
+      //   console.log(data);
+      // })
     };
 
     //Logout function to remove token from user

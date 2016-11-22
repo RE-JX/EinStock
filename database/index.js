@@ -17,7 +17,7 @@ if(process.env.DATABASE_URL) {
 
 
 var User = db.define('User', {
-  userId: { type: Sequelize.UUID, primaryKey: true}
+  userId: { type: Sequelize.STRING, primaryKey: true}
 });
 
 var StockData = db.define('StockData', { //<------ historical data

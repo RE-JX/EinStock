@@ -19,7 +19,7 @@ module.exports = function(app) {
     console.log('requested user: ', req.body.userId);
     database.User.findAll({
       where: {
-        userId: req.body
+        userId: req.body.userId
       }
     })
     .then((data) => {
