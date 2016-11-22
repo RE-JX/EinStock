@@ -16,7 +16,7 @@ var algorithmInstance;
 module.exports = function(app) {
 
   app.post('/api/user', (req, res) => {
-    console.log('requested user: ', req.body.userId);
+    console.log('requested user: ', typeof req.body.userId);
     database.User.findAll({
       where: {
         userId: req.body.userId
@@ -27,7 +27,7 @@ module.exports = function(app) {
         res.send(data[0]);
       } else {
         database.User.create({
-          userId: req.body
+          userId: req.body.userId
         })
         .then(data => {
           res.send(data);
