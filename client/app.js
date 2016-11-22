@@ -40,7 +40,7 @@
 
     $urlRouterProvider.rule(function($injector, $location) {
       var path = $location.path();
-      if (localStorage.getItem('id_token') === null) {
+      if (localStorage.getItem('id_token') == null) {
         $location.replace().path('/login')
       } else {
         $urlRouterProvider.otherwise('/welcome');
