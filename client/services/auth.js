@@ -5,9 +5,9 @@
     .module('einstock.authService', [])
     .service('authService', authService);
 
-  authService.$inject = ['lock', 'authManager', 'UserData'];
+  authService.$inject = ['lock', 'authManager', 'UserData', '$q', '$timeout'];
 
-  function authService(lock, authManager, UserData) {
+  function authService(lock, authManager, UserData, $q, $timeout) {
     function login() {
       lock.show();
     };
@@ -19,15 +19,26 @@
         localStorage.setItem('id_token', authResult.idToken);
         authManager.authenticate();
       });
+
       // Posts user data to the datbase upon registration
-      var id = localStorage.getItem('id_token');
-      var token = {
-        userid: id
+      function getId () {
+        return $timeout(function() {
+          return localStorage.getItem('id_token');
+        }, 2000);
+        return deferred.promise;
       };
-      console.log(token);
-      UserData.post(angular.toJson(token)).success(function(data) {
-        console.log(data);
-      })
+
+      var promise = getId();
+      promise.then(function(id) {
+        var token = {
+          userid: id
+        };
+        console.log(token);
+
+        UserData.post(angular.toJson(token)).success(function(data) {
+          console.log(data);
+        })
+      });
     };
 
     //Logout function to remove token from user
