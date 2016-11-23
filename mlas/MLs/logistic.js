@@ -2,7 +2,8 @@
 //---- reference: http://machinelearningmastery.com/logistic-regression-tutorial-for-machine-learning/ ---
 
 var ss = require('simple-statistics');
-var LogisticRegression = require('machine_learning').LogisticRegression;
+// var LogisticRegression = require('machine_learning').LogisticRegression;
+var LogisticRegression = require('./lib/logisticregression.js');
 
 var moment = require('moment');
 var apiMethods = require('../../worker/index.js');
@@ -114,7 +115,7 @@ Logistic.prototype.predict = function() {
   };
   // console.log('testFeatures: ', testFeatures);
   this.predictionsRaw = logistic.predict(testFeatures).slice(1);
-  this.predictions = this.predictionsRaw.map(prediction => prediction[0] > 0.5 ? 1 : 0);
+  this.predictions = this.predictionsRaw.map(prediction => prediction > 0.5 ? 1 : 0);
   console.log('predictions and actual outcome: ', this.predictionsRaw, testOutcomes);
 };
 
@@ -156,20 +157,27 @@ Logistic.prototype.train = function() {
   };
 
   var options = {};
-  options.input = trainingFeatures;
-  options.label = trainingOutcomes.map(item => [item, 1 - item]);
-  // options.label = trainingOutcomes.map(item => [item]);
-  console.log('labels: ', options.label);
-  options.n_in = trainingFeatures[0].length;
-  options.n_out = 2;
-  var training_epochs = 3000, lr = 0.000001; //<----- epochs and learning rate
+  // options.input = trainingFeatures;
+  // options.label = trainingOutcomes.map(item => [item, 1 - item]);
+  // // options.label = trainingOutcomes.map(item => [item]);
+  // console.log('labels: ', options.label);
+  // options.n_in = trainingFeatures[0].length;
+  // options.n_out = 2;
+
+  options.trainingData = trainingFeatures;
+  options.trainingLabel = trainingOutcomes;
+  options.lr = 0.001;
+  options.epochs = 10000;
+
+  var training_epochs = 10000, lr = 0.000001; //<----- epochs and learning rate
 
   logistic = new LogisticRegression(options);
-  logistic.set('log level',1);
-  logistic.train({
-    'lr': lr,
-    'epochs': training_epochs
-  });
+  // logistic.set('log level',1);
+  // logistic.train({
+  //   'lr': lr,
+  //   'epochs': training_epochs
+  // });
+  logistic.train();
 };
 
 module.exports = Logistic;
