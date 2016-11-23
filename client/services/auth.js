@@ -59,7 +59,7 @@
           console.log(data);
         })
       });
->>>>>>> Add a FAB button to try to access old history and promisify local storage to wait for id token to return
+
     };
 
     //Logout function to remove token from user
