@@ -68,7 +68,7 @@ module.exports = function(app) {
       algorithmInstance = new NaiveBayes(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     }  else if (req.body.algorithm === 'Neural Net 1') {
       algorithmInstance = {};
-      algorithmInstance.preProcess = Promise.promisify(function fake(arg, callback) {return callback(arg); });
+      algorithmInstance[preProcess] = Promise.promisify(function fake(arg, callback) {return callback(arg); });
       algorithmInstance.train = function(a) { return a; }
       algorithmInstance.predict = function(a) { return a; }
 
