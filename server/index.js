@@ -8,6 +8,7 @@ const moment = require('moment');
 const database = require('../database');
 const Logistic = require('../mlas/MLs/logistic.js');
 const evaluation = require('../evaluator/simulate.js');
+const NaiveBayes = require('../mlas/MLs/nb.js');
 
 
 //-----------------middleware---------------
@@ -51,7 +52,7 @@ database.db.sync().then(() => {
 // console.log(predictors.data);
 
 // --------- testing algorithm, to be deleted later -----------------
-// var algorithmInstance = new Logistic('08/31/2016', '11/18/2016', 'AAPL');
+// var algorithmInstance = new NaiveBayes('08/31/2016', '11/18/2016', 'SPY');
 // algorithmInstance.preProcess()
 //   .then(function() {
 //     algorithmInstance.train();
@@ -60,7 +61,7 @@ database.db.sync().then(() => {
 //     algorithmInstance.predict();
 //   })
 //   .then(function() {
-//     return evaluation('d', '08/31/2016', '11/18/2016', 'AAPL', algorithmInstance.predictions)
+//     return evaluation('d', '08/31/2016', '11/18/2016', 'SPY', algorithmInstance.predictions)
 //   })
 //   .then(function(data) {
 //     console.log(data);
