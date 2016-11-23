@@ -4,50 +4,50 @@
   <h2>Hello Settings<h2>
     <md-content layout-padding>
       <form name="algoInput">
-      <div layout-gt-xs="row">
-        <div flex-gt-xs>
-          <md-input-container>
-            <label>Choose A Ticker</label>
-            <input md-minlength="1" md-maxlength="5" required md-no-asterisk name="tick" ng-model="data.ticker">
-            <div ng-messages="algoInput.tick.$error">
-              <div ng-if="!tickTest()">Not a valid ticker</div>
-              <div ng-message="required">Stock ticker required.</div>
-              <div ng-message="validationError">Not a valid stock tick</div>
-              <div ng-message="md-maxlength">The ticker must be less than 5 characters long.</div>
-              <div ng-message="md-minlength">The ticker must be more than one character long.</div>
-            </div>
-          </md-input-container>
-        </div>
-      </div>
-      <div layout-gt-xs="row">
-        <div flex-gt-xs>
-          <h4>Pick an Algorithim below</h4>
-          <div layout="row">
+        <div layout-gt-xs="row">
+          <div flex-gt-xs>
             <md-input-container>
-              <label>Algorithims</label>
-              <md-select ng-model="data.algorithm">
-                <md-optgroup label="Algorithims">
-                  <md-option ng-value="item" ng-repeat="item in algSelections">{{item}}</md-option>
-                </md-optgroup>
-              </md-select>
+              <label>Choose A Ticker</label>
+              <input md-minlength="1" md-maxlength="5" required md-no-asterisk name="tick" ng-model="data.ticker">
+              <div ng-messages="algoInput.tick.$error">
+                <div ng-if="!tickTest()">Not a valid ticker</div>
+                <div ng-message="required">Stock ticker required.</div>
+                <div ng-message="validationError">Not a valid stock tick</div>
+                <div ng-message="md-maxlength">The ticker must be less than 5 characters long.</div>
+                <div ng-message="md-minlength">The ticker must be more than one character long.</div>
+              </div>
             </md-input-container>
           </div>
         </div>
-      </div>
-      <div layout-gt-xs="row">
-        <div flex-gt-xs>
-          <h4>Select Start Date:</h4>
-          <md-datepicker ng-model="data.startDate" md-placeholder="start date"></md-datepicker>
-          <h4>Select End Date:</h4>
-          <md-datepicker ng-model="data.endDate" md-placeholder="end date"></md-datepicker>
+        <div layout-gt-xs="row">
+          <div flex-gt-xs>
+            <h4>Pick an Algorithim below</h4>
+            <div layout="row">
+              <md-input-container>
+                <label>Algorithims</label>
+                <md-select ng-model="data.algorithm">
+                  <md-optgroup label="Algorithims">
+                    <md-option ng-value="item" ng-repeat="item in algSelections">{{item}}</md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-input-container>
+            </div>
+          </div>
         </div>
-      </div>
-      <div layout-gt-xs="row">
-        <div flex-gt-xs>
-        <md-button ng-disabled="!tickTest() || !(data.ticker.length > 0) && !(data.ticker.length < 6)" ng-click="log()"
-            class="md-raised submit" type="submit">Submit</md-button>
+        <div layout-gt-xs="row">
+          <div flex-gt-xs>
+            <h4>Select Start Date:</h4>
+            <md-datepicker ng-model="data.startDate" md-placeholder="start date"></md-datepicker>
+            <h4>Select End Date:</h4>
+            <md-datepicker ng-model="data.endDate" md-placeholder="end date"></md-datepicker>
+          </div>
         </div>
-      </div>
+        <div layout-gt-xs="row">
+          <div flex-gt-xs>
+          <md-button ng-disabled="!tickTest() || !(data.ticker.length > 0) && !(data.ticker.length < 6)" ng-click="log()"
+              class="md-raised md-primary submit" type="submit">Submit</md-button>
+          </div>
+        </div>
       </form>
     </md-content>
 

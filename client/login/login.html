@@ -1,3 +1,14 @@
-<button class="btn btn-primary" ng-click="vm.authService.login()">
-Log In
-</button>
+<!-- Logout Button for Auth0 -->
+<div ng-controller="LoginController" ng-show="!localStorage.getItem('id_token')">
+  <div class="loggedin">
+    <p>Thank you for logging in!</p>
+    <md-button class="md-raised md-primary" ng-click="authService.logout()">Log Out</md-button>
+  </div>
+</div>
+
+  <div ng-show="!localStorage.getItem('id_token')">
+    <md-button class="md-raised md-primary" ng-click="vm.authService.login()">
+    Log In
+    </md-button>
+  </div>
+
