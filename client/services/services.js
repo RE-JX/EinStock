@@ -17,8 +17,9 @@
     return {
       post: function(data) {
         return $http.post('/api/data', data); //start, end , ticker, algo, userid
-        //localStorage.getItem('id_token')
-        // console.log(data); //just for testing purposes
+      },
+      get: function(data) {
+        return $http.get('api/data', data);
       },
       redirect: function() {
         $location.path('/dashboard');
