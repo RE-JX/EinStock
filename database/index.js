@@ -11,10 +11,10 @@ if(process.env.DATABASE_URL) {
 } else {
   db = new Sequelize('einstoc', 'root', '', {
     dialect: 'postgres',
-    port: 5432
+    port: 5432,
+    logging: false
   })
 };
-
 
 var User = db.define('User', {
   userId: { type: Sequelize.STRING, primaryKey: true}
