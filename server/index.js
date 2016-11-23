@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const moment = require('moment');
 //----------------------------------------
 const database = require('../database');
+const Logistic = require('../mlas/MLs/logistic.js');
+const evaluation = require('../evaluator/simulate.js');
 
 
 //-----------------middleware---------------
@@ -47,3 +49,17 @@ database.db.sync().then(() => {
 // predictors.percentBB(2);
 // predictors.lags(2, 2);
 // console.log(predictors.data);
+var algorithmInstance = new Logistic('08/31/2016', '11/18/2016', 'AAPL');
+algorithmInstance.preProcess()
+  .then(function() {
+    algorithmInstance.train();
+  })
+  .then(function() {
+    algorithmInstance.predict();
+  })
+  .then(function() {
+    return evaluation('d', '08/31/2016', '11/18/2016', 'AAPL', algorithmInstance.predictions)
+  })
+  .then(function(data) {
+    console.log(data);
+  });

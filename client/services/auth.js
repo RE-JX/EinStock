@@ -9,6 +9,7 @@
 
   function authService(lock, authManager, UserData) {
     function login() {
+      console.log('login function is called');
       lock.show();
     };
 
