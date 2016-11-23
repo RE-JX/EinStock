@@ -238,10 +238,14 @@ canvas#pie {
   height: calc(100% - 2*50px - 150px) !important;
 }
 canvas#line {
-
+  padding: 25px;
+  width: calc(100% - 2*25px - 150px) !important;
+  height: calc(100% - 2*25px - 150px) !important;
 }
 canvas#bubble {
-
+  padding: 25px;
+  width: calc(100% - 2*25px - 150px) !important;
+  height: calc(100% - 2*25px - 150px) !important;
 }
 
 
