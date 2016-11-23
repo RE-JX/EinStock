@@ -3,6 +3,7 @@ const database = require('../database');
 const evaluation = require('../evaluator/simulate.js');
 const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
+const Promise = require('../node_modules/bluebird');
 //----------------algorithms------------------
 const Neighbors = require('../mlas/MLs/knn.js');
 const SupportVector = require('../mlas/MLs/svm.js');
@@ -33,7 +34,7 @@ module.exports = function(app) {
         })
         .then(data => {
           res.send(data);
-        })
+        });
       }
     });
   });
@@ -67,24 +68,18 @@ module.exports = function(app) {
     } else if (req.body.algorithm === 'Naive Bayes') {
       algorithmInstance = new NaiveBayes(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     }  else if (req.body.algorithm === 'Neural Net 1') {
-      algorithmInstance = {};
-      algorithmInstance[preProcess] = Promise.promisify(function fake(arg, callback) {return callback(arg); });
-      algorithmInstance.train = function(a) { return a; }
-      algorithmInstance.predict = function(a) { return a; }
+      algorithmInstance = {
+        preProcess: Promise.promisify(function fake(arg, callback = function(a) {return a;}) {return callback(arg); }),
+        train: function(a) { return a; },
+        predict: function(a) { return a; },
+        predictions: []
+      };
 
-      NNA1(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker)
+      algorithmInstance.predictions = NNA1(req.body.ticker, dateFormat(req.body.startDate), dateFormat(req.body.endDate))
       .then(function (result) {
-        console.log('result',resut);
-        algorithmInstance.predictions = result;
+        return result;
       });
     }
-
-
-
-
-
-
-
 
 
     algorithmInstance.preProcess()
@@ -95,7 +90,7 @@ module.exports = function(app) {
         algorithmInstance.predict();
       })
       .then(function() {
-        return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, algorithmInstance.predictions)
+        return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, algorithmInstance.predictions);
       })
       .then((result) => {
         console.log('request.body-------> ', req.body);
@@ -130,4 +125,4 @@ module.exports = function(app) {
       });
   });
 
-}
+};
