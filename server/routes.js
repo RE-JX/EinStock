@@ -77,8 +77,9 @@ module.exports = function(app) {
         return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, algorithmInstance.predictions)
       })
       .then((result) => {
+        console.log('request.body-------> ', req.body);
         return database.Simulation.create({ //<------ save in database
-          UserUserId: req.userId,
+          UserUserId: req.body.userId,
           algorithm: req.body.algorithm,
           frequency: result.frequency,
           startDate: result.startDate,
