@@ -8,6 +8,9 @@ The KNN algorithm is a non-parametric method for classification and regression. 
 
 Logistic regression is one of the most popular machine learning method for binary classification. LR uses training data to estimate the odds of being a case. The odds are defined as the probability that a particular outcome is a case divided by the probability that it is a noncase. Like other regression methods, LR uses an linear equation as the model representation. the model coeffiicents are then estimated using maximum-likelihood method.
 
+### Naive Bayes (NB)
+
+Naive Bayes classifiers are a family of simple probabilistic classifiers based on applying Bayes' theorem with strong (naive) independence assumptions between the features.
 
 ### Neural Networks (NN)
 
