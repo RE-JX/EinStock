@@ -1,7 +1,7 @@
 const moment = require('moment');
 const database = require('../database');
 const evaluation = require('../evaluator/simulate.js');
-const PreProcess = require('../mlas/preprocess.js');
+// const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
 const Promise = require('../node_modules/bluebird');
 //----------------algorithms------------------
