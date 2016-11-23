@@ -1,5 +1,6 @@
 <!-- Main Algorithim selector div with input form -->
 <div layout="column" ng-controller="AlgorithmController">
+  <md-progress-linear md-mode="indeterminate" ng-show="isLoading"></md-progress-linear>
   <h2>Hello Settings<h2>
     <md-content layout-padding>
       <form name="algoInput">
