@@ -60,7 +60,6 @@ module.exports = function(app) {
       return date;
     }
 
-
     if (req.body.algorithm === 'K Nearest Neighbors') {
       algorithmInstance = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     } else if (req.body.algorithm === 'Random Forests') {
@@ -73,7 +72,7 @@ module.exports = function(app) {
       algorithmInstance = new NaiveBayes(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     }
 
-    if (req.body.algorithm === 'Neighbors' || req.body.algorithm === 'Forest' || req.body.algorithm === 'Logistic' || req.body.algorithm === 'Support Vectors' || req.body.algorithm === 'Naive Bayes') {
+    if (req.body.algorithm === 'K Nearest Neighbors' || req.body.algorithm === 'Random Forests' || req.body.algorithm === 'Logistic Regression' || req.body.algorithm === 'Support Vector Machine' || req.body.algorithm === 'Naive Bayes') {
       algorithmInstance.preProcess()
         .then(function() {
           algorithmInstance.train();
@@ -86,7 +85,7 @@ module.exports = function(app) {
         })
         .then((result) => {
           return database.Simulation.create({ //<------ save in database
-            UserUserId: req.userId,
+            UserUserId: req.body.userId,
             algorithm: req.body.algorithm,
             frequency: result.frequency,
             startDate: result.startDate,
