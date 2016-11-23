@@ -22,11 +22,11 @@
 
 <div id="chart-container">
 <!-- Material Grid List Container -->
-<md-grid-list md-cols="4" md-row-height="500px" md-row-height="75%" md-gutter="20px">
+<md-grid-list md-cols="2" md-row-height="600px" md-row-height="75%" md-gutter="20px">
   <!-- Stocker Symbol -->
   <h3 id=dashboard-title>{{data.tickerSymbol}}</h3>
   <!-- Chart One -->
-  <md-grid-tile md-rowspan="2" md-colspan="2">
+  <md-grid-tile md-rowspan="1" md-colspan="1">
     <div id="chart1" ng-controller="RadarController">
       <canvas id="radar" class="chart chart-radar" chart-data="radar" chart-labels="labels" chart-colors="colors">
       </canvas>
@@ -36,7 +36,7 @@
     </md-grid-tile-footer>
   </md-grid-tile>
   <!-- Chart Three -->
-  <md-grid-tile md-rowspan="2" md-colspan="2">
+  <md-grid-tile md-rowspan="1" md-colspan="1">
     <div id="chart2" ng-controller="PieController">
       <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options">
       </canvas>
