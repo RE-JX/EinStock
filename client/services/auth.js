@@ -55,11 +55,10 @@
         };
         console.log(token);
 
-        UserData.post(angular.toJson(token)).success(function(data) {
-          console.log(data);
-        })
+        // UserData.post(angular.toJson(token)).success(function(data) {
+          // console.log(data);
+        // })
       });
-
     };
 
     //Logout function to remove token from user

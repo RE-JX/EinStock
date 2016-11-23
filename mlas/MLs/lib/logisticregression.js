@@ -25,12 +25,12 @@ LogisticRegression.prototype.train = function() {
   var cost = 1 / this.sampleSize * ((this.trainingLabel.mulEach(-1).trans().dot(hx.log())).minus((ones.minus(this.trainingLabel)).trans().dot((ones.minus(hx)).log())));
   var gradient;
   for(var i = 0; i < this.epochs; i++) {
-    gradient = this.trainingData.trans().dot(hx.minus(this.trainingLabel)).mulEach(this.lr / this.sampleSize);
+    gradient = this.trainingData.trans().dot(hx.minus(this.trainingLabel)).mulEach(this.lr / this.sampleSize);  //<------ calculate gradient
     // console.log('gradient: ', gradient);
-    this.theta = this.theta.minus(gradient);
+    this.theta = this.theta.minus(gradient); //<-------- incrementally optimize theta
     hx = this.trainingData.dot(this.theta).sigmoid();
     cost = 1 / this.sampleSize * ((this.trainingLabel.mulEach(-1).trans().dot(hx.log()).data) - ((ones.minus(this.trainingLabel)).trans().dot((ones.minus(hx)).log()).data));
-    this.cost.push(cost);
+    this.cost.push(cost); //<------ compute cost function
     // console.log('cost: ', cost);
   }
   console.log('last cost function: ', this.cost[this.cost.length - 1]);

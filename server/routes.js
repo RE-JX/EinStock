@@ -1,7 +1,7 @@
 const moment = require('moment');
 const database = require('../database');
 const evaluation = require('../evaluator/simulate.js');
-const PreProcess = require('../mlas/preprocess.js');
+// const PreProcess = require('../mlas/preprocess.js');
 const sampleData = require('../mlas/sampleData/aapl6.js').data;
 const Promise = require('../node_modules/bluebird');
 //----------------algorithms------------------
@@ -60,13 +60,14 @@ module.exports = function(app) {
       return date;
     }
 
-    if (req.body.algorithm === 'Neighbors') {
+
+    if (req.body.algorithm === 'K Nearest Neighbors') {
       algorithmInstance = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-    } else if (req.body.algorithm === 'Forest') {
+    } else if (req.body.algorithm === 'Random Forests') {
       algorithmInstance = new Forest(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-    } else if (req.body.algorithm === 'Logistic') {
+    } else if (req.body.algorithm === 'Logistic Regression') {
       algorithmInstance = new Logistic(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
-    } else if (req.body.algorithm === 'Support Vectors') {
+    } else if (req.body.algorithm === 'Support Vector Machine') {
       algorithmInstance = new SupportVector(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     } else if (req.body.algorithm === 'Naive Bayes') {
       algorithmInstance = new NaiveBayes(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);

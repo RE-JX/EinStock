@@ -12,6 +12,13 @@
       <li ng-repeat="type in types"> {{type}} </li>
     </ul>
   </div>
+  <div>
+    <h2 class="md-display-2">Machine Learning Algorithms We Use</h2>
+    <p>{{algoIntro}}</p>
+    <ul>
+      <li ng-repeat="algorithm in algorithms"><strong>{{algoTitles[$index]}}: </strong> {{algorithm}} </li>
+    </ul>
+  </div>
   <!-- Cool Machine Learning Gif -->
   <div>
     <img class="learn-gif" src="/assets/mlgif.gif">
