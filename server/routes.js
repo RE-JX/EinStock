@@ -9,6 +9,8 @@ const SupportVector = require('../mlas/MLs/svm.js');
 const Forest = require('../mlas/MLs/rf.js');
 const Logistic = require('../mlas/MLs/logistic.js');
 const NaiveBayes = require('../mlas/MLs/nb.js');
+//--------------neural networks----------------
+const NNA1 = require('../mlas/synaptic/synapticAlg1.js');
 //--------------------------------------------
 let predictions;
 var algorithmInstance;
@@ -53,7 +55,7 @@ module.exports = function(app) {
       date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       return date;
     }
-    
+
     if (req.body.algorithm === 'Neighbors') {
       algorithmInstance = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     } else if (req.body.algorithm === 'Forest') {
@@ -64,7 +66,26 @@ module.exports = function(app) {
       algorithmInstance = new SupportVector(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
     } else if (req.body.algorithm === 'Naive Bayes') {
       algorithmInstance = new NaiveBayes(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
+    }  else if (req.body.algorithm === 'Neural Net 1') {
+      algorithmInstance = {};
+      algorithmInstance.preProcess = Promise.promisify(function fake(arg, callback) {return callback(arg); });
+      algorithmInstance.train = function(a) { return a; }
+      algorithmInstance.predict = function(a) { return a; }
+
+      NNA1(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker)
+      .then(function (result) {
+        console.log('result',resut);
+        algorithmInstance.predictions = result;
+      });
     }
+
+
+
+
+
+
+
+
 
     algorithmInstance.preProcess()
       .then(function() {
