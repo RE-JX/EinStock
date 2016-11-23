@@ -1,14 +1,14 @@
-// const moment = require('moment');
-// const database = require('../database');
-// const evaluation = require('../evaluator/simulate.js');
-// const PreProcess = require('../mlas/preprocess.js');
-// const sampleData = require('../mlas/sampleData/aapl6.js').data;
-// const Promise = require('../node_modules/bluebird');
-// //----------------algorithms------------------
-// const Neighbors = require('../mlas/MLs/knn.js');
-// const SupportVector = require('../mlas/MLs/svm.js');
-// const Forest = require('../mlas/MLs/rf.js');
-// const Logistic = require('../mlas/MLs/logistic.js');
+const moment = require('moment');
+const database = require('../database');
+const evaluation = require('../evaluator/simulate.js');
+const PreProcess = require('../mlas/preprocess.js');
+const sampleData = require('../mlas/sampleData/aapl6.js').data;
+const Promise = require('../node_modules/bluebird');
+//----------------algorithms------------------
+const Neighbors = require('../mlas/MLs/knn.js');
+const SupportVector = require('../mlas/MLs/svm.js');
+const Forest = require('../mlas/MLs/rf.js');
+const Logistic = require('../mlas/MLs/logistic.js');
 const NaiveBayes = require('../mlas/MLs/nb.js');
 //--------------neural networks----------------
 const NNA1 = require('../mlas/synaptic/synapticAlg1.js');
