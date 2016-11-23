@@ -1,3 +1,5 @@
+
+
 /*Additional styling on top of our Angular Material*/
 body {
   font-family: 'Unica One', cursive;
@@ -201,3 +203,15 @@ video {
   top: 0; right: 0; bottom: 0; left: 0;
   position: absolute;
 }
+
+#page-content {
+  min-height: calc(100vh - 49px);
+
+}
+
+/*------- Materia UI fixes -------*/
+md-nav-bar .md-nav-bar {
+  height: auto;
+}
+
+

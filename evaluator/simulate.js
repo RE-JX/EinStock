@@ -2,6 +2,7 @@ var ss = require('simple-statistics');
 var moment = require('moment');
 var Promise = require("bluebird");
 var apiMethods = require('../worker/index.js');
+var synAlg1 = require('../mlas/synaptic/synapticAlg1.js');
 
 //---------- function for simulating trading decisions based on predictions ------------
 var simulation =function(prices, predictions, totalAssetValues, cashPosition, sharesOwned, callback) {
