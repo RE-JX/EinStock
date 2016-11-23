@@ -216,8 +216,9 @@ md-nav-bar .md-nav-bar {
 
 canvas {
   padding: 50px;
-  width: calc(100% - 100px) !important;
-  height: calc(100% - 100px) !important;
+  width: calc(100% - 2*50px) !important;
+  height: calc(100% - 2*50px) !important;
+  margin: 0 auto;
 }
 
 #chart-container {
@@ -227,12 +228,16 @@ canvas {
 }
 
 canvas#radar {
-
-}
-canvas#line {
-
+  padding: 50px;
+  width: calc(100% - 2*50px) !important;
+  height: calc(100% - 2*50px) !important;
 }
 canvas#pie {
+  padding: 50px;
+  width: calc(100% - 2*50px - 150px) !important;
+  height: calc(100% - 2*50px - 150px) !important;
+}
+canvas#line {
 
 }
 canvas#bubble {
