@@ -1,6 +1,5 @@
 <div layout="column" ng-controller="DashboardController" class="dashboard" flex ng-cloak>
   <!-- Header Banner for Dashboard -->
-  <h1 class="md-display-3" id="dashboard-banner">Hello Dashboard<h1>
 
 <!-- Speed Dial -->
 <div id="history" ng-controller="SpeedController">
@@ -20,51 +19,55 @@
   </md-fab-speed-dial>
 </div>
 
+<div id="chart-container">
 <!-- Material Grid List Container -->
-<md-grid-list md-cols="4" md-row-height="500px" md-gutter="20px">
+<md-grid-list md-cols="2" md-row-height="600px" md-row-height="75%" md-gutter="20px">
   <!-- Stocker Symbol -->
-  <h3 id=dashboard-title>{{data.tickerSymbol}}</h3>
+  <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
   <!-- Chart One -->
-  <md-grid-tile md-rowspan="1" md-colspan="2">
+  <md-grid-tile md-rowspan="1" md-colspan="1">
     <div id="chart1" ng-controller="RadarController">
       <canvas id="radar" class="chart chart-radar" chart-data="radar" chart-labels="labels" chart-colors="colors">
       </canvas>
     </div>
     <md-grid-tile-footer>
-      <h3>Radar Chart</h3>
-    </md-grid-tile-footer>
-  </md-grid-tile>
-  <!-- Chart Two -->
-  <md-grid-tile md-rowspan="1" md-colspan="2">
-    <div id="chart2" ng-controller="LineController">
-      <canvas id="line" class="chart-bar" chart-data="line" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
-      </canvas>
-    </div>
-    <md-grid-tile-footer>
-      <h3>Line Chart</h3>
+      <h2>Radar Chart</h2>
     </md-grid-tile-footer>
   </md-grid-tile>
   <!-- Chart Three -->
   <md-grid-tile md-rowspan="1" md-colspan="1">
-    <div id="chart3" ng-controller="PieController">
+    <div id="chart2" ng-controller="PieController">
       <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options">
       </canvas>
     </div>
     <md-grid-tile-footer>
-      <h3>Pie Chart</h3>
+      <h2>Pie Chart</h2>
     </md-grid-tile-footer>
   </md-grid-tile>
+</md-grid-list>
+<md-grid-list md-cols="4" md-row-height="770px" md-gutter="20px">
   <!-- Chart Four -->
-  <md-grid-tile md-rowspan="1" md-colspan="3">
-    <div id="chart4" ng-controller="BubbleController">
+  <md-grid-tile md-rowspan="1" md-colspan="4">
+    <div id="chart3" ng-controller="BubbleController">
       <canvas id="bubble" class="chart-bubble" chart-data="bubble" chart-series="label">
       </canvas>
     </div>
     <md-grid-tile-footer>
-      <h3>Bubble Chart</h3>
+      <h2>Bubble Chart</h2>
+    </md-grid-tile-footer>
+  </md-grid-tile>
+  <!-- Chart Two -->
+  <md-grid-tile md-rowspan="1" md-colspan="4">
+    <div id="chart4" ng-controller="LineController">
+      <canvas id="line" class="chart-bar" chart-data="line" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
+      </canvas>
+    </div>
+    <md-grid-tile-footer>
+      <h2>Line Chart</h2>
     </md-grid-tile-footer>
   </md-grid-tile>
 </md-grid-list>
 <!-- Line -->
 <br>
+</div>
 </div>

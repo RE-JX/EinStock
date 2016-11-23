@@ -147,6 +147,7 @@ md-grid-list {
   width: 100%;
   left: 50%;
   object-fit: cover;
+  margin: 0 0 -4px 0;
 }
 
 .about {
@@ -213,5 +214,47 @@ video {
 md-nav-bar .md-nav-bar {
   height: auto;
 }
+
+canvas {
+  padding: 50px;
+  width: calc(100% - 2*50px) !important;
+  height: calc(100% - 2*50px) !important;
+  margin: 0 auto;
+}
+
+#chart-container {
+  max-width: 75%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+canvas#radar {
+  padding: 50px;
+  width: calc(100% - 2*50px) !important;
+  height: calc(100% - 2*50px) !important;
+}
+canvas#pie {
+  padding: 50px;
+  width: calc(100% - 2*50px - 150px) !important;
+  height: calc(100% - 2*50px - 150px) !important;
+}
+canvas#line {
+  padding: 25px;
+  width: calc(100% - 2*25px - 150px) !important;
+  height: calc(100% - 2*25px - 150px) !important;
+}
+canvas#bubble {
+  padding: 25px;
+  width: calc(100% - 2*25px - 150px) !important;
+  height: calc(100% - 2*25px - 150px) !important;
+}
+
+figcaption h2 {
+  padding: 0 0 0 25px;
+  margin: auto 0;
+}
+
+
+
 
 
