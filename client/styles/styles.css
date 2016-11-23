@@ -214,4 +214,33 @@ md-nav-bar .md-nav-bar {
   height: auto;
 }
 
+canvas {
+  padding: 50px;
+  width: calc(100% - 100px) !important;
+  height: calc(100% - 100px) !important;
+}
+
+#chart-container {
+  max-width: 75%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+canvas#radar {
+
+}
+canvas#line {
+
+}
+canvas#pie {
+
+}
+canvas#bubble {
+
+}
+
+
+
+
+
 
