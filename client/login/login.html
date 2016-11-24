@@ -1,3 +1,16 @@
-<button class="btn btn-primary" ng-click="vm.authService.login()">
-Log In
-</button>
+<!-- Logout Button for Auth0 -->
+<div ng-controller="LoginController">
+  <div class="loggedin" ng-show="vm.isLoggedIn">
+    <p>Thank you for logging in!</p>
+    <md-button class="md-raised md-primary" ng-click="authService.logout(); buttonSwitch()">
+      Log Out
+    </md-button>
+  </div>
+  <div ng-show="!vm.isLoggedIn"> 
+    <md-button class="md-raised md-primary" ng-click="vm.authService.login(); vm.buttonSwitch()">
+      Log In
+    </md-button>
+  </div>
+</div>
+
+

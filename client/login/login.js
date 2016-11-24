@@ -10,5 +10,9 @@
   function LoginController(authService) {
     var vm = this;
     vm.authService = authService;
+    vm.isLoggedIn = false;
+    vm.buttonSwitch = function() {
+      vm.isLoggedIn = !vm.isLoggedIn;
+    }
   }
 })();

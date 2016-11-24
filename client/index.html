@@ -52,16 +52,17 @@
     <md-nav-item md-nav-href="#/machine_learning#navbar" name="machine">Machine Learning</md-nav-item>
     <md-nav-item md-nav-href="#/algorithm#navbar" name="algorithm">Settings</md-nav-item>
     <md-nav-item md-nav-href="#/dashboard#navbar" name="dashboard">Dashboard</md-nav-item>
+    <md-nav-item md-nav-href="#/login#navbar" name="login">Log In/Out</md-nav-item>
   </md-nav-bar>
 </div>
 
-<!-- Logout Button for Auth0 -->
+ <!--Logout Button for Auth0 
 <div ng-if="localStorage.getItem('id_token') !== null">
   <div class="loggedin">
     <p>Thank you for logging in!</p>
     <button ng-click="authService.logout()">Log Out</button>
   </div>
-</div>
+</div>-->
 
 <!-- UI Router -->
 <div class="container" id="page-content">
