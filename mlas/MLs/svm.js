@@ -136,7 +136,7 @@ SupportVector.prototype.train = function(callback) {
   });
   var checkForMissingData = function(array) {
     for(var i = 0; i < array.length; i++) {
-      if(array[i] === undefined) return true;
+      if(array[i] === undefined || array[i] === NaN) return true;
     }
     return false;
   };

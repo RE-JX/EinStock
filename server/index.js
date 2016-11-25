@@ -4,15 +4,16 @@ const port = 8080;
 const path = require('path');
 const bodyParser = require('body-parser');
 const moment = require('moment');
-//----------------------------------------
+// //----------------------------------------
 const database = require('../database');
-const Logistic = require('../mlas/MLs/logistic.js');
+// const Logistic = require('../mlas/MLs/logistic.js');
+const PreProcess = require('../mlas/preprocess.js');
 const evaluation = require('../evaluator/simulate.js');
-const NaiveBayes = require('../mlas/MLs/nb.js');
+// const NaiveBayes = require('../mlas/MLs/nb.js');
+const NNA1 = require('../mlas/synaptic/synapticAlg1.js');
 
-
-//-----------------middleware---------------
-//------------------------------------------
+// //-----------------middleware---------------
+// //------------------------------------------
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -22,16 +23,16 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname + '/../client')));
 
 app.use('/public', express.static(path.join(__dirname + '/../node_modules')));
-//-----------------routes-------------------
-//------------------------------------------
+// //-----------------routes-------------------
+// //------------------------------------------
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
-require('./routes.js')(app);
-// require('./DBroutes.js')(app);
-//-----------------database-----------------
-//------------------------------------------
+// require('./routes.js')(app);
+// // require('./DBroutes.js')(app);
+// //-----------------database-----------------
+// //------------------------------------------
 
 database.db.sync().then(() => {
   console.log('database connected');
@@ -66,3 +67,15 @@ database.db.sync().then(() => {
 //   .then(function(data) {
 //     console.log(data);
 //   });
+
+
+NNA1('AAPL','2016-01-01', '2016-01-10')
+  .then(function(result) {
+    console.log('predictions: ', result);
+    return evaluation('d', '2016-01-01', '2016-01-10', 'AAPL', result);
+  })
+  .then((result) => {
+    console.log(result);
+  });
+
+

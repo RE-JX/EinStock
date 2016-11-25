@@ -1,5 +1,7 @@
 // -------- produce EMAs, standard deviations, Bollinger Bands, and other indicators to be used as predictors in ML models ---------
-var gauss = require('gauss');
+// var gauss = require('gauss');
+var ema = require('ta-lib.ema');
+var stddev = require('ta-lib.stddev');
 
 var PreProcess = function(dataInput) { // trainingData is array of objects from Yahoo finance
   this.data = dataInput.slice(0);
@@ -19,8 +21,10 @@ PreProcess.prototype.movement = function() { // <--- price movement: 1 -- up, 0 
 }
 
 PreProcess.prototype.ema = function(w) { // <-- produce EMA-w, w === 5, 20, 50
-  var prices = this.data.map(item => item.adjClose).toVector();
-  var maPrices = prices.ema(w).toArray();
+  // var prices = this.data.map(item => item.adjClose).toVector();
+  var prices = this.data.map(item => item.adjClose);
+  // var maPrices = prices.ema(w).toArray();
+  var maPrices = ema(prices, w);
   var i = this.data.length - 1,
       j = maPrices.length - 1;
   while(i >= 0) {
@@ -35,12 +39,16 @@ PreProcess.prototype.ema = function(w) { // <-- produce EMA-w, w === 5, 20, 50
 };
 
 PreProcess.prototype.std = function(w) {  // <-- produce w period standard deviation of adjClose prices
-  var prices = this.data.map(item => item.adjClose).toVector();
-  var std;
-  var subPrices;
-  for(var i = w - 1; i < prices.length; i++) {
-    subPrices = prices.slice(i - w + 1, i + 1).toVector();
-    this.data[i][`std${w}`] = subPrices.stdev();
+  // var prices = this.data.map(item => item.adjClose).toVector();
+  var prices = this.data.map(item => item.adjClose);
+  var std = stddev(prices, w);
+  // var subPrices;
+  // for(var i = w - 1; i < prices.length; i++) {
+  //   subPrices = prices.slice(i - w + 1, i + 1).toVector();
+  //   this.data[i][`std${w}`] = subPrices.stdev();
+  // }
+  for(var i = prices.length - 1; i >= 0; i--) {
+    this.data[i][`std${w}`] = std[i];
   }
 };
 

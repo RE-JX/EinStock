@@ -18,11 +18,7 @@ var algorithmInstance;
 
 
 module.exports = function(app) {
-
-
   app.post('/api/user', (req, res) => {
-
-    console.log('requested user: ', req.body.userId);
     database.User.findAll({
       where: {
         userId: req.body.userId
@@ -58,7 +54,7 @@ module.exports = function(app) {
       var date = new Date(dateOriginal);
       date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       return date;
-    }
+    };
 
     if (req.body.algorithm === 'K Nearest Neighbors') {
       algorithmInstance = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
@@ -115,47 +111,47 @@ module.exports = function(app) {
         });
       }
 
-//     if (req.body.algorithm === 'Neural Net 1') {
-// console.log('neural net');
-// console.log(req.body.ticker, dateFormat(req.body.startDate), dateFormat(req.body.endDate));
-//       NNA1('AAPL','2016-01-01', '2016-01-10')
-//         .then(function(result) {console.log('result', result);})
-      // NNA1(req.body.ticker, dateFormat(req.body.startDate), dateFormat(req.body.endDate))
-        // .then(function(result) {
-        //   return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, result);
-        // })
-        // .then((result) => {
-        //   return database.Simulation.create({ //<------ save in database
-        //     UserUserId: req.userId,
-        //     algorithm: req.body.algorithm,
-        //     frequency: result.frequency,
-        //     startDate: result.startDate,
-        //     endDate: result.endDate,
-        //     tickerSymbol: result.tickerSymbol,
-        //     successRate: result.successRate,
-        //     inclusionError: result.inclusionError,
-        //     exclusionError: result.exclusionError,
-        //     avgReturn: result.avgReturn,
-        //     cummuReturn: result.cummuReturn,
-        //     returnStd: result.returnStd,
-        //     sharpeRatio: result.sharpeRatio,
-        //     benchmarkReturnSelf: result.benchmarkReturnSelf,
-        //     benchmarkReturnMarket: result.benchmarkReturnMarket,
-        //     predictedMoves: result.predictedMoves,
-        //     actualMoves: result.actualMoves,
-        //     totalAssetValues: result.totalAssetValues,
-        //     benchmarkAssetValuesSelf: result.benchmarkAssetValuesSelf,
-        //     benchmarkAssetValuesMarket: result.benchmarkAssetValuesMarket,
-        //     returns: result.returns,
-        //     cashPosition: result.cashPosition,
-        //     stockSharesOwned: result.stockSharesOwned
-        //   });
-        // })
-        // .then(result => {
-        //   res.send(result);
-        // })
-    //     .error(err => console.log('err', err));
-    // }
+    if (req.body.algorithm === 'Neural Networks') {
+      //   console.log('neural net');
+      //   console.log(req.body.ticker, dateFormat(req.body.startDate), dateFormat(req.body.endDate));
+      // NNA1('AAPL','2016-01-01', '2016-01-10')
+      //   .then(function(result) {console.log('result', result);})
+      NNA1(req.body.ticker, dateFormat(req.body.startDate), dateFormat(req.body.endDate))
+        .then(function(result) {
+          return evaluation('d', dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker, result);
+        })
+        .then((result) => {
+          return database.Simulation.create({ //<------ save in database
+            UserUserId: req.userId,
+            algorithm: req.body.algorithm,
+            frequency: result.frequency,
+            startDate: result.startDate,
+            endDate: result.endDate,
+            tickerSymbol: result.tickerSymbol,
+            successRate: result.successRate,
+            inclusionError: result.inclusionError,
+            exclusionError: result.exclusionError,
+            avgReturn: result.avgReturn,
+            cummuReturn: result.cummuReturn,
+            returnStd: result.returnStd,
+            sharpeRatio: result.sharpeRatio,
+            benchmarkReturnSelf: result.benchmarkReturnSelf,
+            benchmarkReturnMarket: result.benchmarkReturnMarket,
+            predictedMoves: result.predictedMoves,
+            actualMoves: result.actualMoves,
+            totalAssetValues: result.totalAssetValues,
+            benchmarkAssetValuesSelf: result.benchmarkAssetValuesSelf,
+            benchmarkAssetValuesMarket: result.benchmarkAssetValuesMarket,
+            returns: result.returns,
+            cashPosition: result.cashPosition,
+            stockSharesOwned: result.stockSharesOwned
+          });
+        })
+        .then(result => {
+          res.send(result);
+        })
+        .error(err => console.log('err', err));
+    }
   });
 
 };

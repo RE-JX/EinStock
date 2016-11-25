@@ -73,3 +73,4 @@ console.log('Percent complete: ', Math.round((data.iterations/100000) * 100), '%
 
 
 module.exports = Promise.promisify(NN);
+// module.exports = NN;
