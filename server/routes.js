@@ -18,11 +18,7 @@ var algorithmInstance;
 
 
 module.exports = function(app) {
-
-
   app.post('/api/user', (req, res) => {
-
-    console.log('requested user: ', req.body.userId);
     database.User.findAll({
       where: {
         userId: req.body.userId
@@ -58,7 +54,7 @@ module.exports = function(app) {
       var date = new Date(dateOriginal);
       date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       return date;
-    }
+    };
 
     if (req.body.algorithm === 'K Nearest Neighbors') {
       algorithmInstance = new Neighbors(dateFormat(req.body.startDate), dateFormat(req.body.endDate), req.body.ticker);
