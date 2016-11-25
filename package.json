@@ -63,6 +63,9 @@
     "sequelize": "^3.25.0",
     "simple-statistics": "^2.2.0",
     "synaptic": "^1.0.8",
+    "ta-lib.ema": "0.0.4",
+    "ta-lib.stddev": "0.0.1",
+    "ta-lib.sum": "0.0.2",
     "underscore": "^1.8.3",
     "yahoo-finance": "^0.2.14"
   },

@@ -7,7 +7,7 @@ const moment = require('moment');
 // //----------------------------------------
 const database = require('../database');
 // const Logistic = require('../mlas/MLs/logistic.js');
-// const PreProcess = require('../mlas/preprocess.js');
+const PreProcess = require('../mlas/preprocess.js');
 const evaluation = require('../evaluator/simulate.js');
 // const NaiveBayes = require('../mlas/MLs/nb.js');
 const NNA1 = require('../mlas/synaptic/synapticAlg1.js');
@@ -68,15 +68,14 @@ database.db.sync().then(() => {
 //     console.log(data);
 //   });
 
-      NNA1('AAPL','2016-01-01', '2016-01-10',function(err, predictions) {
-        console.log(predictions);
-      });
-        // .then(function(result) {
-        //   console.log('predictions: ', result);
-        //   return evaluation('d', '2016-01-01', '2016-01-10', result);
-        // })
-        // .then((result) => {
-        //   console.log(result);
-        // });
+
+NNA1('AAPL','2016-01-01', '2016-01-10')
+  .then(function(result) {
+    console.log('predictions: ', result);
+    return evaluation('d', '2016-01-01', '2016-01-10', 'AAPL', result);
+  })
+  .then((result) => {
+    console.log(result);
+  });
 
 
