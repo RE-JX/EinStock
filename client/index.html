@@ -32,21 +32,11 @@
 
 <body>
 
- <!--Logout Button for Auth0
-<div ng-if="localStorage.getItem('id_token') !== null">
-  <div class="loggedin">
-    <p>Thank you for logging in!</p>
-    <button ng-click="authService.logout()">Log Out</button>
-  </div>
-</div>-->
-
 <!-- UI Router -->
 <div class="container" id="page-content">
   <div ui-view></div>
   <!-- <div ng-view></div> -->
 </div>
-
-
 
 <!-- Local routes for files -->
   <script src="/services/services.js"></script>
@@ -54,7 +44,6 @@
   <script src="/services/ticks.js"></script>
   <script src="/algorithm/algorithm.js"></script>
   <script src="/app/run.js"></script>
-  <script src="/app/scroller.js"></script>
   <script src="/dashboard/dashboard.js"></script>
   <script src="/login/login.js"></script>
   <script src="/welcome/welcome.js"></script>
