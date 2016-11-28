@@ -10,7 +10,7 @@ var moment = require('moment');
 var apiMethods = require('../../worker/index.js');
 var PreProcess = require('../preprocess.js');
 
-var min, max, mean, std;
+var mean = [], std = [];
 
 var predictors = [
   'movement_lag2',
@@ -97,6 +97,80 @@ Forest.prototype.preProcess = function() {
       that.testData.reverse();
       that.trainingData.pop();
     });
+};
+
+Forest.prototype.predictTomorrow = function() {
+  var that = this;
+  var start = moment().subtract(25, 'days');
+  if(start.day() === 0) { //<----- if landing on Sunday, go to previous friday
+    start = start.subtract(2, 'days');
+  } else if(start.day() === 6) {
+    start = start.subtract(1, 'days');
+  };
+  var endDate = moment();
+  if(endDate.day() === 0) {
+    endDate = endDate.subtract(2, 'days');
+  } else if(endDate.day() === 6) {
+    endDate = endDate.subtract(1, 'days');
+  };
+  start = start.format().slice(0, 10);
+  endDate = endDate.format().slice(0, 10);
+  return apiMethods.yahoo.historical(this.tickerSymbol, start, endDate)
+    .then(function(data) {
+      var predictors = new PreProcess(data);
+      predictors.index();
+      predictors.movement();
+      predictors.ema(5); //<------ use 5 day and 20 day moving average as predictors
+      predictors.std(5);
+      predictors.maGap(5);
+      predictors.BB(5);
+      predictors.percentBB(5);
+      predictors.lags(3, 5); //<----- use lags 1 to 3
+      predictors.ema(20);
+      predictors.std(20);
+      predictors.maGap(20);
+      predictors.BB(20);
+      predictors.percentBB(20);
+      predictors.lags(3, 20);
+      return predictors.data;
+    })
+    .then(function(data) {
+      var predictors_tomorrow = [
+        'movement_lag1',
+        'std5_lag1',
+        'gap_ema5_lag1',
+        'percentBB5_lag1',
+        'std20_lag1',
+        'gap_ema20_lag1',
+        'percentBB20_lag1',
+        'movement_lag2',
+        'std5_lag2',
+        'gap_ema5_lag2',
+        'percentBB5_lag2',
+        'std20_lag2',
+        'gap_ema20_lag2',
+        'percentBB20_lag2',
+        'movement_lag3',
+        'std5_lag3',
+        'gap_ema5_lag3',
+        'percentBB5_lag3',
+        'std20_lag3',
+        'gap_ema20_lag3',
+        'percentBB20_lag3'
+      ];
+      var testFeatures = data.slice(-1).map(item => {
+        var features = [];
+        predictors_tomorrow.forEach(predictor => {
+          features.push(item[predictor]);
+        });
+        return features;
+      });
+      return testFeatures;
+    })
+    .then(function(testData) {
+      that.tomorrow = forest.predict(testData)[0];
+      that.tomorrow = that.tomorrow > 0.5 ? 1 : 0;
+    })
 };
 
 Forest.prototype.predict = function() {
