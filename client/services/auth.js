@@ -65,6 +65,7 @@
     function logout() {
       localStorage.removeItem('id_token');
       authManager.unauthenticate();
+      location.reload();
     };
 
     return {
