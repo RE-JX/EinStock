@@ -10,6 +10,21 @@ ul li {
   padding: 10px;
 }
 
+.job-icon {
+  display: inline-block;
+}
+
+.linkedin {
+  padding-right: 10px;
+  height: 30px;
+  width: 30px;
+}
+
+.github {
+  height: 30px;
+  width: 30px;
+}
+
 #history {
   z-index: 1;
   position: absolute;
@@ -45,8 +60,16 @@ ul li {
   height: 30%;
 }
 
+a {
+  text-decoration: none;
+}
+
 h3 {
   font-family: 'Open Sans';
+}
+
+h4 {
+  font-style: italic;
 }
 
 md-grid-list {
