@@ -46,28 +46,32 @@ module.exports = function(app) {
     })
     .then(function(userData) {
       for(simulation of userData) {
-        if (simulation.algorithm === 'K Nearest Neighbors') {
-          algorithmInstance = new Neighbors(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
-        } else if (simulation.algorithm === 'Random Forests') {
-          algorithmInstance = new Forest(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
-        } else if (simulation.algorithm === 'Logistic Regression') {
-          algorithmInstance = new Logistic(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
-        } else if (simulation.algorithm === 'Support Vector Machine') {
-          algorithmInstance = new SupportVector(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
-        } else if (simulation.algorithm === 'Naive Bayes') {
-          algorithmInstance = new NaiveBayes(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
-        }
+        if(simulation.algorithm === 'Neural Networks') {
+          continue; // <-- tomorrow's prediction not calculated for neural networks
+        } else {
+          if (simulation.algorithm === 'K Nearest Neighbors') {
+            algorithmInstance = new Neighbors(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
+          } else if (simulation.algorithm === 'Random Forests') {
+            algorithmInstance = new Forest(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
+          } else if (simulation.algorithm === 'Logistic Regression') {
+            algorithmInstance = new Logistic(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
+          } else if (simulation.algorithm === 'Support Vector Machine') {
+            algorithmInstance = new SupportVector(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
+          } else if (simulation.algorithm === 'Naive Bayes') {
+            algorithmInstance = new NaiveBayes(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
+          }
 
-        algorithmInstance.preProcess()
-        .then(function() {
-          algorithmInstance.train();
-        })
-        .then(function() {
-          algorithmInstance.predictTomorrow();
-        })
-        .then(function() {
-          simulation.tomorrow = algorithmInstance.tomorrow;
-        })
+          algorithmInstance.preProcess()
+          .then(function() {
+            algorithmInstance.train();
+          })
+          .then(function() {
+            algorithmInstance.predictTomorrow();
+          })
+          .then(function() {
+            simulation.tomorrow = algorithmInstance.tomorrow;
+          })
+        }
       }
       return userData;
     })
