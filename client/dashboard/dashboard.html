@@ -3,63 +3,60 @@
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
     <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
     <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
-    <md-nav-item md-nav-href="#/algorithm" name="algorithm">Settings</md-nav-item>
-    <md-nav-item md-nav-href="#/dashboard" name="dashboard">Dashboard</md-nav-item>
+    <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
+    <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
     <md-nav-item md-nav-href="#/welcome" ng-if="isLoggedIn" name="logout" ng-click="authService.logout();">Log Out</md-nav-item>
     <md-nav-item md-nav-href="#/welcome" ng-if="!isLoggedIn" name="login" ng-click="authService.login();">Log In</md-nav-item>
   </md-nav-bar>
 </div>
-
 <div layout="column" ng-controller="DashboardController" class="dashboard" flex ng-cloak>
   <!-- Header Banner for Dashboard -->
-
-<!-- Speed Dial -->
-<div id="history" ng-controller="SpeedController">
-  <md-fab-speed-dial md-direction="left" class="md-fling">
-    <!-- Thing that opens -->
-    <md-fab-trigger>
-      <md-button class="md-fab md-warn" aria-label="history">
-        <md-icon md-svg-src="/assets/icons/barchart.svg"></md-icon>
-      </md-button>
-    </md-fab-trigger>
-    <!-- Available actions -->
-    <md-fab-actions>
-      <md-button aria-label="history" class="md-fab md-raised md-mini">
+  <!-- Speed Dial -->
+  <div id="history" ng-controller="SpeedController">
+    <md-fab-speed-dial md-direction="left" class="md-fling">
+      <!-- Thing that opens -->
+      <md-fab-trigger>
+        <md-button class="md-fab md-warn" aria-label="history">
+          <md-icon md-svg-src="/assets/icons/barchart.svg"></md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <!-- Available actions -->
+      <md-fab-actions>
+        <md-button aria-label="history" class="md-fab md-raised md-mini">
           <md-icon md-svg-src="/assets/icons/list.svg"></md-icon>
-      </md-button>
-    </md-fab-actions>
-  </md-fab-speed-dial>
-</div>
-
-<div id="chart-container">
-<!-- Material Grid List Container -->
-<md-grid-list md-cols="2" md-row-height="600px" md-row-height="75%" md-gutter="20px">
-  <!-- Stocker Symbol -->
-  <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
-  <!-- Chart One -->
-  <md-grid-tile md-rowspan="1" md-colspan="1">
-    <div id="chart1" ng-controller="RadarController">
-      <canvas id="radar" class="chart chart-radar" chart-data="radar" chart-labels="labels" chart-colors="colors">
-      </canvas>
-    </div>
-    <md-grid-tile-footer>
-      <h2>Portfolio Returns</h2>
-    </md-grid-tile-footer>
-  </md-grid-tile>
-  <!-- Chart Three -->
-  <md-grid-tile md-rowspan="1" md-colspan="1">
-    <div id="chart2" ng-controller="PieController">
-      <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options">
-      </canvas>
-    </div>
-    <md-grid-tile-footer>
-      <h2>Prediction Success</h2>
-    </md-grid-tile-footer>
-  </md-grid-tile>
-</md-grid-list>
-<md-grid-list md-cols="4" md-row-height="770px" md-gutter="20px">
-  <!-- Chart Four -->
-  <!--<md-grid-tile md-rowspan="1" md-colspan="4">
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
+  </div>
+  <div id="chart-container">
+    <!-- Material Grid List Container -->
+    <md-grid-list md-cols="2" md-row-height="600px" md-row-height="75%" md-gutter="20px">
+      <!-- Stocker Symbol -->
+      <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
+      <!-- Chart One -->
+      <md-grid-tile md-rowspan="1" md-colspan="1">
+        <div id="chart1" ng-controller="RadarController">
+          <canvas id="radar" class="chart chart-radar" chart-data="radar" chart-labels="labels" chart-colors="colors">
+          </canvas>
+        </div>
+        <md-grid-tile-footer>
+          <h2>Portfolio Returns</h2>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+      <!-- Chart Three -->
+      <md-grid-tile md-rowspan="1" md-colspan="1">
+        <div id="chart2" ng-controller="PieController">
+          <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options">
+          </canvas>
+        </div>
+        <md-grid-tile-footer>
+          <h2>Prediction Success</h2>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+    <md-grid-list md-cols="4" md-row-height="770px" md-gutter="20px">
+      <!-- Chart Four -->
+      <!--<md-grid-tile md-rowspan="1" md-colspan="4">
     <div id="chart3" ng-controller="BubbleController">
       <canvas id="bubble" class="chart-bubble" chart-data="bubble" chart-series="label">
       </canvas>
@@ -68,18 +65,18 @@
       <h2></h2>
     </md-grid-tile-footer>
   </md-grid-tile>-->
-  <!-- Chart Two -->
-  <md-grid-tile md-rowspan="1" md-colspan="4">
-    <div id="chart4" ng-controller="LineController">
-      <canvas id="line" class="chart-bar" chart-data="line" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
-      </canvas>
-    </div>
-    <md-grid-tile-footer>
-      <h2>Daily Return Profile</h2>
-    </md-grid-tile-footer>
-  </md-grid-tile>
-</md-grid-list>
-<!-- Line -->
-<br>
-</div>
+      <!-- Chart Two -->
+      <md-grid-tile md-rowspan="1" md-colspan="4">
+        <div id="chart4" ng-controller="LineController">
+          <canvas id="line" class="chart-bar" chart-data="line" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
+          </canvas>
+        </div>
+        <md-grid-tile-footer>
+          <h2>Daily Return Profile</h2>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+    <!-- Line -->
+    <br>
+  </div>
 </div>
