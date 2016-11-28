@@ -39,11 +39,7 @@
 
     $urlRouterProvider.rule(function($injector, $location) {
       var path = $location.path();
-      if (localStorage.getItem('id_token') == null) {
-        $location.replace().path('/login')
-      } else {
-        $urlRouterProvider.otherwise('/welcome');
-      }
+      $urlRouterProvider.otherwise('/welcome');
     })
 
     $stateProvider
@@ -69,7 +65,6 @@
       })
       .state('login', {
         url: '/login',
-        templateUrl: 'login/login.html',
         controller: 'LoginController',
         controllerAs: 'vm'
       });
@@ -94,7 +89,7 @@
         return localStorage.getItem('id_token');
       },
       whiteListedDomains: ['localhost'],
-      unauthenticatedRedirectPath: '/login'
+      unauthenticatedRedirectPath: '/'
     });
 
     // Add the jwtInterceptor to the array of HTTP interceptors

@@ -64,12 +64,17 @@ a {
   text-decoration: none;
 }
 
+h2 {
+  font-family: 'Open Sans';
+}
+
 h3 {
   font-family: 'Open Sans';
 }
 
 h4 {
   font-style: italic;
+  font-family: 'Open Sans';
 }
 
 md-grid-list {

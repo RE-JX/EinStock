@@ -5,14 +5,14 @@
     .module('einstock.login', [])
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['authService'];
+  LoginController.$inject = ['authService', '$scope'];
 
-  function LoginController(authService) {
+  function LoginController(authService, $scope) {
     var vm = this;
     vm.authService = authService;
-    vm.isLoggedIn = false;
-    vm.buttonSwitch = function() {
-      vm.isLoggedIn = !vm.isLoggedIn;
+    $scope.isLoggedIn = localStorage.getItem("id_token") !== null ? true : false;
+    $scope.buttonSwitch = function() {
+      $scope.isLoggedIn = !$scope.isLoggedIn;
     }
   }
 })();
