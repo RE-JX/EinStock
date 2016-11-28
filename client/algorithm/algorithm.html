@@ -1,3 +1,14 @@
+<!-- Navigation Bar -->
+<div class="container" id="navbar">
+  <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
+    <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+    <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
+    <md-nav-item md-nav-href="#/algorithm" name="algorithm">Settings</md-nav-item>
+    <md-nav-item md-nav-href="#/dashboard" name="dashboard">Dashboard</md-nav-item>
+    <md-nav-item md-nav-href="#/login" name="login">Log In/Out</md-nav-item>
+  </md-nav-bar>
+</div>
+
 <!-- Main Algorithim selector div with input form -->
 <div layout="column" ng-controller="AlgorithmController">
   <md-progress-linear md-mode="indeterminate" ng-show="isLoading"></md-progress-linear>

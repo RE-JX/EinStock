@@ -1,3 +1,14 @@
+<!-- Navigation Bar -->
+<div class="container" id="navbar">
+  <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
+    <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+    <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
+    <md-nav-item md-nav-href="#/algorithm" name="algorithm">Settings</md-nav-item>
+    <md-nav-item md-nav-href="#/dashboard" name="dashboard">Dashboard</md-nav-item>
+    <md-nav-item md-nav-href="#/login" name="login">Log In/Out</md-nav-item>
+  </md-nav-bar>
+</div>
+
 <!-- Logout Button for Auth0 -->
 <div ng-controller="LoginController">
   <div class="loggedin" ng-show="vm.isLoggedIn">
@@ -6,7 +17,7 @@
       Log Out
     </md-button>
   </div>
-  <div ng-show="!vm.isLoggedIn"> 
+  <div ng-show="!vm.isLoggedIn">
     <md-button class="md-raised md-primary" ng-click="vm.authService.login(); vm.buttonSwitch()">
       Log In
     </md-button>

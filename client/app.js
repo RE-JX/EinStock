@@ -10,7 +10,6 @@
     'einstock.machine',
     'einstock.authService',
     'einstock.run',
-    'einstock.scroller',
     'einstock.login',
     'einstock.validation',
     'ngMaterial',
