@@ -38,7 +38,7 @@ ul li {
 #scroll-down {
   position: absolute;
   top: 400px;
-  left: 47%;
+  left: calc(50% - 56px / 2);
   text-align: center;
 }
 
@@ -135,6 +135,7 @@ md-grid-list {
 .welcome-hello-banner {
   background-image: url("/assets/balloons.jpg");
   position: relative;
+  height: 400px;
 }
 
 #welcome-banner {
