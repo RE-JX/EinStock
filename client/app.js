@@ -51,7 +51,8 @@
       .state('algorithm', {
         url: '/algorithm',
         templateUrl: 'algorithm/algorithm.html',
-        controller: 'AlgorithmController'
+        controller: 'AlgorithmController',
+        controllerAs: 'vm'
       })
       .state('welcome', {
         url: '/welcome',
