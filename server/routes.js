@@ -39,6 +39,10 @@ module.exports = function(app) {
   });
 
   app.get('/api/data', (req, res) => { // <-- get all simulations created by this user
+    console.log('QUERY ------->', req.query);
+    console.log('BODY ------->', req.body);
+    console.log('DATA ------->', req.data);
+    console.log('params ------->', req.params);
     database.Simulation.findAll({
       where: {
         UserUserId: req.query.userId

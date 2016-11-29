@@ -26,7 +26,6 @@
             userId: profile.identities[0].user_id
           };
           UserData.post(angular.toJson(token)).success(function(data) {
-
             console.log(data);
           });
           localStorage.setItem('profile', JSON.stringify(profile));
@@ -34,18 +33,11 @@
 
       });
 
-      // Posts user data to the datbase upon registration
-
-      // UserData.post(angular.toJson(token)).success(function(data) {
-
-      //   console.log(data);
-      // })
-
       function getId () {
         return $timeout(function() {
           return localStorage.getItem('id_token');
         }, 2000);
-        return deferred.promise;
+        // return deferred.promise;
       };
 
       var promise = getId();
@@ -56,8 +48,8 @@
         console.log(token);
 
         // UserData.post(angular.toJson(token)).success(function(data) {
-          // console.log(data);
-        // })
+        //   console.log(data);
+        // });
       });
     };
 

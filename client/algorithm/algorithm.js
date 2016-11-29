@@ -33,8 +33,10 @@
       $scope.isLoading = true;
       Algorithm.post($scope.data).success(function(data) {
         console.log(data);
-        Algorithm.get($scope.data.userId).success(function(data) {
-          console.log(data)
+        Algorithm.get(
+          {params: {userId: $scope.data.userId}}
+        ).success(function(data) {
+          console.log(data);
         });
         localStorage.setItem('data', angular.toJson(data));
         $scope.isLoading = false;
