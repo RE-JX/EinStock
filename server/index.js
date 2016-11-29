@@ -84,18 +84,18 @@ database.db.sync().then(() => {
 
 var algorithmInstance = new NaiveBayes('11/07/2016', '11/28/2016', 'AAPL');
 algorithmInstance.preProcess()
-        .then(function() {
-          algorithmInstance.train();
-        })
-        .then(function() {
-          return algorithmInstance.predict();
-        })
-        .then(function() {
-          return evaluation('d', '11/07/2016', '11/28/2016', 'AAPL', algorithmInstance.predictions);
-        })
-        .then(function(data) {
-          console.log(data);
-        })
-        // .then(function(){
-        //   console.log('prediction for tomorrow: ',algorithmInstance.tomorrow);
-        // })
+  .then(function() {
+    algorithmInstance.train();
+  })
+  .then(function() {
+    return algorithmInstance.predict();
+  })
+  .then(function() {
+    return evaluation('d', '11/07/2016', '11/28/2016', 'AAPL', algorithmInstance.predictions);
+  })
+  .then(function(data) {
+    console.log(data);
+  })
+  // .then(function(){
+  //   console.log('prediction for tomorrow: ',algorithmInstance.tomorrow);
+  // })
