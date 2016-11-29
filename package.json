@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "$(npm bin)/nodemon server/index.js",
-    "test": "$(npm bin)/mocha"
+    "test": "$(npm bin)/mocha",
+    "startdb": "postgres -D /usr/local/var/postgres"
   },
   "repository": {
     "type": "git",
