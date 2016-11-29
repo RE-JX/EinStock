@@ -16,7 +16,7 @@ if(process.env.DATABASE_URL) {
   });
 }
 
-var User = db.define('Users', {
+var User = db.define('User', {
   userId: { type: Sequelize.STRING, primaryKey: true }
 });
 

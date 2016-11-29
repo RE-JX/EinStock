@@ -12,19 +12,18 @@
 </div>
 
 <!-- Main Algorithim selector div with input form -->
-<div class="about" layout="column" ng-controller="AlgorithmController">
-  <md-progress-linear md-mode="indeterminate" ng-show="isLoading"></md-progress-linear>
-  <div class="pad20">
-    <h2>Hello Settings<h2>
+<div layout="column" ng-controller="AlgorithmController">
+  <md-progress-linear md-mode="indeterminate" ng-show="vm.isLoading"></md-progress-linear>
+  <h2>Hello Settings<h2>
     <md-content layout-padding>
       <form name="algoInput">
         <div layout-gt-xs="row">
           <div flex-gt-xs>
             <md-input-container>
               <label>Choose A Ticker</label>
-              <input md-minlength="1" md-maxlength="5" required md-no-asterisk name="tick" ng-model="data.ticker">
+              <input md-minlength="1" md-maxlength="5" required md-no-asterisk name="tick" ng-model="vm.data.ticker">
               <div ng-messages="algoInput.tick.$error">
-                <div ng-if="!tickTest()">Not a valid ticker</div>
+                <div ng-if="!vm.tickTest()">Not a valid ticker</div>
                 <div ng-message="required">Stock ticker required.</div>
                 <div ng-message="validationError">Not a valid stock tick</div>
                 <div ng-message="md-maxlength">The ticker must be less than 5 characters long.</div>
@@ -39,9 +38,9 @@
             <div layout="row">
               <md-input-container>
                 <label>Algorithims</label>
-                <md-select ng-model="data.algorithm">
+                <md-select ng-model="vm.data.algorithm">
                   <md-optgroup label="Algorithims">
-                    <md-option ng-value="item" ng-repeat="item in algSelections">{{item}}</md-option>
+                    <md-option ng-value="item" ng-repeat="item in vm.algSelections">{{item}}</md-option>
                   </md-optgroup>
                 </md-select>
               </md-input-container>
@@ -51,14 +50,14 @@
         <div layout-gt-xs="row">
           <div flex-gt-xs>
             <h4>Select Start Date:</h4>
-            <md-datepicker ng-model="data.startDate" md-placeholder="start date"></md-datepicker>
+            <md-datepicker ng-model="vm.data.startDate" md-placeholder="start date"></md-datepicker>
             <h4>Select End Date:</h4>
-            <md-datepicker ng-model="data.endDate" md-placeholder="end date"></md-datepicker>
+            <md-datepicker ng-model="vm.data.endDate" md-placeholder="end date"></md-datepicker>
           </div>
         </div>
         <div layout-gt-xs="row">
           <div flex-gt-xs>
-          <md-button ng-disabled="!tickTest() || !(data.ticker.length > 0) && !(data.ticker.length < 6)" ng-click="log()"
+          <md-button ng-disabled="!vm.tickTest() || !(vm.data.ticker.length > 0) && !(vm.data.ticker.length < 6)" ng-click="vm.log()"
               class="md-raised md-primary submit" type="submit">Submit</md-button>
           </div>
         </div>

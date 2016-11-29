@@ -7804,12 +7804,14 @@ var tickers1 = {
   function TickValidation(userInput) {
     return {
       isValid: function(userInput) {
-        if (tickers1[userInput.toUpperCase()]) {
+        if (userInput === null || userInput === undefined) {
+          return false;
+        } else if (tickers1[userInput.toUpperCase()]) {
           return true;
         } else {
           return false;
         }
       }
-    }
+    };
   }
 })();
