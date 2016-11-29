@@ -36,7 +36,7 @@
         Algorithm.get(
           {params: {userId: $scope.data.userId}}
         ).success(function(data) {
-          console.log(data);
+          console.log('simulations: ',data);
         });
         localStorage.setItem('data', angular.toJson(data));
         $scope.isLoading = false;

@@ -39,7 +39,6 @@ var Neighbors = function(startDate, endDate, tickerSymbol) {
   this.tickerSymbol = tickerSymbol;
   this.trainingData = [];
   this.testData = [];
-  this.tomorrow = 0;
 
   var startTrain = moment(this.startDate).subtract(12, 'months'); //<-- use the previous half year for training
   // var endTrain = moment(startDate).subtract(2, 'days');
@@ -169,6 +168,7 @@ Neighbors.prototype.predictTomorrow = function() {
     })
     .then(function(testData) {
       that.tomorrow = knn.predict(testData)[0];
+      return that.tomorrow;
     })
 
 };

@@ -172,7 +172,8 @@ Logistic.prototype.predictTomorrow = function() {
     })
     .then(function(testData) {
       that.tomorrow = logistic.predict(testData)[0];
-      that.tomorrow = that.tomorrow > 0.5 ? 1 : 0
+      that.tomorrow = that.tomorrow > 0.5 ? 1 : 0;
+      return that.tomorrow;
     })
 };
 

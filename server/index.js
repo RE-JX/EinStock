@@ -44,17 +44,6 @@ database.db.sync().then(() => {
   console.log('listening on port: ', port);
 });
 
-// ------- example usage of PreProcess function for creating predictors, to be deleted later ---------
-// const predictors = new PreProcess(sampleData);
-// predictors.index();
-// predictors.movement();
-// predictors.ema(2);
-// predictors.std(2);
-// predictors.maGap(2);
-// predictors.BB(2);
-// predictors.percentBB(2);
-// predictors.lags(2, 2);
-// console.log(predictors.data);
 
 // --------- testing algorithm, to be deleted later -----------------
 // var algorithmInstance = new NaiveBayes('08/31/2016', '11/18/2016', 'SPY');
@@ -82,20 +71,23 @@ database.db.sync().then(() => {
 //     console.log(result);
 //   });
 
-var algorithmInstance = new NaiveBayes('11/07/2016', '11/28/2016', 'AAPL');
-algorithmInstance.preProcess()
-  .then(function() {
-    algorithmInstance.train();
-  })
-  .then(function() {
-    return algorithmInstance.predict();
-  })
-  .then(function() {
-    return evaluation('d', '11/07/2016', '11/28/2016', 'AAPL', algorithmInstance.predictions);
-  })
-  .then(function(data) {
-    console.log(data);
-  })
-  // .then(function(){
-  //   console.log('prediction for tomorrow: ',algorithmInstance.tomorrow);
-  // })
+// var algorithmInstance = new Forest('11/07/2016', '11/28/2016', 'AAPL');
+// algorithmInstance.preProcess()
+//   .then(function() {
+//     algorithmInstance.train();
+//   })
+//   .then(function() {
+//     return algorithmInstance.predictTomorrow();
+//   })
+//   // .then(function() {
+//   //   return algorithmInstance.predict();
+//   // })
+//   // .then(function() {
+//   //   return evaluation('d', '11/07/2016', '11/28/2016', 'AAPL', algorithmInstance.predictions);
+//   // })
+//   // .then(function(data) {
+//   //   console.log(data);
+//   // })
+//   .then(function(data){
+//     console.log('prediction for tomorrow: ',data);
+//   })

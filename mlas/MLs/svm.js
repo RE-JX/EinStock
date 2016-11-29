@@ -168,6 +168,7 @@ SupportVector.prototype.predictTomorrow = function() {
     })
     .then(function(testData) {
       that.tomorrow = svm.predict(testData)[0];
+      return that.tomorrow;
     })
 };
 

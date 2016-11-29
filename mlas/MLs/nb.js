@@ -168,6 +168,7 @@ NaiveBayes.prototype.predictTomorrow = function() {
     })
     .then(function(testData) {
       that.tomorrow = nb.predict(testData)[0];
+      return that.tomorrow;
     })
 };
 
