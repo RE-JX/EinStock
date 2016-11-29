@@ -45,6 +45,7 @@ var Forest = function(startDate, endDate, tickerSymbol) {
   this.trees = [];
   this.predictionsRaw = [];
   this.predictions = [];
+  // this.tomorrow = 0;
 
   var startTrain = moment(this.startDate).subtract(12, 'months'); //<-- use the previous half year for training
 
@@ -169,7 +170,9 @@ Forest.prototype.predictTomorrow = function() {
     })
     .then(function(testData) {
       that.tomorrow = forest.predict(testData)[0];
+      console.log('prediction:', that.tomorrow);
       that.tomorrow = that.tomorrow > 0.5 ? 1 : 0;
+      return that.tomorrow;
     })
 };
 

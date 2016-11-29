@@ -39,19 +39,15 @@ module.exports = function(app) {
   });
 
   app.get('/api/data', (req, res) => { // <-- get all simulations created by this user
-    console.log('QUERY ------->', req.query);
-    console.log('BODY ------->', req.body);
-    console.log('DATA ------->', req.data);
-    console.log('params ------->', req.params);
     database.Simulation.findAll({
       where: {
         UserUserId: req.query.userId
       }
     })
     .then(function(userData) {
-      for(simulation of userData) {
+      var simulation = userData[userData.length - 1];
         if(simulation.algorithm === 'Neural Networks') {
-          continue; // <-- tomorrow's prediction not calculated for neural networks
+          return {data: userData}; // <-- tomorrow's prediction not calculated for neural networks
         } else {
           if (simulation.algorithm === 'K Nearest Neighbors') {
             algorithmInstance = new Neighbors(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
@@ -65,22 +61,24 @@ module.exports = function(app) {
             algorithmInstance = new NaiveBayes(simulation.startDate, simulation.endDate, simulation.tickerSymbol);
           }
 
-          algorithmInstance.preProcess()
+          return algorithmInstance.preProcess()
           .then(function() {
             algorithmInstance.train();
           })
           .then(function() {
-            algorithmInstance.predictTomorrow();
+            return algorithmInstance.predictTomorrow();
           })
-          .then(function() {
-            simulation.tomorrow = algorithmInstance.tomorrow;
+          .then(function(tomorrow) {
+            // userData[userData.length - 1]['tomorrow'] = algorithmInstance.tomorrow;
+            console.log('tomorrow: ', tomorrow);
+            return {data: userData, tomorrow: tomorrow};
           })
         }
-      }
-      return userData;
+
     })
-    .then(function(userData) {
-      res.send(userData);
+    .then(function(data) {
+      // console.log(userData[userData.length - 1]);
+      res.send(data);
     });
   });
 
