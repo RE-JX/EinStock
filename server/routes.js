@@ -136,7 +136,8 @@ module.exports = function(app) {
             benchmarkAssetValuesMarket: result.benchmarkAssetValuesMarket,
             returns: result.returns,
             cashPosition: result.cashPosition,
-            stockSharesOwned: result.stockSharesOwned
+            stockSharesOwned: result.stockSharesOwned,
+            buyOrSell: result.buyOrSell
           });
         })
         .then(result => {
@@ -177,7 +178,8 @@ module.exports = function(app) {
             benchmarkAssetValuesMarket: result.benchmarkAssetValuesMarket,
             returns: result.returns,
             cashPosition: result.cashPosition,
-            stockSharesOwned: result.stockSharesOwned
+            stockSharesOwned: result.stockSharesOwned,
+            buyOrSell: result.buyOrSell
           });
         })
         .then(result => {
