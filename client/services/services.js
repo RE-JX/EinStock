@@ -5,12 +5,10 @@
   angular
     .module('einstock.services', [])
     .factory('Algorithm', Algorithm)
-    .factory('DashboardData', DashboardData)
     .factory('UserData', UserData)
 
 
   Algorithm.$inject = ['$http', '$location'];
-  DashboardData.$inject = ['$http'];
   UserData.$inject = ['$http'];
 
   function Algorithm($http, $location) {
@@ -27,19 +25,11 @@
     }
   };
 
-  function DashboardData($http) {
-    return {
-      get: function(data) {
-        return $http.get('/api/data', data);
-      }
-    }
-  };
-
   function UserData($http) {
     return {
       post: function(data) {
         return $http.post('/api/user', data);
-      }
+      },
     }
   };
 

@@ -14,7 +14,7 @@
     .controller('BubbleController', BubbleController);
 
   SpeedController.$inject = ['$scope', '$timeout', '$mdDialog'];
-  DashboardController.$inject = ['$scope'];
+  DashboardController.$inject = ['$scope', 'Algorithm'];
   RadarController.$inject = ['$scope'];
   LineController.$inject = ['$scope'];
   PieController.$inject = ['$scope'];
@@ -29,9 +29,16 @@
   };
 
   //Using to pass local storage to scope of all charts in dashboard
-  function DashboardController($scope) {
+  function DashboardController($scope, Algorithm) {
     // console.log('GET REQUEST FROM DASHBOARD', localStorage.getItem('data'));
     $scope.data = angular.fromJson(localStorage.getItem('data'));
+    // var something = {
+    //   userId: angular.fromJson(localStorage.getItem('profile')).identities[0].user_id
+    // };
+    // $scope.data = Algorithm.get(something).success(function(data) {
+    //   console.log(data);
+    // });
+    // console.log(localStorage.getItem('profile'));
     $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
     $scope.labels = [];
     console.log($scope.data);
