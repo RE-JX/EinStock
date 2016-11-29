@@ -52,7 +52,8 @@ var Simulation = db.define('Simulation', {  //<-- store simulated results and ev
   benchmarkAssetValuesMarket: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
   returns: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
   cashPosition: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
-  stockSharesOwned: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false }
+  stockSharesOwned: { type: Sequelize.ARRAY(Sequelize.FLOAT), allowNull: false },
+  buyOrSell: { type: Sequelize.ARRAY(Sequelize.STRING), allowNull: false }
 });
 
 

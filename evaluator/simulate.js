@@ -2,7 +2,6 @@ var ss = require('simple-statistics');
 var moment = require('moment');
 var Promise = require("bluebird");
 var apiMethods = require('../worker/index.js');
-var synAlg1 = require('../mlas/synaptic/synapticAlg1.js');
 
 //---------- function for simulating trading decisions based on predictions ------------
 var simulation =function(prices, predictions, totalAssetValues, cashPosition, sharesOwned, callback) {
@@ -99,6 +98,7 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
       benchmarkAssetValuesMarket = [1000], // asset values if you buy and hold SPY over test period
       cashPosition = [1000],
       stockSharesOwned = [],
+      buyOrSell = [],
       returns = [0];
   var start = new Date(startDate), end = new Date(endDate);
   start = moment(start).format().slice(0, 10);
@@ -149,6 +149,21 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
                 cummuReturn = (totalAssetValues[totalAssetValues.length - 1] - totalAssetValues[0]) / totalAssetValues[0] * 100;
                 returnStd = ss.sampleStandardDeviation(returns.slice(1));
                 sharpeRatio = avgReturn / returnStd * Math.sqrt(252);
+              // -------------- calculate buying and selling activities --------------
+                if(stockSharesOwned[0] > 0) {
+                  buyOrSell.push('buy');
+                } else {
+                  buyOrSell.push('sell');
+                }
+                for(var k = 1; k < stockSharesOwned.length; k++) {
+                  if(stockSharesOwned[k] > stockSharesOwned[k - 1]) {
+                    buyOrSell.push('buy');
+                  } else if(stockSharesOwned[k] < stockSharesOwned[k - 1]) {
+                    buyOrSell.push('sell');
+                  } else {
+                    buyOrSell.push('hold');
+                  }
+                }
               // -------- return results -------------
                 var rounding = valueOrArray => {
                   if(Array.isArray(valueOrArray)) {
@@ -175,7 +190,7 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
 
                 return {
                   frequency, startDate: start, endDate: end, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
-                   totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned
+                   totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned, buyOrSell
                 };
             });
         });

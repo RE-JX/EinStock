@@ -9,4 +9,12 @@
    (when prompted for password, just hit n, and then enter)
 5. create a database called einstoc
      createdb -Oroot -Eutf8 einstoc
-6. all set!
+
+To connect to database:
+    psql einstoc
+See all tables:
+    \dt
+Drop the table called 'Simulations':
+    drop table "Simulations";
+See table content of table 'Users':
+    select * from "Users";
