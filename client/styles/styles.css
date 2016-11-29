@@ -161,6 +161,10 @@ md-grid-list {
   font-size: 95px;
 }
 
+.title-video {
+  margin-bottom: -4px;
+}
+
 #navbar {
   background-color: #E0E0E0;
 }
