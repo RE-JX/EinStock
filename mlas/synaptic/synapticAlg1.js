@@ -19,14 +19,13 @@ var NN = function (symbol, from, to, callback) {
   yearBefore[0] = String(Number(yearBefore[0]) - 1);
   yearBefore = yearBefore.join('-');
 
-  var duration = Math.round((new Date(to) - new Date(from))/(1000 * 60 * 60 * 24));
-
   // console.log(duration, from, to, yearBefore);
 
 console.log(symbol, from, to);
 
-  worker(symbol, yearBefore, to).then(function(data) {
-    var normalizedData = normalizer(data, ['stock', 'symbol', 'date']);
+  Promise.all([worker(symbol, yearBefore, to), worker(symbol, from, to)])
+  .then(function(data) {
+    var normalizedData = normalizer(data[0], ['stock', 'symbol', 'date']);
 
     //Setup NN and Trainer
     var myNetwork = new Architect.Perceptron(normalizedData[0].length,normalizedData[0].length * 1, 1);
@@ -61,15 +60,16 @@ console.log('Percent complete: ', Math.round((data.iterations/100000) * 100), '%
 
   var algPredictions = [];
 
-  for (var i = normalizedData.length - 1; i >= normalizedData.length - duration; i--) {
+  for (var i = normalizedData.length - 1; i >= normalizedData.length - data[1].length; i--) {
 
     algPredictions.push(Math.round(myNetwork.activate(normalizedData[i])));
   }
   callback(null, algPredictions);
-  });
+  })
+
 };
 
-// NN('AAPL', '2014-01-01', '2014-01-10', a => console.log(a));
+NN('AAPL', '2014-01-01', '2014-01-10', (a, b) => console.log(a, b));
 
 
 module.exports = Promise.promisify(NN);
