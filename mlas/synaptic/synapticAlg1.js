@@ -21,7 +21,7 @@ var NN = function (symbol, from, to, callback) {
 
   // console.log(duration, from, to, yearBefore);
 
-console.log(symbol, from, to);
+// console.log(symbol, from, to);
 
   Promise.all([worker(symbol, yearBefore, to), worker(symbol, from, to)])
   .then(function(data) {
@@ -66,10 +66,14 @@ console.log('Percent complete: ', Math.round((data.iterations/100000) * 100), '%
   }
   callback(null, algPredictions.reverse());
   })
+  .error(err => {
+    console.log(err);
+    callback(err, []);
+  });
 
 };
 
-NN('AAPL', '2014-01-01', '2014-01-10', (a, b) => console.log(a, b));
+// NN('AAPL', '2014-01-01', '2014-01-10', (a, b) => console.log(a, b));
 
 
 module.exports = Promise.promisify(NN);
