@@ -2,6 +2,7 @@
 <div class="container" id="navbar" ng-controller="LoginController">
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
     <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+    <md-nav-item md-nav-href="#/about" name="about">About</md-nav-item>
     <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
     <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
     <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
@@ -36,15 +37,15 @@
     <img class="learn-gif" src="/assets/mlgif.gif">
   </div>
 
-  <!-- Machine Learning Methods -->
-  <div>
+<!-- <!--   <!-- Machine Learning Methods -->
+<!--   <div>
     <h2 class="md-display-2">Some Common Methods</h2>
     <p>{{methods}}</p>
   </div>
-    <!-- Machine Learning Cheatsheet -->
+    Machine Learning Cheatsheet
   <div>
     <img class="learn-cheat" src="/assets/mlcheat.png">
-  </div>
+  </div> -->
 </div>
 
 

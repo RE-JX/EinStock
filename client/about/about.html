@@ -1,0 +1,87 @@
+<!-- Navigation Bar -->
+<div class="container" id="navbar" ng-controller="LoginController">
+  <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
+    <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+    <md-nav-item md-nav-href="#/about" name="about">About</md-nav-item>
+    <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
+    <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
+    <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
+    <md-nav-item md-nav-href="#/welcome" ng-if="isLoggedIn" name="logout" ng-click="authService.logout();">Log Out</md-nav-item>
+    <md-nav-item md-nav-href="#/welcome" ng-if="!isLoggedIn" name="login" ng-click="authService.login();">Log In</md-nav-item>
+  </md-nav-bar>
+</div>
+<!-- About section -->
+<div class='about' ng-controller = "AboutController" >
+  <!-- About Us description -->
+  <h2 class="md-display-2">About Us</h2>
+  <p>{{about}}</p>
+  <p id="disclaimer">{{disclaimer}}</p>
+</div>
+<md-divider></md-divider>
+<!-- Team Pics -->
+<div>
+  <h2 class="md-display-2 about">Meet Our Sexy Team</h2>
+  <!-- First Line of pics -->
+  <md-grid-list md-cols="4" md-row-height="500px" md-gutter="20px">
+    <md-grid-tile md-rowspan="1" md-colspan="1">
+      <div class="team">
+        <h2>Kevin Kim</h2>
+        <h4>Product Owner</h4>
+        <img class="teampic" src="../assets/kev.jpg">
+        <div class="job-icon">
+          <a href="https://www.linkedin.com/in/kevin-ji-kim">
+            <img class="linkedin" src="../assets/linkedin.svg">
+          </a>
+          <a href="https://github.com/gsuppy">
+            <img class="github" src="../assets/github.png">
+          </a>
+        </div>
+      </div>
+    </md-grid-tile>
+    <md-grid-tile md-rowspan="1" md-colspan="1">
+      <div class="team">
+        <h2>Lucas Hawes</h2>
+        <h4>Scrum Master</h4>
+        <img class="teampic" src="/assets/lucas.png">
+        <div class="job-icon">
+          <a href="https://www.linkedin.com/in/lucashawes">
+            <img class="linkedin" src="../assets/linkedin.svg">
+          </a>
+          <a href="https://github.com/lhawes">
+            <img class="github" src="../assets/github.png">
+          </a>
+        </div>
+      </div>
+    </md-grid-tile>
+    <md-grid-tile md-rowspan="1" md-colspan="1">
+      <div class="team">
+        <h2>Natasha Che</h2>
+        <h4>Lead Algorithm Engineer</h4>
+        <img class="teampic" src="../assets/natasha.jpeg">
+        <div class="job-icon">
+          <a href="https://www.linkedin.com/in/natashache">
+            <img class="linkedin" src="../assets/linkedin.svg">
+          </a>
+          <a href="https://github.com/natashache">
+            <img class="github" src="../assets/github.png">
+          </a>
+        </div>
+      </div>
+    </md-grid-tile>
+    <md-grid-tile md-rowspan="1" md-colspan="1">
+      <div class="team">
+        <h2>Aaron Stevens</h2>
+        <h4>Lead Frontend and Server Engineer</h4>
+        <img class="teampic" src="../assets/aaron.jpg">
+        <div class="job-icon">
+          <a href="https://www.linkedin.com/in/aaron-stevens-565636129">
+            <img class="linkedin" src="../assets/linkedin.svg">
+          </a>
+          <a href="https://github.com/astev89">
+            <img class="github" src="../assets/github.png">
+          </a>
+        </div>
+      </div>
+    </md-grid-tile>
+  </md-grid-list>
+</div>

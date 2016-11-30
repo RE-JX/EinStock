@@ -2,6 +2,7 @@
 <div class="container" id="navbar" ng-controller="LoginController">
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
     <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+    <md-nav-item md-nav-href="#/about" name="about">About</md-nav-item>
     <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
     <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
     <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
@@ -71,7 +72,7 @@
         </div>
       </md-grid-tile>
       <!-- Bar Line Chart -->
-      <md-grid-tile md-rowspan="2" md-colspan="3">
+      <md-grid-tile md-rowspan="3" md-colspan="4">
         <md-grid-tile-header>
           <h3 class="md-headline">Daily Profile of Asset Values</h3>
         </md-grid-tile-header>
@@ -82,8 +83,10 @@
       </md-grid-tile>
       <!-- Tomorrow Up or Down -->
       <md-grid-tile md-rowspan="2" md-colspan="1">
+      </md-grid-tile>
+      <md-grid-tile md-rowspan="2" md-colspan="2">
         <md-grid-tile-header>
-          <h3 class="md-headline">Price Prediction</h3>
+          <h3 class="md-headline">Predicted Price Movement for Next Trading Day</h3>
         </md-grid-tile-header>
         <div id="tomorrow">
           <img ng-if="history.tomorrow > 0" class="arrow" src="../assets/icons/arrowup.png">
