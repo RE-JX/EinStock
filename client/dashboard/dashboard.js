@@ -4,13 +4,11 @@
 
   angular.module('einstock.dashboard', [
       'ngMaterial',
-      'chart.js',
-      'angular-horizontal-timeline'
+      'chart.js'
     ])
     // Dashboard for users to see charts
     .controller('SpeedController', SpeedController)
-    .controller('DashboardController', DashboardController)
-    .controller('TimelineController', TimelineController);
+    .controller('DashboardController', DashboardController);
 
   SpeedController.$inject = ['$scope', '$timeout', '$mdDialog'];
   DashboardController.$inject = ['$scope', 'Algorithm'];
@@ -22,23 +20,6 @@
         clickOutsideToClose: true
       })
     };
-  };
-
-  function TimelineController($scope) {
-    var history = angular.fromJson(localStorage.getItem('data'));
-    $scope.history = history;
-    var data = history.data;
-    $scope.data = data[data.length - 1];
-    $scope.format = 'YYYY-MM-DD';
-    $scope.startDate = $scope.data.dateLabels[0];
-    $scope.endDate = $scope.data.dateLabels[$scope.data.dateLabels.length - 1];
-    $scope.events = [];
-    $scope.data.buyOrSell.forEach((event, i) => {
-      if(event !== 'hold') {
-        $scope.events.push({'date': $scope.data.dateLabels[i], 'content': event});
-      }
-    });
-    console.log($scope.events);
   };
 
   //Using to pass local storage to scope of all charts in dashboard
@@ -123,6 +104,46 @@
           this.showTooltip(this.segments, true);
         }
       };
+
+      // Bar chart for buying and selling timeline
+      $scope.timeline = [];
+      $scope.buying = $scope.data.buyOrSell.map(event => {
+        if(event === 'buy') return 1;
+        else return 0;
+      });
+      $scope.selling = $scope.data.buyOrSell.map(event => {
+        if(event === 'sell') return -1;
+        else return 0;
+      });
+      $scope.timeline.push($scope.buying);
+      $scope.timeline.push($scope.selling);
+      $scope.timelineOptions = {
+        legend: {
+          display: true,
+          fullWidth: true,
+          labels: {
+            fontSize: 25
+          }
+        },
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              fontSize: 16
+            }
+          }],
+          yAxes: [{
+            display: false
+          }]
+        }
+      };
+      $scope.timelineSeries = [
+        'Buy',
+        'Sell'
+      ];
+      $scope.timelineColors = ['#4CAF50','#F44336'];
 
       // Bar Line Hybrid Chart on bottom
       $scope.line = [
