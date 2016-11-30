@@ -51,7 +51,6 @@
     $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
     $scope.labels = $scope.data.dateLabels;
     // console.log($scope.data);
-    var data = $scope.data;
 
     // History changing function for button module
     $scope.changeHistoryOne = function() {
@@ -99,7 +98,7 @@
       $scope.pieLegend = ['Successful predictions (%)', 'Inclusion Errors (%)', 'Exclusion Errors (%)'];
       $scope.pieSeries = ['Successful predictions (%)', 'Inclusion Errors (%)', 'Exclusion Errors (%)'];
 
-      $scope.pie = [$scope.successRate * 100, $scope.inclusionError * 100, $scope.exclusionError * 100];
+      $scope.pie = [$scope.data.successRate * 100, $scope.data.inclusionError * 100, $scope.data.exclusionError * 100];
       $scope.pieOptions = {
         legend: {
           display: true,
@@ -124,6 +123,7 @@
         $scope.data.benchmarkAssetValuesSelf,
         $scope.data.totalAssetValues
       ];
+      console.log($scope.line, $scope.labels);
 
       $scope.lineSeries = [
         'Benchmark 1: Buy and hold S&P 500',
