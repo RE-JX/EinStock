@@ -227,6 +227,10 @@ p {
   text-align: center;
 }
 
+#team-container {
+  margin-bottom: 15vh;
+}
+
 .teampic {
   height: 200px;
   width: 200px;
@@ -307,7 +311,6 @@ figcaption h2 {
   padding: 0 0 0 25px;
   margin: auto 0;
 }
-
 
 
 
