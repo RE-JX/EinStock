@@ -64,7 +64,7 @@ console.log('Percent complete: ', Math.round((data.iterations/100000) * 100), '%
 
     algPredictions.push(Math.round(myNetwork.activate(normalizedData[i])));
   }
-  callback(null, algPredictions);
+  callback(null, algPredictions.reverse());
   })
 
 };
