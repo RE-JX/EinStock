@@ -9,12 +9,13 @@
     <md-nav-item md-nav-href="#/welcome" ng-if="!isLoggedIn" name="login" ng-click="authService.login();">Log In</md-nav-item>
   </md-nav-bar>
 </div>
+
+<!-- Dashboard Div begins here -->
 <div layout="column" ng-controller="DashboardController" class="dashboard" flex ng-cloak>
-  <!-- Header Banner for Dashboard -->
-  <!-- Speed Dial -->
+  <!-- Speed Dial to click through past three searches -->
   <div id="history" ng-controller="SpeedController">
     <md-fab-speed-dial md-direction="left" class="md-fling">
-      <!-- Thing that opens -->
+      <!-- Thing that opens up when clicked -->
       <md-fab-trigger>
         <md-button class="md-fab md-warn" aria-label="history">
           <md-icon md-svg-src="/assets/icons/barchart.svg"></md-icon>
@@ -22,61 +23,62 @@
       </md-fab-trigger>
       <!-- Available actions -->
       <md-fab-actions>
-        <md-button aria-label="history" class="md-fab md-raised md-mini">
-          <md-icon md-svg-src="/assets/icons/list.svg"></md-icon>
+        <md-button aria-label="history" class="md-fab md-raised md-mini" ng-click="changeHistoryThree()">
+          <md-icon md-svg-src="/assets/icons/three.svg"></md-icon>
+        </md-button>
+        <md-button aria-label="history" class="md-fab md-raised md-mini" ng-click="changeHistoryTwo()">
+          <md-icon md-svg-src="/assets/icons/two.svg"></md-icon>
+        </md-button>
+        <md-button aria-label="history" class="md-fab md-raised md-mini" ng-click="changeHistoryOne()">
+          <md-icon md-svg-src="/assets/icons/one.svg"></md-icon>
         </md-button>
       </md-fab-actions>
     </md-fab-speed-dial>
   </div>
+
+  <!-- Charts in the Dashboard -->
   <div id="chart-container">
     <!-- Material Grid List Container -->
+    <!-- Stock Ticker Symbol -->
     <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
     <md-grid-list md-cols="2" md-row-height="500px" md-row-height="100%" md-gutter="1em">
-      <!-- Stocker Symbol -->
       <!-- Chart One -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
         <md-grid-tile-header>
           <h2 class="md-display-1">Investment Return Comparison</h2>
         </md-grid-tile-header>
-        <div id="chart1" ng-controller="RadarController">
-          <canvas id="radar" class="chart chart-radar" chart-options="options" chart-data="radar" chart-labels="labels" chart-colors="colors">
+        <div id="chart1">
+          <canvas id="radar" class="chart chart-radar" chart-options="radarOptions" chart-data="radar" chart-labels="radarLabel" chart-colors="colors">
           </canvas>
         </div>
       </md-grid-tile>
-      <!-- Chart Three -->
+
+      <!-- Chart Two -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
         <md-grid-tile-header>
           <h2 class="md-display-1">Success Rate of Predictions</h2>
         </md-grid-tile-header>
-        <div id="chart2" ng-controller="PieController">
-          <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options" chart-series="series" >
+        <div id="chart2">
+          <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="pieLabels" chart-options="pieOptions" chart-series="pieSeries">
           </canvas>
         </div>
       </md-grid-tile>
     </md-grid-list>
     <md-grid-list md-cols="4" md-row-height="600px" md-gutter="20px">
-      <!-- Chart Four -->
-      <!--<md-grid-tile md-rowspan="1" md-colspan="4">
-    <div id="chart3" ng-controller="BubbleController">
-      <canvas id="bubble" class="chart-bubble" chart-data="bubble" chart-series="label">
-      </canvas>
-    </div>
-    <md-grid-tile-footer>
-      <h2></h2>
-    </md-grid-tile-footer>
-  </md-grid-tile>-->
-      <!-- Chart Two -->
+
+      <!-- Chart Three -->
       <md-grid-tile md-rowspan="1" md-colspan="4">
         <md-grid-tile-header>
           <h2 class="md-display-1">Daily Profile of Asset Values</h2>
         </md-grid-tile-header>
-        <div id="chart4" ng-controller="LineController">
-          <canvas id="line" class="chart-bar" chart-data="line" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
-          </canvas>
+        <div id="chart4">
+          <md-grid-list md-cols="4" md-row-height="770px" md-gutter="20px">
+            <canvas id="line" class="chart-bar" chart-data="line" chart-labels="labels" chart-series="lineSeries" chart-options="lineOptions" chart-dataset-override="datasetOverride" chart-click="onClick">
+            </canvas>
         </div>
       </md-grid-tile>
-    </md-grid-list>
-    <!-- Line -->
-    <br>
+      </md-grid-list>
+      <!-- Line -->
+      <br>
   </div>
 </div>

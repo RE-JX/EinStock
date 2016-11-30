@@ -31,16 +31,17 @@
 
     $scope.log = function() {
       $scope.isLoading = true;
+      localStorage.setItem('userId', $scope.data.userId);
       Algorithm.post($scope.data).success(function(data) {
-        console.log(data);
+        // console.log(data);
         Algorithm.get(
           {params: {userId: $scope.data.userId}}
         ).success(function(data) {
-          console.log('simulations: ',data);
+          // console.log('simulations: ',data);
+          localStorage.setItem('data', angular.toJson(data));
+          $scope.isLoading = false;
+          Algorithm.redirect();
         });
-        localStorage.setItem('data', angular.toJson(data));
-        $scope.isLoading = false;
-        Algorithm.redirect();
       });
     };
 

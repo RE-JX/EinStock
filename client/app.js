@@ -35,7 +35,7 @@
   };
 
   // This is where we are routing our views
-  function routes ($stateProvider, lockProvider, $urlRouterProvider, $rootScope, $state) {
+  function routes ($stateProvider, lockProvider, $urlRouterProvider, $rootScope, $state, $http) {
 
     $urlRouterProvider.rule(function($injector, $location) {
       var path = $location.path();

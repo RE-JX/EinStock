@@ -10,6 +10,10 @@ ul li {
   padding: 10px;
 }
 
+.machine {
+  margin: 20px;
+}
+
 .job-icon {
   display: inline-block;
 }
