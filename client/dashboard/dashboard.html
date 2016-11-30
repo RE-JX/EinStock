@@ -64,6 +64,22 @@
         </div>
       </md-grid-tile>
     </md-grid-list>
+    <md-grid-list md-cols="4" md-row-height="300px" md-gutter="20px">
+          <!-- Trading timeline -->
+      <md-grid-tile md-rowspan="1" md-colspan="4">
+        <md-grid-tile-header>
+          <h2 class="md-display-1">Simulated Trading Activities</h2>
+        </md-grid-tile-header>
+        <div id="timeline" ng-controller="TimelineController" style="width: 90%">
+          <horizontal-timeline
+            start-date="{{startDate}}"
+            end-date="{{endDate}}"
+            format="{{format}}"
+            events="events">
+          </horizontal-timeline>
+        </div>
+      </md-grid-tile>
+    </md-grid-list>
     <md-grid-list md-cols="4" md-row-height="600px" md-gutter="20px">
 
       <!-- Chart Three -->

@@ -3,14 +3,24 @@
 
   angular.module('einstock.dashboard', [
       'ngMaterial',
-      'chart.js'
+      'chart.js',
+      'angular-horizontal-timeline'
     ])
     // Dashboard for users to see charts
     .controller('SpeedController', SpeedController)
     .controller('DashboardController', DashboardController)
+    .controller('RadarController', RadarController)
+    .controller('LineController', LineController)
+    .controller('PieController', PieController)
+    .controller('BubbleController', BubbleController)
+    .controller('TimelineController', TimelineController);
 
   SpeedController.$inject = ['$scope', '$timeout', '$mdDialog'];
   DashboardController.$inject = ['$scope', 'Algorithm'];
+  RadarController.$inject = ['$scope'];
+  LineController.$inject = ['$scope'];
+  PieController.$inject = ['$scope'];
+  TimelineController.$inject = ['$scope'];
 
   //Sidebar navigation controller
   function SpeedController($scope, $timeout, $mdDialog) {
@@ -59,7 +69,6 @@
     $scope.labels = data.dateLabels;
   };
 
-
     // History changing function for button module
     $scope.changeHistoryOne = function() {
       var data = history.data;
@@ -75,6 +84,37 @@
       var data = history.data;
       $scope.data = data[data.length - 1 - 4];
       graphRender();
+
+  function TimelineController($scope) {
+    var data = $scope.data;
+    $scope.format = 'YYYY-MM-DD';
+    $scope.startDate = data.dateLabels[0];
+    $scope.endDate = data.dateLabels[data.dateLabels.length - 1];
+    $scope.events = [];
+    data.buyOrSell.forEach((event, i) => {
+      if(event !== 'hold') {
+        $scope.events.push({'date': data.dateLabels[i], 'content': event});
+      }
+    });
+    console.log($scope.events);
+  };
+
+  //Chart top left bar chart to show if it went up or down
+  function RadarController($scope) {
+    var data = $scope.data;
+    $scope.labels = ['Algorithm Cumulative Return', 'Algorithm Average Return', 'Sharpe Ratio', 'Market Benchmark', 'Self Benchmark'];
+    $scope.colors = ['#FDB45C'];
+    $scope.radar = [];
+    $scope.options = {
+      scale: {
+        pointLabels: {
+          fontSize: 16
+        },
+      },
+      tooltips: {
+        titleFontSize: 20,
+        bodyFontSize: 20
+      }
     };
 
 
