@@ -13,7 +13,7 @@
 <!-- Dashboard Div begins here -->
 <div layout="column" ng-controller="DashboardController" class="dashboard" flex ng-cloak>
   <!-- Speed Dial to click through past three searches -->
-  <div id="history" ng-controller="SpeedController">
+  <div id="history" ng-controller="SpeedController" ng-if="history.data.length > 3">
     <md-fab-speed-dial md-direction="left" class="md-fling">
       <!-- Thing that opens up when clicked -->
       <md-fab-trigger>
