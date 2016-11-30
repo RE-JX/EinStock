@@ -10,6 +10,15 @@ ul li {
   padding: 10px;
 }
 
+#footer {
+  text-align: center;
+}
+
+.arrow {
+  height: 200px;
+  width: 200px;
+}
+
 .machine {
   margin: 20px;
 }
@@ -90,24 +99,25 @@ md-grid-list {
   text-align: center;
 }
 
-#chart1 {
+#radarchart {
   display: block;
   width: 100%;
 }
 
-#chart2 {
+#piechart {
   display: block;
   width: 100%;
 }
 
-#chart3 {
+#barlinechart {
   display: block;
   width: 100%;
 }
 
-#chart4 {
+#barchart {
   display: block;
-  width: 90%;
+  width: 80%;
+  height: 100%;
 }
 
 #disclaimer {
