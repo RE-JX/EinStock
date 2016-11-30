@@ -27,6 +27,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname + '/../client')));
 
 app.use('/public', express.static(path.join(__dirname + '/../node_modules')));
+app.use('/bower', express.static(path.join(__dirname + '/../bower_components')));
 // //-----------------routes-------------------
 // //------------------------------------------
 app.get('/', (req, res) => {

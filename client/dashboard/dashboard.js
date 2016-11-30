@@ -1,13 +1,16 @@
+
 (function() {
   'use strict'
 
   angular.module('einstock.dashboard', [
       'ngMaterial',
-      'chart.js'
+      'chart.js',
+      'angular-horizontal-timeline'
     ])
     // Dashboard for users to see charts
     .controller('SpeedController', SpeedController)
     .controller('DashboardController', DashboardController)
+    .controller('TimelineController', TimelineController);
 
   SpeedController.$inject = ['$scope', '$timeout', '$mdDialog'];
   DashboardController.$inject = ['$scope', 'Algorithm'];
@@ -21,6 +24,23 @@
     };
   };
 
+  function TimelineController($scope) {
+    var history = angular.fromJson(localStorage.getItem('data'));
+    $scope.history = history;
+    var data = history.data;
+    $scope.data = data[data.length - 1];
+    $scope.format = 'YYYY-MM-DD';
+    $scope.startDate = $scope.data.dateLabels[0];
+    $scope.endDate = $scope.data.dateLabels[$scope.data.dateLabels.length - 1];
+    $scope.events = [];
+    $scope.data.buyOrSell.forEach((event, i) => {
+      if(event !== 'hold') {
+        $scope.events.push({'date': $scope.data.dateLabels[i], 'content': event});
+      }
+    });
+    console.log($scope.events);
+  };
+
   //Using to pass local storage to scope of all charts in dashboard
   function DashboardController($scope, Algorithm) {
 
@@ -29,33 +49,9 @@
     var data = history.data;
     $scope.data = data[data.length - 1];
     $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
-    $scope.labels = [];
+    $scope.labels = $scope.data.dateLabels;
     // console.log($scope.data);
     var data = $scope.data;
-
-    //Create labels for dates given and pass to children in scope
-    var current = moment(data.startDate).add(1, 'days');
-    var end = moment(data.endDate).add(1, 'days');
-    var labelCount = data.actualMoves.length;
-
-    //If end predicted date is weekend, change to following Monday
-    if (6 <= end.day()) {
-      end = end.weekday(8);
-    }
-
-    //Way to get day labels
-    while (labelCount > 1) {
-      if (0 < current.day() && current.day() < 6) {
-        $scope.labels.push(current.format('MM-DD-YYYY'));
-        current.add(1, 'days');
-      }
-      if (6 <= current.day()) {
-        current = current.weekday(8);
-        $scope.labels.push(current.format('MM-DD-YYYY'));
-        current.add(1, 'days');
-      }
-      labelCount--;
-    }
 
     // History changing function for button module
     $scope.changeHistoryOne = function() {
