@@ -4,13 +4,11 @@
 
   angular.module('einstock.dashboard', [
       'ngMaterial',
-      'chart.js',
-      'angular-horizontal-timeline'
+      'chart.js'
     ])
     // Dashboard for users to see charts
     .controller('SpeedController', SpeedController)
-    .controller('DashboardController', DashboardController)
-    .controller('TimelineController', TimelineController);
+    .controller('DashboardController', DashboardController);
 
   SpeedController.$inject = ['$scope', '$timeout', '$mdDialog'];
   DashboardController.$inject = ['$scope', 'Algorithm'];
@@ -22,23 +20,6 @@
         clickOutsideToClose: true
       })
     };
-  };
-
-  function TimelineController($scope) {
-    var history = angular.fromJson(localStorage.getItem('data'));
-    $scope.history = history;
-    var data = history.data;
-    $scope.data = data[data.length - 1];
-    $scope.format = 'YYYY-MM-DD';
-    $scope.startDate = $scope.data.dateLabels[0];
-    $scope.endDate = $scope.data.dateLabels[$scope.data.dateLabels.length - 1];
-    $scope.events = [];
-    $scope.data.buyOrSell.forEach((event, i) => {
-      if(event !== 'hold') {
-        $scope.events.push({'date': $scope.data.dateLabels[i], 'content': event});
-      }
-    });
-    console.log($scope.events);
   };
 
   //Using to pass local storage to scope of all charts in dashboard
