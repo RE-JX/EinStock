@@ -77,7 +77,7 @@
     $scope.options = {
       scale: {
         pointLabels: {
-          fontSize: 14
+          fontSize: 16
         },
       },
       tooltips: {
