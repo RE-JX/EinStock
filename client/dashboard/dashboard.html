@@ -41,6 +41,18 @@
     <!-- Material Grid List Container -->
     <!-- Stock Ticker Symbol -->
     <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
+    <md-grid-list md-cols="4" md-row-height="450px" md-gutter="20px">
+          <!-- Trading timeline -->
+      <md-grid-tile md-rowspan="1" md-colspan="4">
+        <md-grid-tile-header>
+          <h2 class="md-display-1">Simulated Trading Activities</h2>
+        </md-grid-tile-header>
+        <div id="chart3">
+            <canvas id="bar" class="chart chart-bar" chart-data="timeline" chart-labels="labels" chart-series="timelineSeries" chart-options="timelineOptions" chart-colors="timelineColors">
+            </canvas>
+        </div>
+      </md-grid-tile>
+    </md-grid-list>
     <md-grid-list md-cols="2" md-row-height="500px" md-row-height="100%" md-gutter="1em">
       <!-- Radar Chart -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
@@ -61,22 +73,6 @@
         <div id="chart2">
           <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="pieLabels" chart-options="pieOptions"chart-series="pieSeries">
           </canvas>
-        </div>
-      </md-grid-tile>
-    </md-grid-list>
-    <md-grid-list md-cols="4" md-row-height="300px" md-gutter="20px">
-          <!-- Trading timeline -->
-      <md-grid-tile md-rowspan="1" md-colspan="4">
-        <md-grid-tile-header>
-          <h2 class="md-display-1">Simulated Trading Activities</h2>
-        </md-grid-tile-header>
-        <div id="timeline" ng-controller="TimelineController" style="width: 90%">
-          <horizontal-timeline
-            start-date="{{startDate}}"
-            end-date="{{endDate}}"
-            format="{{format}}"
-            events="events">
-          </horizontal-timeline>
         </div>
       </md-grid-tile>
     </md-grid-list>

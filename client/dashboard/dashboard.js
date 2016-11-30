@@ -124,6 +124,46 @@
         }
       };
 
+      // Bar chart for buying and selling timeline
+      $scope.timeline = [];
+      $scope.buying = $scope.data.buyOrSell.map(event => {
+        if(event === 'buy') return 1;
+        else return 0;
+      });
+      $scope.selling = $scope.data.buyOrSell.map(event => {
+        if(event === 'sell') return -1;
+        else return 0;
+      });
+      $scope.timeline.push($scope.buying);
+      $scope.timeline.push($scope.selling);
+      $scope.timelineOptions = {
+        legend: {
+          display: true,
+          fullWidth: true,
+          labels: {
+            fontSize: 25
+          }
+        },
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              fontSize: 16
+            }
+          }],
+          yAxes: [{
+            display: false
+          }]
+        }
+      };
+      $scope.timelineSeries = [
+        'Buy',
+        'Sell'
+      ];
+      $scope.timelineColors = ['#4CAF50','#F44336'];
+
       // Bar Line Hybrid Chart on bottom
       $scope.line = [
         $scope.data.benchmarkAssetValuesMarket,
