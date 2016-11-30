@@ -74,7 +74,17 @@
     $scope.labels = ['Algorithm Cumulative Return', 'Algorithm Average Return', 'Sharpe Ratio', 'Market Benchmark', 'Self Benchmark'];
     $scope.colors = ['#FDB45C'];
     $scope.radar = [];
-
+    $scope.options = {
+      scale: {
+        pointLabels: {
+          fontSize: 14
+        },
+      },
+      tooltips: {
+        titleFontSize: 20,
+        bodyFontSize: 20
+      }
+    };
     //Add to Radar data
     $scope.radar.push(data.cummuReturn);
     $scope.radar.push(data.avgReturn);
@@ -92,23 +102,56 @@
       data.totalAssetValues
     ];
 
+    $scope.series = [
+      'Benchmark 1: Buy and hold S&P 500',
+      'Benchmark 2: Buy and hold current stock',
+      'Trading from algorithm predictions'
+    ];
+
+    $scope.options = {
+      legend: {
+        display: true,
+        fullWidth: true,
+        labels: {
+          fontSize: 25
+        }
+      },
+      tooltips: {
+        titleFontSize: 25,
+        bodyFontSize: 25
+      },
+      padding: 0,
+      scales: {
+        xAxes: [{
+            ticks: {
+                fontSize: 18
+            }
+        }],
+        yAxes: [{
+            ticks: {
+                fontSize: 20
+            }
+        }]
+      }
+    };
+
     $scope.onClick = function(points, evt) {
       console.log(points, evt);
     };
 
     $scope.datasetOverride = [
       {
-        label: 'Benchmark Asset Value',
+        label: 'Buy and hold S&P 500',
         borderWidth: 3,
         type: 'line'
       },
       {
-        label: 'Chosen Asset Value',
+        label: 'Buy and hold current stock',
         borderWidth: 3,
         type: 'line',
       },
       {
-        label: 'Algorithm Asset Value',
+        label: 'Trading from algorithm predictions',
         borderWidth: 1,
         type: 'bar'
       }
@@ -118,8 +161,28 @@
   //Bottom left pie chart that shows algorithm success rate
   function PieController($scope) {
     var data = $scope.data;
-    $scope.labels = ['Success Rate', 'Include Error', 'Exclusion Error'];
+    $scope.labels = ['Successful predictions (%)', 'Inclusion Errors (%)', 'Exclusion Errors (%)'];
+    $scope.legend = ['Successful predictions (%)', 'Inclusion Errors (%)', 'Exclusion Errors (%)'];
+    $scope.series = ['Successful predictions (%)', 'Inclusion Errors (%)', 'Exclusion Errors (%)'];
+
     $scope.pie = [data.successRate * 100, data.inclusionError * 100, data.exclusionError * 100];
+    $scope.options = {
+      legend: {
+        display: true,
+        fullWidth: true,
+        labels: {
+          fontSize: 30
+        }
+      },
+      tooltips: {
+        titleFontSize: 30,
+        bodyFontSize: 25
+      },
+      defaultFontSize: 18,
+      onAnimationComplete: function () {
+          this.showTooltip(this.segments, true);
+      }
+    };
   }
 
   //Bottom right bubble graph

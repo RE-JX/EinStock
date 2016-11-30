@@ -36,7 +36,7 @@
       <!-- Chart One -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
         <div id="chart1" ng-controller="RadarController">
-          <canvas id="radar" class="chart chart-radar" chart-data="radar" chart-labels="labels" chart-colors="colors">
+          <canvas id="radar" class="chart chart-radar" chart-options="options" chart-data="radar" chart-labels="labels" chart-colors="colors">
           </canvas>
         </div>
         <md-grid-tile-footer>
@@ -46,11 +46,11 @@
       <!-- Chart Three -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
         <div id="chart2" ng-controller="PieController">
-          <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options">
+          <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options" chart-series="series" >
           </canvas>
         </div>
         <md-grid-tile-footer>
-          <h2>Prediction Success</h2>
+          <h2>Prediction Success Rate</h2>
         </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
@@ -72,7 +72,7 @@
           </canvas>
         </div>
         <md-grid-tile-footer>
-          <h2>Daily Return Profile</h2>
+          <h2>Daily Asset Value Profile</h2>
         </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
