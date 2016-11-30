@@ -34,28 +34,31 @@
     var data = $scope.data;
 
     //Create labels for dates given and pass to children in scope
-    var current = moment(data.startDate).add(1, 'days');
-    var end = moment(data.endDate).add(1, 'days');
-    var labelCount = data.actualMoves.length;
 
-    //If end predicted date is weekend, change to following Monday
-    if (6 <= end.day()) {
-      end = end.weekday(8);
-    }
+    // var current = moment(data.startDate).add(1, 'days');
+    // var end = moment(data.endDate).add(1, 'days');
+    // var labelCount = data.actualMoves.length;
+    // //If end predicted date is weekend, change to following Monday
+    // if (6 <= end.day()) {
+    //   end = end.weekday(8);
+    // }
 
-    //Way to get day labels
-    while (labelCount > 1) {
-      if (0 < current.day() && current.day() < 6) {
-        $scope.labels.push(current.format('MM-DD-YYYY'));
-        current.add(1, 'days');
-      }
-      if (6 <= current.day()) {
-        current = current.weekday(8);
-        $scope.labels.push(current.format('MM-DD-YYYY'));
-        current.add(1, 'days');
-      }
-      labelCount--;
-    }
+    // //Way to get day labels
+    // while (labelCount > 1) {
+    //   if (0 < current.day() && current.day() < 6) {
+    //     $scope.labels.push(current.format('YYYY-MM-DD'));
+    //     current.add(1, 'days');
+    //   }
+    //   if (6 <= current.day()) {
+    //     current = current.weekday(8);
+    //     $scope.labels.push(current.format('YYYY-MM-DD'));
+    //     current.add(1, 'days');
+    //   }
+    //   labelCount--;
+    // }
+    $scope.labels = data.dateLabels;
+  };
+
 
     // History changing function for button module
     $scope.changeHistoryOne = function() {
@@ -74,6 +77,7 @@
       graphRender();
     };
 
+
     //Graph render function to help with re-rendering
     var graphRender = function() {
       //Radar Chart on top left
@@ -89,6 +93,29 @@
         tooltips: {
           titleFontSize: 20,
           bodyFontSize: 20
+
+  //Line chart on top right to show returns
+  function LineController($scope) {
+    var data = $scope.data;
+    $scope.labels = data.dateLabels;
+    $scope.line = [
+      data.benchmarkAssetValuesMarket,
+      data.benchmarkAssetValuesSelf,
+      data.totalAssetValues
+    ];
+
+    $scope.series = [
+      'Benchmark 1: Buy and hold S&P 500',
+      'Benchmark 2: Buy and hold current stock',
+      'Trading from algorithm predictions'
+    ];
+
+    $scope.options = {
+      legend: {
+        display: true,
+        fullWidth: true,
+        labels: {
+          fontSize: 25
         }
       };
       //Add to Radar data

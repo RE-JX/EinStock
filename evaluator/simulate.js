@@ -99,13 +99,18 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
       cashPosition = [1000],
       stockSharesOwned = [],
       buyOrSell = [],
-      returns = [0];
+      returns = [0]
+      dateLabels = [];
   var start = new Date(startDate), end = new Date(endDate);
   start = moment(start).format().slice(0, 10);
   end =  moment(end).format().slice(0, 10);
   // fetch prices of S&P 500 index
   return apiMethods.yahoo.historical('SPY', start, end)
     .then(function(result) {
+        dateLabels = result.map(data => {
+          return moment(data.date).format('YYYY-MM-DD');
+        });
+        console.log('dateLabels: ', dateLabels);
         pricesSpy = result.map(data => data.adjClose);
         benchmarkReturnMarket = (pricesSpy[pricesSpy.length - 1] - pricesSpy[0]) / pricesSpy[0] * 100;
     })
@@ -190,7 +195,7 @@ var evaluation = function(frequency, startDate, endDate, tickerSymbol, predicted
 
                 return {
                   frequency, startDate: start, endDate: end, tickerSymbol, successRate, inclusionError, exclusionError, avgReturn, cummuReturn, returnStd, sharpeRatio, benchmarkReturnSelf, benchmarkReturnMarket, predictedMoves, actualMoves, returns,
-                   totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned, buyOrSell
+                   totalAssetValues, benchmarkAssetValuesSelf, benchmarkAssetValuesMarket, cashPosition, stockSharesOwned, buyOrSell, dateLabels
                 };
             });
         });

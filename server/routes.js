@@ -137,7 +137,8 @@ module.exports = function(app) {
             returns: result.returns,
             cashPosition: result.cashPosition,
             stockSharesOwned: result.stockSharesOwned,
-            buyOrSell: result.buyOrSell
+            buyOrSell: result.buyOrSell,
+            dateLabels: result.dateLabels
           });
         })
         .then(result => {
@@ -179,7 +180,8 @@ module.exports = function(app) {
             returns: result.returns,
             cashPosition: result.cashPosition,
             stockSharesOwned: result.stockSharesOwned,
-            buyOrSell: result.buyOrSell
+            buyOrSell: result.buyOrSell,
+            dateLabels: result.dateLabels
           });
         })
         .then(result => {
