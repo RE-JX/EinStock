@@ -50,22 +50,28 @@
     $scope.data = data[data.length - 1];
     $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
     $scope.labels = $scope.data.dateLabels;
-    // console.log($scope.data);
+
 
     // History changing function for button module
     $scope.changeHistoryOne = function() {
       var data = history.data;
-      $scope.data = data[data.length - 1 - 2];
+      $scope.data = data[data.length - 2];
+      $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
+      $scope.labels = $scope.data.dateLabels;
       graphRender();
     };
     $scope.changeHistoryTwo = function() {
       var data = history.data;
-      $scope.data = data[data.length - 1 - 3];
+      $scope.data = data[data.length - 3];
+      $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
+      $scope.labels = $scope.data.dateLabels;
       graphRender();
     };
     $scope.changeHistoryThree = function() {
       var data = history.data;
-      $scope.data = data[data.length - 1 - 4];
+      $scope.data = data[data.length - 4];
+      $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
+      $scope.labels = $scope.data.dateLabels;
       graphRender();
     };
 
@@ -99,6 +105,7 @@
       $scope.pieSeries = ['Successful predictions (%)', 'Inclusion Errors (%)', 'Exclusion Errors (%)'];
 
       $scope.pie = [$scope.data.successRate * 100, $scope.data.inclusionError * 100, $scope.data.exclusionError * 100];
+
       $scope.pieOptions = {
         legend: {
           display: true,
@@ -123,7 +130,6 @@
         $scope.data.benchmarkAssetValuesSelf,
         $scope.data.totalAssetValues
       ];
-      console.log($scope.line, $scope.labels);
 
       $scope.lineSeries = [
         'Benchmark 1: Buy and hold S&P 500',
