@@ -30,31 +30,31 @@
   </div>
   <div id="chart-container">
     <!-- Material Grid List Container -->
-    <md-grid-list md-cols="2" md-row-height="600px" md-row-height="75%" md-gutter="20px">
+    <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
+    <md-grid-list md-cols="2" md-row-height="500px" md-row-height="100%" md-gutter="1em">
       <!-- Stocker Symbol -->
-      <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
       <!-- Chart One -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
+        <md-grid-tile-header>
+          <h2 class="md-display-1">Investment Return Comparison</h2>
+        </md-grid-tile-header>
         <div id="chart1" ng-controller="RadarController">
           <canvas id="radar" class="chart chart-radar" chart-options="options" chart-data="radar" chart-labels="labels" chart-colors="colors">
           </canvas>
         </div>
-        <md-grid-tile-footer>
-          <h2>Portfolio Returns</h2>
-        </md-grid-tile-footer>
       </md-grid-tile>
       <!-- Chart Three -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
+        <md-grid-tile-header>
+          <h2 class="md-display-1">Success Rate of Predictions</h2>
+        </md-grid-tile-header>
         <div id="chart2" ng-controller="PieController">
           <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="labels" chart-options="options" chart-series="series" >
           </canvas>
         </div>
-        <md-grid-tile-footer>
-          <h2>Prediction Success Rate</h2>
-        </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
-    <md-grid-list md-cols="4" md-row-height="770px" md-gutter="20px">
+    <md-grid-list md-cols="4" md-row-height="600px" md-gutter="20px">
       <!-- Chart Four -->
       <!--<md-grid-tile md-rowspan="1" md-colspan="4">
     <div id="chart3" ng-controller="BubbleController">
@@ -67,13 +67,13 @@
   </md-grid-tile>-->
       <!-- Chart Two -->
       <md-grid-tile md-rowspan="1" md-colspan="4">
+        <md-grid-tile-header>
+          <h2 class="md-display-1">Daily Profile of Asset Values</h2>
+        </md-grid-tile-header>
         <div id="chart4" ng-controller="LineController">
           <canvas id="line" class="chart-bar" chart-data="line" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
           </canvas>
         </div>
-        <md-grid-tile-footer>
-          <h2>Daily Asset Value Profile</h2>
-        </md-grid-tile-footer>
       </md-grid-tile>
     </md-grid-list>
     <!-- Line -->
