@@ -27,6 +27,7 @@
 
     var history = angular.fromJson(localStorage.getItem('data'));
     $scope.history = history;
+    console.log($scope.history)
     var data = history.data;
     $scope.data = data[data.length - 1];
     $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
