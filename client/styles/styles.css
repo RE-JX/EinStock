@@ -147,14 +147,45 @@ md-grid-list {
 }
 
 .welcome-hello-banner {
-  background-image: url("/assets/balloons.jpg");
   position: relative;
-  height: 400px;
+  /*height: 400px;*/
+}
+
+
+.flexbox-container {
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+  flex-direction: row;
+}
+
+/*.flexbox-container > div {
+	width: 50%;
+}*/
+
+.flexbox-container.welcome-hello-banner {
+  width: 60%;
+}
+
+.flexbox-container.flex-item {
+  width: 40%;
+}
+
+@media screen and (max-width: 1200px) {
+  .flexbox-container {
+    flex-direction: column
+  }
+  .flexbox-container > * {
+    flex: 1;
+  }
+  .flexbox-container > .welcome-hello-banner {
+    flex: 2;
+  }
 }
 
 #welcome-banner {
   width: 100%;
-  height: 30%;
+  /*height: 30%;*/
   -webkit-clip-path: polygon(80% 0%, 100% 50%, 80% 100%, 0% 100%, 20% 50%, 0% 0%);
   clip-path: polygon(80% 0%, 100% 50%, 80% 100%, 0% 100%, 20% 50%, 0% 0%);
   object-fit: cover;
@@ -246,9 +277,25 @@ p {
 
 video {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   z-index: -100;
-  /*display: block;*/
+}
+
+video.tut {
+  position: relative; 
+  top: 0;
+  left: 0;
+  right: 0; 
+  bottom: 0;
+  min-width: 50%; 
+  min-height: 100%;
+  /*width: auto; */
+  /*height: auto; */
+  z-index: -100;
+  object-fit: initial;
+  /*background-size: cover;*/
+  overflow: hidden;
 }
 
 /*#layWrap {
@@ -263,12 +310,13 @@ video {
   display: flex;
   top: 0; right: 0; bottom: 0; left: 0;
   position: absolute;
+  border: 5px solid black;
 }
 
-#page-content {
+/*#page-content {
   min-height: calc(100vh - 49px);
 
-}
+}*/
 
 /*------- Materia UI fixes -------*/
 md-nav-bar .md-nav-bar {
@@ -314,6 +362,9 @@ figcaption h2 {
   margin: auto 0;
 }
 
-
+md-list.flex {
+  padding: 0;
+  margin: 0;
+}
 
 
