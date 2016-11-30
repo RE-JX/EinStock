@@ -14,7 +14,7 @@
 
   function AlgorithmController($scope, Algorithm, TickValidation) {
     //temp place holders
-    $scope.algSelections = ['K Nearest Neighbors','Logistic Regression','Naive Bayes','Neural Networks','Random Forests','Support Vector Machine'];
+    $scope.algSelections = ['K Nearest Neighbors','Logistic Regression','Naive Bayes','Neural Networks','Random Forests'];
     $scope.selection = $scope.algSelections[0];
     //-----------------------------------------
     //init a start date
