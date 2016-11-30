@@ -42,7 +42,7 @@
     <!-- Stock Ticker Symbol -->
     <h1 class="md-display-3" id="dashboard-title">{{data.tickerSymbol}}</h1>
     <md-grid-list md-cols="2" md-row-height="500px" md-row-height="100%" md-gutter="1em">
-      <!-- Chart One -->
+      <!-- Radar Chart -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
         <md-grid-tile-header>
           <h2 class="md-display-1">Investment Return Comparison</h2>
@@ -53,13 +53,13 @@
         </div>
       </md-grid-tile>
 
-      <!-- Chart Two -->
+      <!-- Pie Chart -->
       <md-grid-tile md-rowspan="1" md-colspan="1">
         <md-grid-tile-header>
           <h2 class="md-display-1">Success Rate of Predictions</h2>
         </md-grid-tile-header>
         <div id="chart2">
-          <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="pieLabels" chart-options="pieOptions" chart-series="pieSeries">
+          <canvas id="pie" class="chart chart-pie" chart-data="pie" chart-labels="pieLabels" chart-options="pieOptions"chart-series="pieSeries">
           </canvas>
         </div>
       </md-grid-tile>
@@ -82,7 +82,7 @@
     </md-grid-list>
     <md-grid-list md-cols="4" md-row-height="600px" md-gutter="20px">
 
-      <!-- Chart Three -->
+      <!-- Bar Line Chart -->
       <md-grid-tile md-rowspan="1" md-colspan="4">
         <md-grid-tile-header>
           <h2 class="md-display-1">Daily Profile of Asset Values</h2>
