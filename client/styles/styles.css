@@ -90,6 +90,11 @@ h4 {
   font-family: 'Open Sans';
 }
 
+.setting {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
 md-grid-list {
   margin: 8px;
   background-color: white;
@@ -148,15 +153,26 @@ md-grid-list {
 
 .welcome-hello-banner {
   position: relative;
-  /*height: 400px;*/
+  height: 500px;
+  border: 5px solid black;
 }
 
+.flex-item {
+  height: 507px;
+  /*padding-bottom: 10px;*/
+  border: 1px solid lightgray;
+  overflow: scroll;
+}
 
 .flexbox-container {
 	display: -ms-flex;
 	display: -webkit-flex;
 	display: flex;
   flex-direction: row;
+  /*border: 1px solid lightgray;*/
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 60px;
 }
 
 /*.flexbox-container > div {
@@ -183,6 +199,18 @@ md-grid-list {
   }
 }
 
+/*@media screen and (min-width: 1500px) {
+  .flexbox-container {
+    flex-direction: column
+  }
+  .flexbox-container > * {
+    flex: 1;
+  }
+  .flexbox-container > .welcome-hello-banner {
+    flex: 2;
+  }
+}*/
+
 #welcome-banner {
   width: 100%;
   /*height: 30%;*/
@@ -204,10 +232,9 @@ md-grid-list {
   font-size: 95px;
 }
 
-.title-video {
-  margin-bottom: -4px;
+.container.title-video {
   max-height: 500px;
-  height: 50vh;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -235,16 +262,21 @@ md-grid-list {
 
 .about {
   text-align: left;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 .welcome {
   text-align: center;
+  background: white; 
+  background: -webkit-linear-gradient(left top, grey, lightblue); 
+  background: -o-linear-gradient(bottom right, grey, lightblue); 
+  background: -moz-linear-gradient(bottom right, grey, lightblue);
+  background: linear-gradient(to top left, grey, lightblue); 
+  overflow: auto;
 }
 
 .howto {
   text-align: left;
-  padding: 20px;
 }
 
 p {
@@ -290,11 +322,9 @@ video.tut {
   bottom: 0;
   min-width: 50%; 
   min-height: 100%;
-  /*width: auto; */
-  /*height: auto; */
+  width: 100%;
   z-index: -100;
   object-fit: initial;
-  /*background-size: cover;*/
   overflow: hidden;
 }
 

@@ -40,11 +40,9 @@
     vm.log = function() {
       vm.isLoading = true;
       Algorithm.post(vm.data).success(function(data) {
-        console.log(data);
         Algorithm.get(
           {params: {userId: vm.data.userId}}
         ).success(function(data) {
-          console.log('simulations: ', data);
           localStorage.setItem('data', angular.toJson(data));
           vm.isLoading = false;
           Algorithm.redirect();
