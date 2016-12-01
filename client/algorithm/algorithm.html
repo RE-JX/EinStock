@@ -12,15 +12,15 @@
 </div>
 
 <!-- Main Algorithim selector div with input form -->
-<div layout="column" ng-controller="AlgorithmController">
+<div layout="column" ng-controller="AlgorithmController" class="about">
   <md-progress-linear md-mode="indeterminate" ng-show="vm.isLoading"></md-progress-linear>
-  <h2>Hello Settings<h2>
+  <h2>Create A Trading Simulation<h2>
     <md-content layout-padding>
       <form name="algoInput">
         <div layout-gt-xs="row">
           <div flex-gt-xs>
             <md-input-container>
-              <label>Choose A Ticker</label>
+              <label>Enter A Stock Ticker</label>
               <input md-minlength="1" md-maxlength="5" required md-no-asterisk name="tick" ng-model="vm.data.ticker">
               <div ng-messages="algoInput.tick.$error">
                 <div ng-if="!vm.tickTest()">Not a valid ticker</div>
@@ -34,7 +34,7 @@
         </div>
         <div layout-gt-xs="row">
           <div flex-gt-xs>
-            <h4>Pick an Algorithim below</h4>
+            <h4>Pick an Algorithm</h4>
             <div layout="row">
               <md-input-container>
                 <label>Algorithims</label>
@@ -49,9 +49,9 @@
         </div>
         <div layout-gt-xs="row">
           <div flex-gt-xs>
-            <h4>Select Start Date:</h4>
+            <h4>Select A Start Date:</h4>
             <md-datepicker ng-model="vm.data.startDate" md-placeholder="start date"></md-datepicker>
-            <h4>Select End Date:</h4>
+            <h4>Select An End Date:</h4>
             <md-datepicker ng-model="vm.data.endDate" md-placeholder="end date"></md-datepicker>
           </div>
         </div>

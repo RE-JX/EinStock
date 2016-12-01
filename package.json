@@ -6,7 +6,7 @@
   "scripts": {
     "start": "$(npm bin)/nodemon server/index.js",
     "test": "$(npm bin)/mocha",
-    "startdb": "postgres -D /usr/local/var/postgres"
+    "run-script": "postgres -D /usr/local/var/postgres"
   },
   "repository": {
     "type": "git",
