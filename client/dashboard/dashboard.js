@@ -31,7 +31,7 @@
     $scope.data = $scope.history.data[$scope.history.data.length - 1];
     $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
     $scope.labels = $scope.data.dateLabels;
-
+    $scope.tomorrow = true;
 
     // History changing function for button module
     $scope.changeHistoryOne = function() {
@@ -40,6 +40,7 @@
       $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
       $scope.labels = $scope.data.dateLabels;
       graphRender();
+      $scope.tomorrow = false;
     };
     $scope.changeHistoryTwo = function() {
       var data = history.data;
@@ -47,6 +48,7 @@
       $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
       $scope.labels = $scope.data.dateLabels;
       graphRender();
+      $scope.tomorrow = false;
     };
     $scope.changeHistoryThree = function() {
       var data = history.data;
@@ -54,6 +56,7 @@
       $scope.data.tickerSymbol = $scope.data.tickerSymbol.toUpperCase();
       $scope.labels = $scope.data.dateLabels;
       graphRender();
+      $scope.tomorrow = false;
     };
 
     //Graph render function to help with re-rendering
