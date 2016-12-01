@@ -58,6 +58,7 @@
     "moment": "^2.16.0",
     "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
+    "no-favicon": "0.0.1",
     "nodemon": "^1.11.0",
     "numeric": "^1.2.6",
     "open": "0.0.5",
