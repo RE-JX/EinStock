@@ -18,6 +18,7 @@
   <div class="container" id="navbar" ng-controller="LoginController">
     <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
       <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+      <md-nav-item md-nav-href="#/about" name="about">About</md-nav-item>
       <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
       <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
       <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
@@ -26,7 +27,7 @@
     </md-nav-bar>
   </div>
   <div class="howto">
-    <h2 class="md-display-2">How to get started with Einstock</h2>
+    <h2 class="md-display-2" style="text-align: center;">How to get started with Einstock</h2>
   </div>
   <md-divider></md-divider>
   <!-- Video Tutorial -->
@@ -44,7 +45,7 @@
           <md-list-item class="md-2-line" ng-click="null">
             <div class="md-list-item-text" layout-align="center none">
               <h2>Choose any stock</h2>
-              <p>Select one of the 4000 stocks traded on NYSE or Nasdaq</p>
+              <p>Select one of the over 7000 stocks traded on NYSE or Nasdaq</p>
             </div>
           </md-list-item>
           <md-list-item class="md-2-line" ng-click="null">
@@ -79,70 +80,6 @@
           </md-list-item>
         </md-list>
       </md-content>
-    </div>
-  </div>
-  <md-divider></md-divider>
-  <!-- Div for How to Use Algorithm Selector -->
-  <div class="howto">
-    <h2 class="md-display-2">How the heck do you use this Algorithm Selector?</h2>
-    <p>{{how}}</p>
-  </div>
-  <md-divider></md-divider>
-  <!-- Team Pics -->
-  <div id="team-container">
-    <h2 class="md-display-2">Meet Our Sexy Team</h2>
-    <!-- First Line of pics -->
-    <div class="team">
-      <h2>Kevin Kim</h2>
-      <h4>Product Owner</h4>
-      <img class="teampic" src="../assets/kev.jpg">
-      <div class="job-icon">
-        <a href="https://www.linkedin.com/in/kevin-ji-kim">
-          <img class="linkedin" src="../assets/linkedin.svg">
-        </a>
-        <a href="https://github.com/gsuppy">
-          <img class="github" src="../assets/github.png">
-        </a>
-      </div>
-    </div>
-    <div class="team">
-      <h2>Lucas Hawes</h2>
-      <h4>Scrum Master</h4>
-      <img class="teampic" src="/assets/lucas.png">
-      <div class="job-icon">
-        <a href="https://www.linkedin.com/in/lucashawes">
-          <img class="linkedin" src="../assets/linkedin.svg">
-        </a>
-        <a href="https://github.com/lhawes">
-          <img class="github" src="../assets/github.png">
-        </a>
-      </div>
-    </div>
-    <div class="team">
-      <h2>Natasha Che</h2>
-      <h4>Lead Algorithm Engineer</h4>
-      <img class="teampic" src="../assets/natasha.jpeg">
-      <div class="job-icon">
-        <a href="https://www.linkedin.com/in/natashache">
-          <img class="linkedin" src="../assets/linkedin.svg">
-        </a>
-        <a href="https://github.com/natashache">
-          <img class="github" src="../assets/github.png">
-        </a>
-      </div>
-    </div>
-    <div class="team">
-      <h2>Aaron Stevens</h2>
-      <h4>Lead Frontend and Server Engineer</h4>
-      <img class="teampic" src="../assets/aaron.jpg">
-      <div class="job-icon">
-        <a href="https://www.linkedin.com/in/aaron-stevens-565636129">
-          <img class="linkedin" src="../assets/linkedin.svg">
-        </a>
-        <a href="https://github.com/astev89">
-          <img class="github" src="../assets/github.png">
-        </a>
-      </div>
     </div>
   </div>
 </div>
