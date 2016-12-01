@@ -67,9 +67,9 @@ Simulation.belongsTo(User);
 User.hasMany(Simulation, {as: 'Simulations'});
 
 
-User.sync();
-StockData.sync();
-Simulation.sync();
+User.sync({force:false});
+StockData.sync({force:false});
+Simulation.sync({force:false});
 
 module.exports = {
   User: User,
