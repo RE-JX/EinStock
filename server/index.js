@@ -4,6 +4,7 @@ const port = 8080;
 const path = require('path');
 const bodyParser = require('body-parser');
 const moment = require('moment');
+const nofavicon = require("no-favicon");
 // //----------------------------------------
 const database = require('../database');
 const PreProcess = require('../mlas/preprocess.js');
@@ -11,27 +12,24 @@ const evaluation = require('../evaluator/simulate.js');
 // const NaiveBayes = require('../mlas/MLs/nb.js');
 const Forest = require('../mlas/MLs/rf.js');
 const Neighbors = require('../mlas/MLs/knn.js');
-const SupportVector = require('../mlas/MLs/svm.js');
-const Logistic = require('../mlas/MLs/logistic.js');
-const NaiveBayes = require('../mlas/MLs/nb.js');
-const NNA1 = require('../mlas/synaptic/synapticAlg1.js');
 
 // //-----------------middleware---------------
 // //------------------------------------------
 app.use(bodyParser.json());
+app.use(nofavicon());
 
 app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname + '/../client')));
+app.use(express.static(path.join(__dirname , '/../client')));
+ console.log(path.join(__dirname , '/../client'));
+app.use('/public', express.static(path.join(__dirname , '/../node_modules')));
 
-app.use('/public', express.static(path.join(__dirname + '/../node_modules')));
-app.use('/bower', express.static(path.join(__dirname + '/../bower_components')));
 // //-----------------routes-------------------
 // //------------------------------------------
 app.get('/', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
+  res.status(200).sendFile(path.join(__dirname , '/../client/index.html'));
 });
 
 require('./routes.js')(app);
@@ -45,6 +43,8 @@ database.db.sync().then(() => {
   console.log('listening on port: ', port);
 });
 
+// app.listen(process.env.PORT || port);
+// app.listen(process.env.PORT);
 
 // --------- testing algorithm, to be deleted later -----------------
 // var algorithmInstance = new NaiveBayes('08/31/2016', '11/18/2016', 'SPY');
