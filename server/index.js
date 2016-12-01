@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const moment = require('moment');
 // //----------------------------------------
-const database = require('../database');
+// const database = require('../database');
 const PreProcess = require('../mlas/preprocess.js');
 const evaluation = require('../evaluator/simulate.js');
 // const NaiveBayes = require('../mlas/MLs/nb.js');
@@ -35,13 +35,13 @@ require('./routes.js')(app);
 // //-----------------database-----------------
 // //------------------------------------------
 
-database.db.sync().then(() => {
-  console.log('database connected');
-  app.listen(process.env.PORT || port);
-  console.log('listening on port: ', port);
-});
+// database.db.sync().then(() => {
+//   console.log('database connected');
+//   app.listen(process.env.PORT || port);
+//   console.log('listening on port: ', port);
+// });
 
-
+app.listen(process.env.PORT || port);
 // --------- testing algorithm, to be deleted later -----------------
 // var algorithmInstance = new NaiveBayes('08/31/2016', '11/18/2016', 'SPY');
 // algorithmInstance.preProcess()
