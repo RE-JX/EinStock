@@ -46,10 +46,10 @@
           {params: {userId: vm.data.userId}}
         ).success(function(data) {
           console.log('simulations: ', data);
+          localStorage.setItem('data', angular.toJson(data));
+          vm.isLoading = false;
+          Algorithm.redirect();
         });
-        localStorage.setItem('data', angular.toJson(data));
-        vm.isLoading = false;
-        Algorithm.redirect();
       });
     };
 
