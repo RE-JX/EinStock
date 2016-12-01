@@ -4,6 +4,7 @@ const port = 8080;
 const path = require('path');
 const bodyParser = require('body-parser');
 const moment = require('moment');
+const nofavicon = require("no-favicon");
 // //----------------------------------------
 // const database = require('../database');
 const PreProcess = require('../mlas/preprocess.js');
@@ -15,6 +16,7 @@ const Neighbors = require('../mlas/MLs/knn.js');
 // //-----------------middleware---------------
 // //------------------------------------------
 app.use(bodyParser.json());
+app.use(nofavicon());
 
 app.use((req, res, next) => {
   next();
