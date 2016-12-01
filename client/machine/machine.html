@@ -2,22 +2,17 @@
 <div class="container" id="navbar" ng-controller="LoginController">
   <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
     <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
-    <md-nav-item md-nav-href="#/about" name="about">About</md-nav-item>
     <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
-    <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
-    <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
+    <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Choose Algorithm</md-nav-item>
+    <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn && dashShow" name="dashboard">Results</md-nav-item>
+    <md-nav-item md-nav-href="#/about" name="about">About Us</md-nav-item>
     <md-nav-item md-nav-href="#/welcome" ng-if="isLoggedIn" name="logout" ng-click="authService.logout();">Log Out</md-nav-item>
     <md-nav-item md-nav-href="#/welcome" ng-if="!isLoggedIn" name="login" ng-click="authService.login();">Log In</md-nav-item>
   </md-nav-bar>
 </div>
-
 <!-- Machine Learning Info -->
 <div class="machine" ng-controller="MachineController">
-  <!-- Learning Banner -->
-  <div >
-    <img class="learn-banner" src="/assets/learn.jpg">
-  </div>
-    <!-- Machine Learning -->
+  <!-- Machine Learning -->
   <div>
     <h2 class="md-display-2">What is Machine Learning?</h2>
     <p>{{about}}</p>
@@ -32,21 +27,7 @@
       <li ng-repeat="algorithm in algorithms"><strong>{{algoTitles[$index]}}: </strong> {{algorithm}} </li>
     </ul>
   </div>
-  <!-- Cool Machine Learning Gif -->
-  <div>
-    <img class="learn-gif" src="/assets/mlgif.gif">
+  <div class="machine-video">
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/IpGxLWOIZy4" frameborder="0" allowfullscreen></iframe>
   </div>
-
-<!-- <!--   <!-- Machine Learning Methods -->
-<!--   <div>
-    <h2 class="md-display-2">Some Common Methods</h2>
-    <p>{{methods}}</p>
-  </div>
-    Machine Learning Cheatsheet
-  <div>
-    <img class="learn-cheat" src="/assets/mlcheat.png">
-  </div> -->
 </div>
-
-
-

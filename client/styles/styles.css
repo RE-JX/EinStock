@@ -10,6 +10,15 @@ ul li {
   padding: 10px;
 }
 
+.machine-video {
+  width: 100%;
+  text-align: center;
+}
+
+.about {
+  margin: 20px 20px;
+}
+
 #footer {
   text-align: center;
 }
@@ -267,11 +276,11 @@ md-grid-list {
 
 .welcome {
   text-align: center;
-  background: white; 
-  background: -webkit-linear-gradient(left top, grey, lightblue); 
-  background: -o-linear-gradient(bottom right, grey, lightblue); 
+  background: white;
+  background: -webkit-linear-gradient(left top, grey, lightblue);
+  background: -o-linear-gradient(bottom right, grey, lightblue);
   background: -moz-linear-gradient(bottom right, grey, lightblue);
-  background: linear-gradient(to top left, grey, lightblue); 
+  background: linear-gradient(to top left, grey, lightblue);
   overflow: auto;
 }
 
@@ -315,12 +324,12 @@ video {
 }
 
 video.tut {
-  position: static; 
+  position: static;
   top: 0;
   left: 0;
-  right: 0; 
+  right: 0;
   bottom: 0;
-  min-width: 50%; 
+  min-width: 50%;
   min-height: 100%;
   width: 100%;
   z-index: -100;
