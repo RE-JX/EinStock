@@ -30,7 +30,7 @@
 > Buying and selling decisions are automatically generated according to the price predictions from the selected algorithm
 
 ### Comprehensive evaluation
-> Einstock reports various metrics after a simulation run to assess an algorithm's performance against market benchmarks
+> Einstock reports various assessment metrics after a simulation run to evaluate an algorithm's performance against market benchmarks
 
 ## Requirements
 
