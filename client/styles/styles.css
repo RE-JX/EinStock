@@ -204,10 +204,11 @@ md-grid-list {
   font-size: 95px;
 }
 
-.title-video {
-  margin-bottom: -4px;
+.container.title-video {
+  /*margin-bottom: -4px;*/
   max-height: 500px;
-  height: 50vh;
+  /*height: 50vh;*/
+  width: 100%;
   overflow: hidden;
 }
 
