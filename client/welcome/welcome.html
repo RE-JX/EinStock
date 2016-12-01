@@ -14,32 +14,74 @@
       <md-icon md-svg-src="assets/icons/timeline.svg"></md-icon>
     </md-button>
   </div>
-
-<!-- Navigation Bar -->
-<div class="container" id="navbar" ng-controller="LoginController">
-  <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
-    <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
-    <md-nav-item md-nav-href="#/about" name="about">About</md-nav-item>
-    <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
-    <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
-    <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
-    <md-nav-item md-nav-href="#/welcome" ng-if="isLoggedIn" name="logout" ng-click="authService.logout();">Log Out</md-nav-item>
-    <md-nav-item md-nav-href="#/welcome" ng-if="!isLoggedIn" name="login" ng-click="authService.login();">Log In</md-nav-item>
-  </md-nav-bar>
-</div>
-
-  <!-- Video Tutorial -->
-  <div class="welcome-hello-banner">
-    <!--<h1 class="md-display-3" id="welcome-header">How it works</h1>-->
-    <!--<div>
-    <img id="welcome-banner" src="/assets/balloons.jpg">
-  </div>-->
-    <video frameborder="0" autoplay="autoplay" loop="loop">
-      <source src="/assets/trialvid1.mp4" type="video/mp4" />
-    </video>
-    <!--<h1 id="layWrap" align="center">How it works</h1>-->
-    <div id="overlay"></div>
+  <!-- Navigation Bar -->
+  <div class="container" id="navbar" ng-controller="LoginController">
+    <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="Navigation bar">
+      <md-nav-item md-nav-href="#/welcome#navbar" name="welcome">Welcome</md-nav-item>
+      <md-nav-item md-nav-href="#/machine_learning" name="machine">Machine Learning</md-nav-item>
+      <md-nav-item md-nav-href="#/algorithm" ng-if="isLoggedIn" name="algorithm">Settings</md-nav-item>
+      <md-nav-item md-nav-href="#/dashboard" ng-if="isLoggedIn" name="dashboard">Dashboard</md-nav-item>
+      <md-nav-item md-nav-href="#/welcome" ng-if="isLoggedIn" name="logout" ng-click="authService.logout();">Log Out</md-nav-item>
+      <md-nav-item md-nav-href="#/welcome" ng-if="!isLoggedIn" name="login" ng-click="authService.login();">Log In</md-nav-item>
+    </md-nav-bar>
   </div>
+  <div class="howto">
+    <h2 class="md-display-2">How to get started with Einstock</h2>
+  </div>
+  <md-divider></md-divider>
+  <!-- Video Tutorial -->
+  <div class="flexbox-container">
+    <div class="welcome-hello-banner">
+      <video class="tut" frameborder="0" autoplay="autoplay" loop="loop">
+        <source src="/assets/trialvid1.mp4" type="video/mp4" />
+      </video>
+      <!--<h1 id="layWrap" align="center">How it works</h1>-->
+      <div id="overlay"></div>
+    </div>
+    <div class="flex-item">
+      <md-content>
+        <md-list flex style="margin-top: 0">
+          <md-list-item class="md-2-line" ng-click="null">
+            <div class="md-list-item-text" layout-align="center none">
+              <h2>Choose any stock</h2>
+              <p>Select one of the 4000 stocks traded on NYSE or Nasdaq</p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null">
+            <div class="md-list-item-text" layout-align="center center">
+              <h2>Choose an algorithm</h2>
+              <p>Einstoc allows you to choose among a wide range of machine learning algorithms in predicting the price movement of a stock</p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null">
+            <div class="md-list-item-text" layout-align="center center">
+              <h2>Backtest with historical data</h2>
+              <p>Pick a test period and see how well an algorithm does in predicting the daily price movement of your stock over that period. Our trading simulator reports the profit/loss that could have occurred if you had followed the algorithm's predictions in your trading</p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null">
+            <div class="md-list-item-text" layout-align="center center">
+              <h2>Comprehensive stats</h2>
+              <p>After a simulation is run, Einstoc generates various analytics against market benchmarks to help you gauge the performance of an algorithm over the test period of your choice</p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null">
+            <div class="md-list-item-text" layout-align="center center">
+              <h2>Future prediction</h2>
+              <p>Want to see what's the predicted price movement of your stock for tomorrow? Just check your dashboard</p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null">
+            <div class="md-list-item-text" layout-align="center center">
+              <h2>Store your simulation</h2>
+              <p>All your simulation runs are stored in our database. You can refer back to them anytime</p>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </div>
+  </div>
+  <md-divider></md-divider>
   <!-- Div for How to Use Algorithm Selector -->
   <div class="howto">
     <h2 class="md-display-2">How the heck do you use this Algorithm Selector?</h2>
