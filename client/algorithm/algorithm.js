@@ -20,8 +20,7 @@
       'Logistic Regression',
       'Naive Bayes',
       'Neural Networks',
-      'Random Forests',
-      'Support Vector Machine'
+      'Random Forests'
     ];
     //Model
     vm.selection = vm.algSelections[0];
