@@ -1,34 +1,41 @@
-# Project Name
+# Einstock Algo Trader
 
-> Pithy project description
+> A stock trading simulation app that uses machine learning algorithms to predict equity price trends.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Kevin Kim
+  - __Scrum Master__: Lucas Hawes
+  - __Lead Frontend Engineer__: Aaron Stevens
+  - __Lead Backend Engineer__: Natasha Che
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Features](#features)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
+    1. [Tasks] (#tasks)
 1. [Contributing](#contributing)
 
-## Usage
+## Features
 
-> Some usage instructions
+### Multiple algorithms
+> Popular machine learning algorithms, including K Nearest Neighbors, Logistic regressions, Naive Bayes, Neural Networks, and Random Forests, are available for testing
+
+### Wide range of equity selections
+> Users can test algorithm performance with historical data for over 7000 stocks traded on NYSE and Nasdaq
+
+### Hassle-free trade simulation
+> Buying and selling decisions are automatically generated according to the price predictions from the selected algorithm
+
+### Comprehensive evaluation
+> Einstock reports various metrics after a simulation run to assess an algorithm's performance against market benchmarks
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
+- Node 6.1.x
 - Postgresql 9.1.x
-- etc
-- etc
 
 ## Development
 
@@ -37,15 +44,19 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
 bower install
 ```
 
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
+### Tasks
+Start the local database:
+```sh
+postgres -D /usr/local/var/postgres
+```
+Start the server:
+```sh
+npm start
+```
 
 ## Contributing
 
