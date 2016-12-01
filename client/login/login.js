@@ -14,5 +14,6 @@
     $scope.buttonSwitch = function() {
       $scope.isLoggedIn = !$scope.isLoggedIn;
     }
+    $scope.dashShow = localStorage.getItem('data') !== null ? true : false;
   }
 })();
