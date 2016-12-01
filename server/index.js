@@ -11,10 +11,6 @@ const evaluation = require('../evaluator/simulate.js');
 // const NaiveBayes = require('../mlas/MLs/nb.js');
 const Forest = require('../mlas/MLs/rf.js');
 const Neighbors = require('../mlas/MLs/knn.js');
-const SupportVector = require('../mlas/MLs/svm.js');
-const Logistic = require('../mlas/MLs/logistic.js');
-const NaiveBayes = require('../mlas/MLs/nb.js');
-const NNA1 = require('../mlas/synaptic/synapticAlg1.js');
 
 // //-----------------middleware---------------
 // //------------------------------------------
