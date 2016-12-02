@@ -1,4 +1,6 @@
-
+md-tooltip ._md-content {
+    height: auto;
+}
 
 /*Additional styling on top of our Angular Material*/
 body {
@@ -17,6 +19,11 @@ ul li {
 
 .about {
   margin: 20px 20px;
+}
+
+.info {
+  padding: 1em;
+  margin: 1em;
 }
 
 #footer {
