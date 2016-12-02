@@ -237,20 +237,12 @@ Logistic.prototype.train = function() {
   };
 
   var options = {};
-  // options.input = trainingFeatures;
-  // options.label = trainingOutcomes.map(item => [item, 1 - item]);
-  // // options.label = trainingOutcomes.map(item => [item]);
-  // console.log('labels: ', options.label);
-  // options.n_in = trainingFeatures[0].length;
-  // options.n_out = 2;
-
-  options.trainingData = trainingFeatures;
-  options.trainingLabel = trainingOutcomes;
-  options.lr = 0.001;
-  options.epochs = 10000;
-
-  var training_epochs = 10000, lr = 0.000001; //<----- epochs and learning rate
-
+  options.input = trainingFeatures;
+  options.label = trainingOutcomes.map(item => [item]);
+  options.n_in = trainingFeatures[0].length;
+  options.n_out = 1;
+  var training_epochs = 800, lr = 0.001; //<----- epochs and learning rate
+  // console.log('trainingFeatures: ', trainingFeatures);
   logistic = new LogisticRegression(options);
   // logistic.set('log level',1);
   // logistic.train({
