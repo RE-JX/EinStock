@@ -44,12 +44,12 @@
       <!-- Trading timeline -->
       <md-grid-tile md-rowspan="2" md-colspan="4" ng-if="tomorrow">
         <md-grid-tile-header>
-          <span class="md-headline">
+          <h3 class="md-headline">
             Simulated Trading Activities
             <md-button class="md-icon-button" ng-click="showHelpBuySell($event)" >
               <i class="material-icons">help</i>
             </md-button>
-          </span>
+          </h3>
         </md-grid-tile-header>
         <div id="barchart">
           <canvas id="bar" class="chart chart-bar" chart-data="timeline" chart-labels="labels" chart-series="timelineSeries" chart-options="timelineOptions" chart-colors="timelineColors">
