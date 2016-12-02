@@ -16,13 +16,14 @@
   <md-progress-linear md-mode="indeterminate" ng-show="vm.isLoading"></md-progress-linear>
 </div>
 <div layout="column" ng-controller="AlgorithmController" class="about">
-  <h2>Create A Trading Simulation</h2>
     <md-content layout-padding>
-      <form name="algoInput">
+  <h2 class="md-display-2" style="margin-bottom:0px;">Create A Trading Simulation</h2>
+      <!-- <form name="algoInput"> -->
+        <!-- <div layout-gt-xs="row"> -->
+          <!-- <div flex-gt-xs> -->
         <div layout-gt-xs="row">
-          <div flex-gt-xs>
             <md-input-container>
-              <label>Stock</label>
+              <h3>Stock</h3>
               <input md-minlength="1" md-maxlength="5" required md-no-asterisk name="tick" ng-model="vm.data.ticker">
               <div ng-messages="algoInput.tick.$error">
                 <div ng-if="!vm.tickTest()">Not a valid ticker</div>
@@ -32,14 +33,14 @@
                 <div ng-message="md-minlength">The ticker must be more than one character long.</div>
               </div>
             </md-input-container>
-          </div>
-        </div>
-        <div layout-gt-xs="row">
-          <div flex-gt-xs>
+          <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div layout-gt-xs="row"> -->
+          <!-- <div flex-gt-xs> -->
             <!--<h4>Pick an Algorithm</h4>-->
-            <div layout="row">
-              <md-input-container>
-                <label>Algorithims</label>
+            <!-- <div layout="row"> -->
+              <md-input-container style="vertical-align:top;">
+                <h3>Algorithims</h3>
                 <md-select ng-model="vm.data.algorithm">
                   <md-optgroup label="Algorithims">
                     <md-option ng-value="item" ng-repeat="item in vm.algSelections">{{item}}</md-option>
@@ -47,15 +48,15 @@
                 </md-select>
               </md-input-container>
             </div>
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> -->
         <div layout-gt-xs="row">
-          <div class="startDate">
-            <h4>Select A Start Date:</h4>
+          <div col-md-6>
+            <h3>Start Date:</h3>
             <md-datepicker ng-model="vm.data.startDate" md-placeholder="start date"></md-datepicker>
           </div>
           <div col-md-6>
-            <h4>Select An End Date:</h4>
+            <h3>End Date:</h3>
             <md-datepicker ng-model="vm.data.endDate" md-placeholder="end date"></md-datepicker>
           </div>
         </div>
@@ -65,7 +66,6 @@
               class="md-raised md-primary submit" type="submit">Submit</md-button>
           </div>
         </div>
-      </form>
-    </md-content>
+      <!-- </form> -->
   </div>
 </div>
