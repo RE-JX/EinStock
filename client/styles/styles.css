@@ -31,8 +31,9 @@ ul li {
 }
 
 .arrow {
-  height: 200px;
-  width: 200px;
+  height: 60%;
+  width: 60%;
+padding-top: 2em;
 }
 
 .machine {
@@ -400,20 +401,26 @@ canvas {
   margin: 0 auto;
 }
 
+canvas#bar {
+  padding: 25px;
+  width: calc(100% - 2*25px) !important;
+  height: calc(100% - 2*25px) !important;
+}
 canvas#radar {
-  padding: 50px;
-  width: calc(100% - 2*50px) !important;
-  height: calc(100% - 2*50px) !important;
+  padding: 4px;
+  width: calc(100% - 2*4px) !important;
+  height: calc(100% - 2*4px) !important;
 }
 canvas#pie {
   padding: 50px;
   width: calc(100% - 2*50px - 150px) !important;
   height: calc(100% - 2*50px - 150px) !important;
+  max-width: 60% !important;
 }
 canvas#line {
   padding: 25px;
-  width: calc(100% - 2*25px - 150px) !important;
-  height: calc(100% - 2*25px - 150px) !important;
+  width: calc(100% - 2*25px) !important;
+  height: calc(100% - 2*25px) !important;
 }
 canvas#bubble {
   padding: 25px;
@@ -442,34 +449,29 @@ md-list.flex {
   width: 100%;
   vertical-align:top;
 }
-.chart-block.arrow {
-max-width: calc(30% - 2px);
-max-height:100%;
+.chart-block.arrow-container {
+  max-width: calc(30% - 2px);
 }
-.chart-block.arrow img {
+.chart-block.arrow-container img {
   margin:0 auto;
   display: block;
 }
 
 .chart-block.barchart {
-max-width: calc(70% - 2px);
-max-height:100%;
+  max-width: calc(70% - 2px);
 
 }
+
 .chart-block.radar {
-max-width:100%;
-max-height:100%;
-
+  max-width: calc(50% - 2px);
 }
+
 .chart-block.pie {
-max-width:100%;
-max-height:100%;
-
+  max-width: calc(50% - 2px);
 }
-.chart-block.line {
-max-width:100%;
-max-height:100%;
 
+.chart-block.line {
+  max-width:100%;
 }
 
 

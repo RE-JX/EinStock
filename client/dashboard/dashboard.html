@@ -62,26 +62,22 @@
           <i class="material-icons">help</i>
         </md-button>
       </h3>
-      <div id="barchart">
         <canvas id="bar" class="chart chart-bar" chart-data="timeline" chart-labels="labels" chart-series="timelineSeries" chart-options="timelineOptions" chart-colors="timelineColors">
         </canvas>
-      </div>
     </div>
 
 
 
     <!-- Tomorrow Up or Down -->
-    <div class="chart-block arrow">
+    <div class="chart-block arrow-container">
       <h3 class="md-headline">
         Price Prediction
         <md-button class="md-icon-button" ng-click="showHelpTomorrow($event)" >
           <i class="material-icons">help</i>
         </md-button>
       </h3>
-      <div id="tomorrow">
         <img ng-if="history.tomorrow > 0" class="arrow" src="../assets/icons/arrowup.png">
         <img ng-if="history.tomorrow < 1" class="arrow" src="../assets/icons/arrowdown.png">
-      </div>
     </div>
 
 
