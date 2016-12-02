@@ -301,11 +301,11 @@ md-grid-list {
 .welcome {
   text-align: center;
   background: white;
-  background: -webkit-linear-gradient(left top, grey, lightblue);
+/*  background: -webkit-linear-gradient(left top, grey, lightblue);
   background: -o-linear-gradient(bottom right, grey, lightblue);
   background: -moz-linear-gradient(bottom right, grey, lightblue);
   background: linear-gradient(to top left, grey, lightblue);
-  overflow: auto;
+*/  overflow: auto;
 }
 
 .howto {
