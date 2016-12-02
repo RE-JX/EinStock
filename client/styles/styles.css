@@ -31,8 +31,9 @@ ul li {
 }
 
 .arrow {
-  height: 200px;
-  width: 200px;
+  height: 60%;
+  width: 60%;
+padding-top: 2em;
 }
 
 .machine {
@@ -147,11 +148,12 @@ md-grid-list {
   width: 100%;
 }
 
-#barchart {
+/*#barchart {
   display: block;
   width: 80%;
   height: 100%;
-}
+margin: 0 auto;
+}*/
 
 #disclaimer {
   font-size: 15px;
@@ -166,7 +168,7 @@ md-grid-list {
 .dashboard {
 /*  background-color: #CFD8DC;
 */
-  background-color: #949FB1;
+  /*background-color: #949FB1;*/
 }
 
 #welcome-header {
@@ -301,11 +303,11 @@ md-grid-list {
 .welcome {
   text-align: center;
   background: white;
-  background: -webkit-linear-gradient(left top, grey, lightblue);
+/*  background: -webkit-linear-gradient(left top, grey, lightblue);
   background: -o-linear-gradient(bottom right, grey, lightblue);
   background: -moz-linear-gradient(bottom right, grey, lightblue);
   background: linear-gradient(to top left, grey, lightblue);
-  overflow: auto;
+*/  overflow: auto;
 }
 
 .howto {
@@ -399,20 +401,26 @@ canvas {
   margin: 0 auto;
 }
 
+canvas#bar {
+  padding: 25px;
+  width: calc(100% - 2*25px) !important;
+  height: calc(100% - 2*25px) !important;
+}
 canvas#radar {
-  padding: 50px;
-  width: calc(100% - 2*50px) !important;
-  height: calc(100% - 2*50px) !important;
+  padding: 4px;
+  width: calc(100% - 2*4px) !important;
+  height: calc(100% - 2*4px) !important;
 }
 canvas#pie {
   padding: 50px;
   width: calc(100% - 2*50px - 150px) !important;
   height: calc(100% - 2*50px - 150px) !important;
+  max-width: 60% !important;
 }
 canvas#line {
   padding: 25px;
-  width: calc(100% - 2*25px - 150px) !important;
-  height: calc(100% - 2*25px - 150px) !important;
+  width: calc(100% - 2*25px) !important;
+  height: calc(100% - 2*25px) !important;
 }
 canvas#bubble {
   padding: 25px;
@@ -428,6 +436,42 @@ figcaption h2 {
 md-list.flex {
   padding: 0;
   margin: 0;
+}
+
+.md-headline {
+  background: grey;
+  color: white;
+  padding: 0 0 0 12px;
+}
+
+.chart-block {
+  display: inline-block;
+  width: 100%;
+  vertical-align:top;
+}
+.chart-block.arrow-container {
+  max-width: calc(30% - 2px);
+}
+.chart-block.arrow-container img {
+  margin:0 auto;
+  display: block;
+}
+
+.chart-block.barchart {
+  max-width: calc(70% - 2px);
+
+}
+
+.chart-block.radar {
+  max-width: calc(50% - 2px);
+}
+
+.chart-block.pie {
+  max-width: calc(50% - 2px);
+}
+
+.chart-block.line {
+  max-width:100%;
 }
 
 
