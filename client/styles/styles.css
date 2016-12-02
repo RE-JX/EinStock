@@ -102,13 +102,25 @@ h3 {
 }
 
 h4 {
-  font-style: italic;
+  /*font-style: italic;*/
   font-family: 'Open Sans';
+}
+
+#createHeader {
+  padding-left: 20px;
+}
+
+.layout-column {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    margin: 0;
 }
 
 .setting {
   padding-left: 20px;
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 md-grid-list {
@@ -279,6 +291,11 @@ md-grid-list {
 .about {
   text-align: left;
   /*padding: 20px;*/
+}
+
+.startDate {
+  margin-right: 50px;
+  margin-bottom: 20px;
 }
 
 .welcome {
