@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="chart-block" ng-if="!tomorrow">
+    <div class="chart-block barchart" ng-if="!tomorrow">
       <h3 class="md-headline">
         Simulated Trading Activities
         <md-button class="md-icon-button" ng-click="showHelpBuySell($event)" >
@@ -71,7 +71,7 @@
 
 
     <!-- Tomorrow Up or Down -->
-    <div class="chart-block">
+    <div class="chart-block arrow">
       <h3 class="md-headline">
         Price Prediction
         <md-button class="md-icon-button" ng-click="showHelpTomorrow($event)" >
@@ -88,7 +88,7 @@
 
 
     <!-- Radar Chart -->
-    <div class="chart-block">
+    <div class="chart-block radar">
       <h3 class="md-headline">
         Investment Return Comparison
         <md-button class="md-icon-button" ng-click="showHelpRadar($event)" >
@@ -102,7 +102,7 @@
     </div>
 
     <!-- Pie Chart -->
-    <div class="chart-block">
+    <div class="chart-block pie">
       <h3 class="md-headline">
         Prediction Accuracy
         <md-button class="md-icon-button" ng-click="showHelpPie($event)" >
@@ -117,9 +117,9 @@
 
 
 
-    <div id="line-chart">
+    <!-- <div id="line-chart"> -->
       <!-- Bar Line Chart -->
-      <div class="chart-block">
+      <div class="chart-block line">
         <h3 class="md-headline ">
           Daily Profile of Asset Values
           <md-button class="md-icon-button" ng-click="showHelpBarLine($event)" >
@@ -131,7 +131,7 @@
           </canvas>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
   </div>
 

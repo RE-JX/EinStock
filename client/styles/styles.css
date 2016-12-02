@@ -151,6 +151,7 @@ md-grid-list {
   display: block;
   width: 80%;
   height: 100%;
+margin: 0 auto;
 }
 
 #disclaimer {
@@ -428,6 +429,12 @@ figcaption h2 {
 md-list.flex {
   padding: 0;
   margin: 0;
+}
+
+.md-headline {
+  background: grey;
+  color: white;
+  padding: 0 0 0 12px;
 }
 
 
