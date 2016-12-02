@@ -147,12 +147,12 @@ md-grid-list {
   width: 100%;
 }
 
-#barchart {
+/*#barchart {
   display: block;
   width: 80%;
   height: 100%;
 margin: 0 auto;
-}
+}*/
 
 #disclaimer {
   font-size: 15px;
@@ -435,6 +435,41 @@ md-list.flex {
   background: grey;
   color: white;
   padding: 0 0 0 12px;
+}
+
+.chart-block {
+  display: inline-block;
+  width: 100%;
+  vertical-align:top;
+}
+.chart-block.arrow {
+max-width: calc(30% - 2px);
+max-height:100%;
+}
+.chart-block.arrow img {
+  margin:0 auto;
+  display: block;
+}
+
+.chart-block.barchart {
+max-width: calc(70% - 2px);
+max-height:100%;
+
+}
+.chart-block.radar {
+max-width:100%;
+max-height:100%;
+
+}
+.chart-block.pie {
+max-width:100%;
+max-height:100%;
+
+}
+.chart-block.line {
+max-width:100%;
+max-height:100%;
+
 }
 
 
