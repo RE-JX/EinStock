@@ -44,7 +44,12 @@
       <!-- Trading timeline -->
       <md-grid-tile md-rowspan="2" md-colspan="4" ng-if="tomorrow">
         <md-grid-tile-header>
-          <h3 class="md-headline">Simulated Trading Activities</h3>
+          <h3 class="md-headline">
+            Simulated Trading Activities
+            <md-button class="md-icon-button" ng-click="showHelpBuySell($event)" >
+              <i class="material-icons">help</i>
+            </md-button>
+          </h3>
         </md-grid-tile-header>
         <div id="barchart">
           <canvas id="bar" class="chart chart-bar" chart-data="timeline" chart-labels="labels" chart-series="timelineSeries" chart-options="timelineOptions" chart-colors="timelineColors">
@@ -53,7 +58,12 @@
       </md-grid-tile>
       <md-grid-tile md-rowspan="2" md-colspan="5" ng-if="!tomorrow">
         <md-grid-tile-header>
-          <h3 class="md-headline">Simulated Trading Activities</h3>
+          <h3 class="md-headline">
+            Simulated Trading Activities
+            <md-button class="md-icon-button" ng-click="showHelpBuySell($event)" >
+              <i class="material-icons">help</i>
+            </md-button>
+          </h3>
         </md-grid-tile-header>
         <div id="barchart">
           <canvas id="bar" class="chart chart-bar" chart-data="timeline" chart-labels="labels" chart-series="timelineSeries" chart-options="timelineOptions" chart-colors="timelineColors">
@@ -63,20 +73,27 @@
       <!-- Tomorrow Up or Down -->
       <md-grid-tile md-rowspan="2" md-colspan="1" ng-if="tomorrow">
         <md-grid-tile-header>
-          <h3 class="md-headline">Price Prediction</h3>
+          <h3 class="md-headline">
+            Price Prediction
+            <md-button class="md-icon-button" ng-click="showHelpTomorrow($event)" >
+              <i class="material-icons">help</i>
+            </md-button>
+          </h3>
         </md-grid-tile-header>
         <div id="tomorrow">
           <img ng-if="history.tomorrow > 0" class="arrow" src="../assets/icons/arrowup.png">
           <img ng-if="history.tomorrow < 1" class="arrow" src="../assets/icons/arrowdown.png">
         </div>
-        <md-grid-tile-footer>
-          <h3 class="md-caption">*for next available trading day</h3>
-        </md-grid-tile-footer>
       </md-grid-tile>
       <!-- Radar Chart -->
       <md-grid-tile md-rowspan="2" md-colspan="3">
         <md-grid-tile-header>
-          <h3 class="md-headline">Investment Return Comparison</h3>
+          <h3 class="md-headline">
+            Investment Return Comparison
+            <md-button class="md-icon-button" ng-click="showHelpRadar($event)" >
+            <i class="material-icons">help</i>
+            </md-button>
+          </h3>
         </md-grid-tile-header>
         <div id="radarchart">
           <canvas id="radar" class="chart chart-radar" chart-options="radarOptions" chart-data="radar" chart-labels="radarLabel" chart-colors="colors">
@@ -86,7 +103,12 @@
       <!-- Pie Chart -->
       <md-grid-tile md-rowspan="2" md-colspan="2">
         <md-grid-tile-header>
-          <h3 class="md-headline" ">Success Rate of Predictions</h3>
+          <h3 class="md-headline" ">
+            Prediction Accuracy
+            <md-button class="md-icon-button" ng-click="showHelpPie($event)" >
+              <i class="material-icons">help</i>
+            </md-button>
+          </h3>
         </md-grid-tile-header>
         <div id="piechart ">
           <canvas id="pie " class="chart chart-pie " chart-data="pie " chart-labels="pieLabels" chart-options="pieOptions " chart-series="pieSeries">
@@ -96,10 +118,15 @@
       <!-- Bar Line Chart -->
       <md-grid-tile md-rowspan="3" md-colspan="5">
         <md-grid-tile-header>
-          <h3 class="md-headline ">Daily Profile of Asset Values</h3>
+          <h3 class="md-headline ">
+            Daily Profile of Asset Values
+            <md-button class="md-icon-button" ng-click="showHelpBarLine($event)" >
+              <i class="material-icons">help</i>
+            </md-button>
+          </h3>
         </md-grid-tile-header>
         <div id="barlinechart ">
-          <canvas id="line " class="chart-bar " chart-data="line " chart-labels="labels " chart-series="lineSeries " chart-options="lineOptions " chart-dataset-override="datasetOverride " chart-click="onClick ">
+          <canvas id="line " yAxisID="lineChartYAxis" class="chart-bar " chart-data="line " chart-labels="labels " chart-series="lineSeries " chart-options="lineOptions " chart-dataset-override="datasetOverride " chart-click="onClick ">
           </canvas>
         </div>
       </md-grid-tile>

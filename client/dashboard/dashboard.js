@@ -11,7 +11,7 @@
     .controller('DashboardController', DashboardController);
 
   SpeedController.$inject = ['$scope', '$timeout', '$mdDialog'];
-  DashboardController.$inject = ['$scope', 'Algorithm'];
+  DashboardController.$inject = ['$scope', 'Algorithm', '$mdDialog'];
 
   //Sidebar navigation controller
   function SpeedController($scope, $timeout, $mdDialog) {
@@ -23,7 +23,7 @@
   };
 
   //Using to pass local storage to scope of all charts in dashboard
-  function DashboardController($scope, Algorithm) {
+  function DashboardController($scope, Algorithm, $mdDialog) {
 
     var history = angular.fromJson(localStorage.getItem('data'));
     $scope.history = history;
@@ -33,6 +33,161 @@
     $scope.labels = $scope.data.dateLabels;
     $scope.tomorrow = true;
 
+    // Dialog templates for the info buttons
+    $scope.showHelpBuySell = function($event) {
+        $mdDialog.show({
+          targetEvent: $event,
+          template: '<md-dialog>' +
+                    '  <md-dialog-content class="info">' +
+                    '    <h3>Trading Decisions</h3>' +
+                    '    <p>This chart shows the buying/selling actions ' +
+                    '    simulated over the test period if one were to trade' +
+                    '    following the algorithm\'s price trend predictions.</p>' +
+                    '  </md-dialog-content>' +
+                    '  <div class="md-actions">' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Got it' +
+                    '    </md-button>' +
+                    '  </div>' +
+                    '</md-dialog>',
+          controller: function($scope, $mdDialog){
+            $scope.closeDialog = function(){$mdDialog.hide();};
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        });
+    };
+
+    $scope.showHelpTomorrow = function($event) {
+        $mdDialog.show({
+          targetEvent: $event,
+          template: '<md-dialog>' +
+                    '  <md-dialog-content class="info">' +
+                    '    <h3>Next Day Prediction</h3>' +
+                    '    <p>Up-arrow indicates the algorithm predicts an upward movement ' +
+                    '    in the underlining stock price for the next trading day. ' +
+                    '    Down-arrow indicates the opposite.</p>' +
+                    '  </md-dialog-content>' +
+                    '  <div class="md-actions">' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Got it' +
+                    '    </md-button>' +
+                    '  </div>' +
+                    '</md-dialog>',
+          controller: function($scope, $mdDialog){
+            $scope.closeDialog = function(){$mdDialog.hide();};
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        });
+    };
+
+    $scope.showHelpRadar = function($event) {
+        $mdDialog.show({
+          targetEvent: $event,
+          template: '<md-dialog>' +
+                    '  <md-dialog-content class="info">' +
+                    '    <h3>Investment Returns</h3>' +
+                    '    <p><strong>Algorithm Cumulative Return: </strong>Total simulated investment returns over the test period if tradings were conducted following the algorithm\' predictions </p>' +
+                    '    <p><strong>Average Algorithm Return: </strong>Daily average of the cumulative return </p>' +
+                    '    <p><strong>Sharpe Ratio: </strong>Average algorithm return divided by standard deviation of daily returns. This is a common measure for risk-adjusted returns </p>' +
+                    '    <p><strong>Market Benchmark: </strong>Cumulative returns over the test period for buying and holding S&P 500 index </p>' +
+                    '    <p><strong>Self Benchmark: </strong>Cumulative returns over the test period for buying and holding the underlining stock </p>' +
+                    '  </md-dialog-content>' +
+                    '  <div class="md-actions">' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Got it' +
+                    '    </md-button>' +
+                    '  </div>' +
+                    '</md-dialog>',
+          controller: function($scope, $mdDialog){
+            $scope.closeDialog = function(){$mdDialog.hide();};
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        });
+    };
+
+    $scope.showHelpPie = function($event) {
+        $mdDialog.show({
+          targetEvent: $event,
+          template: '<md-dialog>' +
+                    '  <md-dialog-content class="info">' +
+                    '    <h3>Prediction Accuracy</h3>' +
+                    '    <p><strong>Successful predictions: </strong>Percentage of the test period when the algorithm\'s prediction for the next day matches the actual direction of price change</p>' +
+                    '    <p><strong>Inclusion Errors: </strong>Percentage of the test period when the algorithm\'s prediction was "up" while the actual price movement was "down" </p>' +
+                    '    <p><strong>Exclusion Errors: </strong>Percentage of the test period when the algorithm\' prediction was "down" while the actual price movement was "up" </p>' +
+                    '  </md-dialog-content>' +
+                    '  <div class="md-actions">' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Got it' +
+                    '    </md-button>' +
+                    '  </div>' +
+                    '</md-dialog>',
+          controller: function($scope, $mdDialog){
+            $scope.closeDialog = function(){$mdDialog.hide();};
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        });
+    };
+
+    $scope.showHelpBarLine = function($event) {
+        $mdDialog.show({
+          targetEvent: $event,
+          template: '<md-dialog>' +
+                    '  <md-dialog-content class="info">' +
+                    '    <h3>Daily Asset Values</h3>' +
+                    '    <p>This chart shows the evolution of total portfolio asset values over the test period if $1000 had been invested at the beginning of the test period and tradings conducted according to algorithm predictions. This result is shown against the evolution of total asset values if the $1000 had been invested in buying and holding the S&P 500 index or the underlining stock. </p>' +
+                    '  </md-dialog-content>' +
+                    '  <div class="md-actions">' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Got it' +
+                    '    </md-button>' +
+                    '  </div>' +
+                    '</md-dialog>',
+          controller: function($scope, $mdDialog){
+            $scope.closeDialog = function(){$mdDialog.hide();};
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        });
+    };
     // History changing function for button module
     $scope.changeHistoryOne = function() {
       var data = history.data;
@@ -66,6 +221,7 @@
       $scope.colors = ['#FDB45C'];
       $scope.radar = [];
       $scope.radarOptions = {
+        responsive: true,
         scale: {
           pointLabels: {
             fontSize: 16
@@ -91,6 +247,7 @@
       $scope.pie = [$scope.data.successRate * 100, $scope.data.inclusionError * 100, $scope.data.exclusionError * 100];
 
       $scope.pieOptions = {
+        responsive: true,
         legend: {
           display: true,
           fullWidth: true,
@@ -121,6 +278,7 @@
       $scope.timeline.push($scope.buying);
       $scope.timeline.push($scope.selling);
       $scope.timelineOptions = {
+        responsive: true,
         legend: {
           display: true,
           fullWidth: true,
@@ -161,7 +319,10 @@
         'Trading from algorithm predictions'
       ];
 
+      $scope.lineChartYAxis = '$';
+
       $scope.lineOptions = {
+        responsive: true,
         legend: {
           display: true,
           fullWidth: true,
@@ -182,6 +343,11 @@
           }],
           yAxes: [{
             ticks: {
+              fontSize: 20
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Dollars',
               fontSize: 20
             }
           }]

@@ -46,49 +46,16 @@ database.db.sync().then(() => {
 // app.listen(process.env.PORT || port);
 // app.listen(process.env.PORT);
 
-// --------- testing algorithm, to be deleted later -----------------
-// var algorithmInstance = new NaiveBayes('08/31/2016', '11/18/2016', 'SPY');
-// algorithmInstance.preProcess()
-//   .then(function() {
-//     algorithmInstance.train();
-//   })
-//   .then(function() {
-//     algorithmInstance.predict();
-//   })
-//   .then(function() {
-//     return evaluation('d', '08/31/2016', '11/18/2016', 'SPY', algorithmInstance.predictions)
-//   })
-//   .then(function(data) {
-//     console.log(data);
-//   });
 
+// ------- example usage of preProcess + algorithm, to be deleted later --------------
+// var logistic = new Logistic('10/03/2016', '11/03/2016', 'AAPL');
+//   logistic.preProcess()
+//     .then(function() {
+//       console.log('training!');
+//       logistic.train();
+//     })
+//     .then(function() {
+//       console.log('predicting!');
+//       logistic.predict();
+//     });
 
-// NNA1('AAPL','2016-01-01', '2016-01-10')
-//   .then(function(result) {
-//     console.log('predictions: ', result);
-//     return evaluation('d', '2016-01-01', '2016-01-10', 'AAPL', result);
-//   })
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-// var algorithmInstance = new Forest('11/07/2016', '11/28/2016', 'AAPL');
-// algorithmInstance.preProcess()
-//   .then(function() {
-//     algorithmInstance.train();
-//   })
-//   .then(function() {
-//     return algorithmInstance.predictTomorrow();
-//   })
-//   // .then(function() {
-//   //   return algorithmInstance.predict();
-//   // })
-//   // .then(function() {
-//   //   return evaluation('d', '11/07/2016', '11/28/2016', 'AAPL', algorithmInstance.predictions);
-//   // })
-//   // .then(function(data) {
-//   //   console.log(data);
-//   // })
-//   .then(function(data){
-//     console.log('prediction for tomorrow: ',data);
-//   })
