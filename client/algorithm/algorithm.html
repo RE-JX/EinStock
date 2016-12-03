@@ -23,7 +23,7 @@
           <!-- <div flex-gt-xs> -->
         <div layout-gt-xs="row">
             <md-input-container>
-              <h3>Stock</h3>
+              <h3>Stock: </h3>
               <input md-minlength="1" md-maxlength="5" required md-no-asterisk name="tick" ng-model="vm.data.ticker">
               <div ng-messages="algoInput.tick.$error">
                 <div ng-if="!vm.tickTest()">Not a valid ticker</div>
@@ -40,7 +40,7 @@
             <!--<h4>Pick an Algorithm</h4>-->
             <!-- <div layout="row"> -->
               <md-input-container style="vertical-align:top;">
-                <h3>Algorithims</h3>
+                <h3>Algorithm: </h3>
                 <md-select ng-model="vm.data.algorithm">
                   <md-optgroup label="Algorithims">
                     <md-option ng-value="item" ng-repeat="item in vm.algSelections">{{item}}</md-option>
